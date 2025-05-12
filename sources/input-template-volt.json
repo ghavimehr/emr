@@ -1,0 +1,37 @@
+{
+    "project_name":"django",
+    "design":"volt",
+    "db": {
+        "driver": "sqlite",
+        "name": "db_name",
+        "user": "db_user",
+        "pass": "db_pass",
+        "host": "db_host",
+        "port": "db_port"
+    },
+    "models": {
+        "Product": {
+            "name":"string",
+            "info":"string"
+        }
+    },     
+    "auth": {  
+        "basic":"",
+        "github":"",
+        "twitter":""
+    },
+    "custom_user": {
+        "phone":"string",
+        "zip":"string"
+    },
+    "deploy": {  
+        "docker":"1",
+        "ci_cd":"0",
+        "go_live":"0"
+    },    
+    "tools":{
+        "api_generator": {
+            "product":"home.models.Product"
+        }
+    }    
+}

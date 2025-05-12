@@ -1,0 +1,57 @@
+{% extends "layouts/base-dashboard.html" %}
+{% load static custom_tags %}
+
+
+{% block content %}
+
+<div class="m-5 px-6 py-8 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-800 rounded-lg overflow-hidden">
+
+    {% include "includes/component-onboarding-kit.html" %}
+
+    <h2 class="text-2xl font-bold pb-3 dark:text-white text-center mt-10 pb-6">My Purchases</h2>
+
+    <div class="relative overflow-x-auto">
+        {% if sales %}
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">Product</th>
+                    {% comment %} <th scope="col" class="px-6 py-3">Tech1</th>
+                    <th scope="col" class="px-6 py-3">Version</th>
+                    <th scope="col" class="px-6 py-3">Release</th>
+                    <th scope="col" class="px-6 py-3">Latest Version</th> {% endcomment %}
+            
+                    <th scope="col" class="px-6 py-3">Purchase Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sale in sales %}
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        
+                        <th scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <a 
+                            href="#"  
+                            class="underline">
+                            {{ sale.product_name }} 
+                         </a> 
+                        </th>
+                        {% comment %} <td class="px-6 py-4"></td>
+                        <td class="px-6 py-4"></td>
+                        <td class="px-6 py-4"></td>
+                        <td class="px-6 py-4"></td> {% endcomment %}
+                        
+                        <td class="px-6 py-4"> {{sale.created_at}} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="flex items-center justify-center w-full h-64 my-8">
+            <p class="text-gray-600">No downloaded products found</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

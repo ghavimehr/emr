@@ -1,0 +1,190 @@
+{% extends "layouts/base2.html" %}
+{% load static socialaccount custom_tags %}
+{% get_providers as socialaccount_providers %}
+
+{% block content %}
+
+<div class="py-16">
+    <div class="max-w-screen-xl mx-3 md:mx-auto grid grid-cols-2 items-start gap-5 mb-32">
+        <div class="col-span-2 md:col-span-1">
+            {% if product.url_video %}
+            <a href="{{ product.url_video }}" target="_blank" class="block bg-primary-100 rounded-2xl text-white hover:text-white  inline-flex items-center gap-3 p-0.5 mb-5">
+                <p class="text-xs md:text-sm bg-primary-600 px-3 rounded-2xl py-px">Watch Video</p>
+                <p class="flex items-center gap-2 text-xs md:text-sm text-primary-700">
+                  Discover {{ product.name }} in Action
+                  <svg class="w-4 h-4 text-primary-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/>
+                  </svg>                  
+                </p>
+            </a>
+            {% endif %}
+            <h2 class="text-gray-900 dark:text-white font-bold text-3xl mb-2">{{ product.name }}</h2>
+            <p class="text-gray-500 dark:text-gray-300 mb-6 w-2/3">
+                {{ product.info }}
+            </p>
+            <div class="flex items-center gap-2 mb-6 flex-wrap">
+                <a href="{{ product.url_docs }}" class="inline-flex items-center gap-2 py-2.5 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                    Docs
+                    <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5"/>
+                    </svg>                                         
+                </a>
+                <a target="_blank" href="{{ product.url_demo }}" class="inline-flex items-center gap-2 py-2.5 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                    Demo
+                    <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
+                        <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                    </svg>                      
+                </a>
+                <a href="#pricing" class="inline-flex items-center gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    Get Offer
+                </a> 
+                <span class="text-gray-800 dark:text-gray-400">Pricing starts from <span class="text-red-600 font-semibold">${{ product.price }}</span></span>
+            </div>
+            <div class="grid grid-cols-2 gap-5 w-3/4">
+                <div class="col-span-2 md:col-span-1">
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-3">Technologies</p>
+                    <div class="flex items-center gap-4">
+                        <img data-tooltip-target="tooltip-javascript" class="w-8 h-8" src="{% static "common/technologies/js.png" %}" alt="Javascript">
+                        <div id="tooltip-javascript" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            JavaScript
+                            <div class="tooltip-arrow" data-popper-arrow></div>
+                        </div>
+
+                        <img data-tooltip-target="tooltip-docker" class="w-8 h-8" src="{% static "common/technologies/docker.png" %}" alt="Docker">
+                        <div id="tooltip-docker" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            Docker
+                            <div class="tooltip-arrow" data-popper-arrow></div>
+                        </div>
+
+                        <img data-tooltip-target="tooltip-render" class="w-8 h-8" src="{% static "common/technologies/render.png" %}" alt="Render">
+                        <div id="tooltip-render" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            Render
+                            <div class="tooltip-arrow" data-popper-arrow></div>
+                        </div>
+
+                        {% if product.tech1 and not product.tech1 == 'NA' %}
+                        <img data-tooltip-target="tooltip-{{ product.tech1 }}" class="w-8 h-8" src="/static/common/technologies/{{ product.tech1 }}.png" alt="{{ product.tech1 }}">
+                        <div id="tooltip-{{ product.tech1 }}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            {{ product.tech1|title }}
+                            <div class="tooltip-arrow" data-popper-arrow></div>
+                        </div>
+                        {% endif %}
+
+                        {% if product.tech2 and not product.tech2 == 'NA' %}
+                        <img data-tooltip-target="tooltip-{{ product.tech2 }}" class="w-8 h-8" src="/static/common/technologies/{{ product.tech2 }}.png" alt="{{ product.tech2 }}">
+                        <div id="tooltip-{{ product.tech2 }}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            {{ product.tech2|title }}
+                            <div class="tooltip-arrow" data-popper-arrow></div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-span-2 md:col-span-1">
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-3">Design By</p>
+                    <div class="flex items-center gap-3">
+                        {% if product.design_by and not product.design_by == 'NA' %}
+                        <img data-tooltip-target="tooltip-{{ product.design_by }}" class="h-8" src="/static/common/agency/{{ product.design_by }}.png" alt="">
+                        <div id="tooltip-{{ product.design_by }}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            {{ product.design_by|title }}
+                            <div class="tooltip-arrow" data-popper-arrow></div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-2 md:col-span-1">
+            <img src="/static/product/{{ product.design }}/{{ product.tech1 }}/top.png" 
+                 alt="Mobile and Desktop Screen-shots for {{ product.name }} - {{ product.card_info }}">
+        </div>
+    </div>
+
+    <div class="max-w-screen-xl mx-3 md:mx-auto">
+
+        <div class="max-w-4xl mx-auto mb-32 prose">
+            <h2 class="text-2xl text-center font-bold text-gray-900 dark:text-white mb-3">Product Features</h2>
+            <p class="text-gray-500 dark:text-gray-300">{{ product.features.html|safe }}</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-5 mb-40">
+            {% if 'django' == product.tech1 %}
+                {% include "includes/tech-django.html" with product=product %}
+            {% elif 'flask' == product.tech1 %}
+                {% include "includes/tech-flask.html" with product=product %}
+            {% else %}
+                {% include "includes/tech-backend.html" with product=product %}
+            {% endif %} 
+            <div class="col-span-2 md:col-span-1 flex justify-center">
+                <img src="/static/product/{{ product.design }}/{{ product.tech1 }}/mobile.png" 
+                     alt="Mobile View for {{ product.seo_title }}">
+            </div>
+        </div>
+
+        <div id="pricing" class="max-w-2xl mx-auto text-center mb-12">
+            <div class="flex justify-center mb-3">
+                <div class="inline-flex items-center gap-1 bg-red-100 rounded-md py-1 px-3 text-red-600 font-semibold">
+                    <svg class="w-3.5 h-3.5 text-red-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8.597 3.2A1 1 0 0 0 7.04 4.289a3.49 3.49 0 0 1 .057 1.795 3.448 3.448 0 0 1-.84 1.575.999.999 0 0 0-.077.094c-.596.817-3.96 5.6-.941 10.762l.03.049a7.73 7.73 0 0 0 2.917 2.602 7.617 7.617 0 0 0 3.772.829 8.06 8.06 0 0 0 3.986-.975 8.185 8.185 0 0 0 3.04-2.864c1.301-2.2 1.184-4.556.588-6.441-.583-1.848-1.68-3.414-2.607-4.102a1 1 0 0 0-1.594.757c-.067 1.431-.363 2.551-.794 3.431-.222-2.407-1.127-4.196-2.224-5.524-1.147-1.39-2.564-2.3-3.323-2.788a8.487 8.487 0 0 1-.432-.287Z"/>
+                    </svg>
+                    <p class="text-xs">{{ props.PROMO_DISCOUNT|default:'' }}% Off Discount</p>      
+                </div>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                Download {{ product.name }}
+            </h3>
+            <p class="text-gray-500 dark:text-gray-400">
+                Take advantage of our limited-time offer and get <strong>{{ props.PROMO_DISCOUNT|default:'' }}% Discount</strong> using 
+            </p>
+            <p class="text-gray-500 dark:text-gray-400">
+                <span class="font-bold text-gray-900 dark:text-white">{{ props.PROMO_COUPON|default:'' }}</span> coupon.
+            </p>
+        </div>
+
+        <div class="mb-16">
+            {% with template_name="includes/pricing/pricing-"|add:product.tech1|add:"-"|add:product.design|add:".html" %}
+                {% if template_name|template_exists %}
+                    {% include template_name %}
+                {% else %}
+                    {% include "includes/pricing2.html" %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        {% include "includes/faq-pro.html" %}
+    </div>
+    
+</div>
+
+<div id="login-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="p-4 md:p-5 space-y-4">
+                <div class="flex flex-col items-center justify-center mx-auto dark:bg-gray-900">
+                    <a href="/" class="flex items-center justify-center mb-8 text-2xl font-semibold lg:mb-10 dark:text-white">
+                        <img src="{% static "common/favicon.png" %}" class="mr-4 h-11" alt="App Generator Logo">
+                        <span>App Generator</span>  
+                    </a>
+                    <div class="w-full max-w-xl p-6 space-y-8 sm:p-8 bg-white dark:bg-gray-800">
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white text-center">
+                            Purchase reserved to authenticated users
+                        </h2>
+                        
+                        <div class="flex justify-center">
+                            <form action="{% provider_login_url 'github' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-2">
+                                    <svg class="h-4 mr-1 -ml-1 w-7" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Log in with Github
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

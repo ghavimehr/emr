@@ -1,0 +1,41 @@
+{# templates/emr/events/event_list.html #}
+{% extends "layouts/my-base-dashboard.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto my-6 bg-white dark:bg-gray-800 p-5 rounded-xl shadow">
+  <h2 class="text-2xl font-bold dark:text-white mb-4">{% trans "Events List" %}</h2>
+  {% if events %}
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">{% trans "Patient" %}</th>
+          <th scope="col" class="px-6 py-3">{% trans "Date" %}</th>
+          <th scope="col" class="px-6 py-3">{% trans "Time" %}</th>
+          <th scope="col" class="px-6 py-3">{% trans "Event Type" %}</th>
+          <th scope="col" class="px-6 py-3">{% trans "User" %}</th>
+          <th scope="col" class="px-6 py-3">{% trans "Actions" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for event in events %}
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <td class="px-6 py-4">{{ event.patient }}</td>
+            <td class="px-6 py-4">{{ event.date }}</td>
+            <td class="px-6 py-4">{{ event.time }}</td>
+            <td class="px-6 py-4">{{ event.event_type }}</td>
+            <td class="px-6 py-4">{{ event.user }}</td>
+            <td class="px-6 py-4">
+              <a href="{% url 'events:event_detail' event.id %}" class="text-blue-600 hover:underline">
+                {% trans "View" %}
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="text-gray-500 dark:text-gray-400">{% trans "No events found." %}</p>
+  {% endif %}
+</div>
+{% endblock content %}

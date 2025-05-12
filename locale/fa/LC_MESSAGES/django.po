@@ -1,0 +1,2183 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-04 09:07+0000\n"
+"PO-Revision-Date: 2025-01-13 20:04+0330\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 3.5\n"
+
+#: apps/authentication/forms.py:15
+msgid "Password"
+msgstr "رمز"
+
+#: apps/blog/forms.py:35
+msgid "Thumbnail"
+msgstr "تصویر شاخص"
+
+#: apps/blog/forms.py:43
+msgid "Title"
+msgstr "عنوان"
+
+#: apps/blog/forms.py:52
+msgid "Slug"
+msgstr "آدرسی که میخواهید پست در آن قرار بگیرد. (حداقل 5 حرف انگلیسی)"
+
+#: apps/blog/forms.py:61
+msgid "Subtitle"
+msgstr "عنوان فرعی"
+
+#: apps/blog/forms.py:80
+msgid "Video (Optional)"
+msgstr "ویدیو (اختیاری)"
+
+#: apps/blog/forms.py:91 apps/emr/lab/models.py:189 apps/emr/rtms/models.py:229
+#: apps/emr/rtms/models.py:255
+msgid "Tags"
+msgstr "برچسب ها"
+
+#: apps/blog/forms.py:99
+msgid "Visibility"
+msgstr "قابلیت مشاهده"
+
+#: apps/blog/forms.py:109
+msgid "Featured"
+msgstr "قرار گیری در ابتدای لیست"
+
+#: apps/blog/forms.py:117
+msgid "Content"
+msgstr "محتوی"
+
+#: apps/blog/forms.py:121
+msgid "Type here"
+msgstr "تایپ کنید"
+
+#: apps/common/admin.py:29
+#, python-format
+msgid "%d article was published successfully."
+msgid_plural "%d articles were published successfully."
+msgstr[0] "%d مطلب در سایت منتشر شد."
+msgstr[1] "%d مطالب در سایت منتشر شدند."
+
+#: apps/common/views_sliding_panel.py:53
+msgid "You do not have permission to view these files."
+msgstr ""
+
+#: apps/emr/lab/forms.py:37
+msgid "Select or create tags"
+msgstr "انتخاب یا ساخت برچسب"
+
+#: apps/emr/lab/forms.py:66
+msgid "Select test date"
+msgstr "تاریخ را انتخاب کنید"
+
+#: apps/emr/lab/models.py:27
+msgid "Test Category Name"
+msgstr "نام دسته آزمایش"
+
+#: apps/emr/lab/models.py:34
+msgid "English Test Category Name"
+msgstr "نام انگلیسی دسته آزمایش"
+
+#: apps/emr/lab/models.py:41
+msgid "Persian Test Category Name"
+msgstr "نام دسته آزمایش"
+
+#: apps/emr/lab/models.py:50
+msgid "Test Type Name"
+msgstr "نام نوع آزمایش"
+
+#: apps/emr/lab/models.py:57
+msgid "Persian Test Type Name"
+msgstr "نام نوع آزمایش"
+
+#: apps/emr/lab/models.py:64
+msgid "Event Types"
+msgstr "نوع ثبت"
+
+#: apps/emr/lab/models.py:72
+msgid "Test Name"
+msgstr "نام آزمایش"
+
+#: apps/emr/lab/models.py:78
+msgid "Persian Test Name"
+msgstr "نام آزمایش"
+
+#: apps/emr/lab/models.py:84
+msgid "Category"
+msgstr "دسته"
+
+#: apps/emr/lab/models.py:90
+msgid "Testtype"
+msgstr "نوع آزمایش"
+
+#: apps/emr/lab/models.py:93
+msgid "All Required"
+msgstr "همه موارد الزامی است"
+
+#: apps/emr/lab/models.py:94
+msgid "Access Permissions"
+msgstr "سطح دسترسی"
+
+#: apps/emr/lab/models.py:101
+msgid "Tag Name"
+msgstr "نام برچسب"
+
+#: apps/emr/lab/models.py:107
+msgid "Persian Tag Name"
+msgstr "نام برچسب"
+
+#: apps/emr/lab/models.py:119
+msgid "Performer Name"
+msgstr "نام انجام دهنده تست (آزمون گیرنده / آزمایشگاه)"
+
+#: apps/emr/lab/models.py:126
+msgid "Persian Performer Name"
+msgstr "نام انجام دهنده تست (آزمون گیرنده / آزمایشگاه)"
+
+#: apps/emr/lab/models.py:136
+msgid "Blood Test Performer"
+msgstr "آزمایشگاه"
+
+#: apps/emr/lab/models.py:137
+msgid "Blood Test Performers"
+msgstr "آزمایشگاه ها"
+
+#: apps/emr/lab/models.py:144 apps/emr/lab/models.py:164
+#: apps/emr/rtms/forms.py:47 apps/emr/rtms/models.py:9
+#: apps/emr/rtms/models.py:221
+msgid "Name"
+msgstr "نام:"
+
+#: apps/emr/lab/models.py:145 apps/emr/lab/models.py:165
+msgid "Persian Nanme"
+msgstr "نام"
+
+#: apps/emr/lab/models.py:146 apps/emr/lab/models.py:166
+msgid "Family"
+msgstr "نام خانوادگی:"
+
+#: apps/emr/lab/models.py:147 apps/emr/lab/models.py:167
+msgid "Persian Family"
+msgstr "نام خانوادگی"
+
+#: apps/emr/lab/models.py:149 apps/emr/lab/models.py:172
+#: templates/emr/events/event_list.html:16
+msgid "User"
+msgstr "کاربر:"
+
+#: apps/emr/lab/models.py:152 apps/emr/lab/models.py:175
+#: templates/emr/identity/identity_form.html:408
+msgid "Address"
+msgstr "آدرس"
+
+#: apps/emr/lab/models.py:156
+msgid "CSF Test Performer"
+msgstr "آزمایشگاه"
+
+#: apps/emr/lab/models.py:157
+msgid "CSF Test Performers"
+msgstr "آزمایشگاه ها"
+
+#: apps/emr/lab/models.py:169 templates/emr/identity/identity_form.html:272
+msgid "Education Level"
+msgstr "سطح تحصیلات"
+
+#: apps/emr/lab/models.py:179 apps/emr/lab/models.py:591
+msgid "Psychometrician"
+msgstr "روان سنج"
+
+#: apps/emr/lab/models.py:180
+msgid "Psychometricians"
+msgstr "روان سنج ها"
+
+#: apps/emr/lab/models.py:188 templates/emr/lab/father_form.html:44
+msgid "Test Date"
+msgstr "تاریخ انجام"
+
+#: apps/emr/lab/models.py:195
+msgid "Registered Event"
+msgstr "رویداد ذخیره شده"
+
+#: apps/emr/lab/models.py:246 apps/emr/lab/models.py:344
+#: apps/emr/lab/models.py:418 apps/emr/lab/models.py:447
+#: apps/emr/lab/models.py:490
+msgid "Laboratory Name"
+msgstr "نام آزمایشگاه"
+
+#: apps/emr/lab/models.py:248 apps/emr/lab/models.py:499
+msgid "WBC"
+msgstr ""
+
+#: apps/emr/lab/models.py:249 apps/emr/lab/models.py:500
+msgid "RBC"
+msgstr ""
+
+#: apps/emr/lab/models.py:250
+msgid "Hemoglobin"
+msgstr ""
+
+#: apps/emr/lab/models.py:251
+msgid "Hematocrit"
+msgstr ""
+
+#: apps/emr/lab/models.py:252
+msgid "MCV"
+msgstr ""
+
+#: apps/emr/lab/models.py:253
+msgid "MCHC"
+msgstr ""
+
+#: apps/emr/lab/models.py:254
+msgid "RDW-CV"
+msgstr ""
+
+#: apps/emr/lab/models.py:255
+msgid "RDW-SD"
+msgstr ""
+
+#: apps/emr/lab/models.py:257
+msgid "Platelets"
+msgstr ""
+
+#: apps/emr/lab/models.py:259
+msgid "MPV"
+msgstr ""
+
+#: apps/emr/lab/models.py:260
+msgid "PDW"
+msgstr ""
+
+#: apps/emr/lab/models.py:261
+msgid "PCT"
+msgstr ""
+
+#: apps/emr/lab/models.py:262 apps/emr/lab/models.py:501
+msgid "Neutrophils"
+msgstr ""
+
+#: apps/emr/lab/models.py:263 apps/emr/lab/models.py:502
+msgid "Lymphocytes"
+msgstr ""
+
+#: apps/emr/lab/models.py:264 apps/emr/lab/models.py:503
+msgid "Monocytes"
+msgstr ""
+
+#: apps/emr/lab/models.py:265 apps/emr/lab/models.py:504
+msgid "Eosinophils"
+msgstr ""
+
+#: apps/emr/lab/models.py:266 apps/emr/lab/models.py:505
+msgid "Basophils"
+msgstr ""
+
+#: apps/emr/lab/models.py:306 apps/emr/lab/models.py:545
+#, python-format
+msgid ""
+"If you provide any CBC data, all fields must be completed. Missing: "
+"%(fields)s"
+msgstr ""
+
+#: apps/emr/lab/models.py:327
+msgid "The sum of differentiation values must be 100."
+msgstr "مجموع درصد تمایز رده های WBC باید 100 باشد"
+
+#: apps/emr/lab/models.py:331
+msgid "Complete Blood Count"
+msgstr "شمارش کامل خون"
+
+#: apps/emr/lab/models.py:334
+msgid "CBC for patient: "
+msgstr "آزمایش شمارش کامل خون برای"
+
+#: apps/emr/lab/models.py:347
+msgid "FBS (Fast Plasma Glucose)"
+msgstr ""
+
+#: apps/emr/lab/models.py:353
+msgid "BS (Random Plasma Glucose)"
+msgstr ""
+
+#: apps/emr/lab/models.py:359
+msgid "2hPP (2-hours Post Prandial Plasma Glucose)"
+msgstr ""
+
+#: apps/emr/lab/models.py:365
+msgid "OGTT (Oral Glucose Tolerance Test)"
+msgstr ""
+
+#: apps/emr/lab/models.py:371
+msgid "Hb A1c"
+msgstr ""
+
+#: apps/emr/lab/models.py:374
+msgid "TC (Total Cholesterol)"
+msgstr ""
+
+#: apps/emr/lab/models.py:380
+msgid "HDL (High-Density Lipoprotein)"
+msgstr ""
+
+#: apps/emr/lab/models.py:386
+msgid "LDL (Low-Density Lipoprotein)"
+msgstr ""
+
+#: apps/emr/lab/models.py:392
+msgid "VLDL (Low-Density Lipoprotein)"
+msgstr ""
+
+#: apps/emr/lab/models.py:398
+msgid "TG (Triglycerides)"
+msgstr ""
+
+#: apps/emr/lab/models.py:405
+msgid "Metabolic Profile"
+msgstr "پروفایل متابولیک"
+
+#: apps/emr/lab/models.py:408
+msgid "Metabolic Profile for patient: "
+msgstr "پروفایل متابولیک برای"
+
+#: apps/emr/lab/models.py:420
+msgid "TSH"
+msgstr ""
+
+#: apps/emr/lab/models.py:421
+msgid "T3"
+msgstr ""
+
+#: apps/emr/lab/models.py:422
+msgid "freeT3"
+msgstr ""
+
+#: apps/emr/lab/models.py:423
+msgid "T4 (mcrg/dl)"
+msgstr ""
+
+#: apps/emr/lab/models.py:424
+msgid "T4 (nmol/l)"
+msgstr ""
+
+#: apps/emr/lab/models.py:425
+msgid "freeT4"
+msgstr ""
+
+#: apps/emr/lab/models.py:426
+msgid "Anti TPO Ab"
+msgstr ""
+
+#: apps/emr/lab/models.py:427
+msgid "Thyroglobulin"
+msgstr ""
+
+#: apps/emr/lab/models.py:428
+msgid "Anti Thyroglobulin Ab"
+msgstr ""
+
+#: apps/emr/lab/models.py:429
+msgid "Anti TSH Ab"
+msgstr ""
+
+#: apps/emr/lab/models.py:430
+msgid "Anti T3 Ab"
+msgstr ""
+
+#: apps/emr/lab/models.py:431
+msgid "Anti T4 Ab"
+msgstr ""
+
+#: apps/emr/lab/models.py:434
+msgid "Thyroid Function Test"
+msgstr ""
+
+#: apps/emr/lab/models.py:437
+msgid "Thyroid Function Test for patient: "
+msgstr ""
+
+#: apps/emr/lab/models.py:450
+msgid "SGPT (ALT)"
+msgstr ""
+
+#: apps/emr/lab/models.py:456
+msgid "Alkaline Phosphatase (ALP)"
+msgstr ""
+
+#: apps/emr/lab/models.py:462
+msgid "Albumin"
+msgstr ""
+
+#: apps/emr/lab/models.py:467 apps/emr/lab/models.py:468
+msgid "Total Bilirubin"
+msgstr ""
+
+#: apps/emr/lab/models.py:470
+msgid "GGT (Gamma-Glutamyl Transferase)"
+msgstr ""
+
+#: apps/emr/lab/models.py:477
+msgid "Liver Function Test"
+msgstr "تست های عملکرد کبد"
+
+#: apps/emr/lab/models.py:480
+msgid "Liver Function Test for patient: "
+msgstr "تست های عملکرد کبد برای"
+
+#: apps/emr/lab/models.py:497
+msgid "LP Performer"
+msgstr "متخصص انجام دهنده LP"
+
+#: apps/emr/lab/models.py:506
+msgid "Glucose"
+msgstr ""
+
+#: apps/emr/lab/models.py:507
+msgid "Protein"
+msgstr ""
+
+#: apps/emr/lab/models.py:508
+msgid "Ketone"
+msgstr ""
+
+#: apps/emr/lab/models.py:509
+msgid "Amyloid Beta 1-42"
+msgstr ""
+
+#: apps/emr/lab/models.py:511
+msgid "Alpha Synuclein"
+msgstr ""
+
+#: apps/emr/lab/models.py:569
+msgid "One or more differentiation fields have invalid numeric values."
+msgstr "مقدار وارد شده برای بخش تمایز سلولی باید به صورت عدد باشد."
+
+#: apps/emr/lab/models.py:576
+msgid "The sum of differentiation values must not exceed 100."
+msgstr "مجموع درصد تمایز رده های سلولی نباید بیشتر از 100 باشد."
+
+#: apps/emr/lab/models.py:582
+msgid "CSF for patient: "
+msgstr "آزمایش شمارش کامل خون برای"
+
+#: apps/emr/lab/models.py:594
+msgid "Total MMSE Score"
+msgstr "نمره کل پرسشنامه کیفیت زندگی"
+
+#: apps/emr/lab/models.py:597
+msgid "Affective"
+msgstr "نمره بخش روحیه"
+
+#: apps/emr/lab/models.py:600
+msgid "Cognitive"
+msgstr "نمره بخش شناخت"
+
+#: apps/emr/lab/models.py:603
+msgid "Somatic"
+msgstr "نمره بخش علائم جسمی"
+
+#: apps/emr/lab/models.py:619
+#, python-format
+msgid ""
+"If you provide any MMSE data, all fields must be completed. Missing: "
+"%(fields)s"
+msgstr ""
+
+#: apps/emr/lab/models.py:633 apps/emr/lab/models.py:739
+msgid "The total score must equal the sum of all subscores."
+msgstr "نمره کل باید برابر با جمع نمرات جزء باشد"
+
+#: apps/emr/lab/models.py:637
+msgid "MMSE for patient: "
+msgstr "نمره MMSE برای"
+
+#: apps/emr/lab/models.py:645
+msgid "Somatoform Disorder"
+msgstr ""
+
+#: apps/emr/lab/models.py:656
+msgid "PHQ for patient: "
+msgstr "پرسشنامه PHQ برای"
+
+#: apps/emr/lab/models.py:665
+msgid "Performer"
+msgstr "نام انجام دهنده تست (آزمون گیرنده / آزمایشگاه)"
+
+#: apps/emr/lab/models.py:668
+msgid "Total Score"
+msgstr "نمره کل"
+
+#: apps/emr/lab/models.py:671
+msgid "Memory"
+msgstr "حافظه"
+
+#: apps/emr/lab/models.py:674
+msgid "Visuospatial"
+msgstr "نمره بخش بصری-موقعیتی"
+
+#: apps/emr/lab/models.py:677
+msgid "Naming"
+msgstr "نمره بخش نامیدن"
+
+#: apps/emr/lab/models.py:680
+msgid "Attention"
+msgstr "نمره بخش توجه"
+
+#: apps/emr/lab/models.py:683
+msgid "Language"
+msgstr "نمره بخش زبان"
+
+#: apps/emr/lab/models.py:686
+msgid "Abstraction"
+msgstr "نمره بخش انتزاع"
+
+#: apps/emr/lab/models.py:689
+msgid "Recall"
+msgstr "نمره بخش حافظه"
+
+#: apps/emr/lab/models.py:692
+msgid "Orientation"
+msgstr "نمره بخش آگاهی"
+
+#: apps/emr/lab/models.py:717
+#, python-format
+msgid ""
+"If you provide any MOCA data, all fields must be completed. Missing: "
+"%(fields)s"
+msgstr ""
+
+#: apps/emr/lab/models.py:743
+msgid "MOCA for patient: "
+msgstr "نمره آزمون موکا برای"
+
+#: apps/emr/lab/views.py:22
+msgid "No patient selected. Please select a patient first."
+msgstr "شما بیمار را انتخاب نکرده اید، لطفا ابتدا بیمار مد نظر را انتخاب کنید."
+
+#: apps/emr/lab/views.py:106
+msgid "All lab test data successfully saved."
+msgstr "تمام نتایج ذخیره شد."
+
+#: apps/emr/lab/views.py:108
+msgid "There were errors in your submission."
+msgstr "مشکلی در ذخیره سازی به وجود آمد."
+
+#: apps/emr/questionnaires/forms.py:63
+msgid "options"
+msgstr "گزینه ها"
+
+#: apps/emr/questionnaires/models.py:11
+msgid "English Question"
+msgstr "سوال انگلیسی"
+
+#: apps/emr/questionnaires/models.py:12
+msgid "Persian Question"
+msgstr "سوال فارسی"
+
+#: apps/emr/questionnaires/models.py:13
+msgid "Coefficient"
+msgstr "ضریب"
+
+#: apps/emr/questionnaires/models.py:20
+msgid "English Name"
+msgstr "پرسش به انگلیسی"
+
+#: apps/emr/questionnaires/models.py:21 apps/emr/rtms/forms.py:48
+msgid "Persian Name"
+msgstr "پرسش به فارسی"
+
+#: apps/emr/questionnaires/models.py:22
+msgid "Description"
+msgstr "راهنما"
+
+#: apps/emr/questionnaires/models.py:36
+msgid "Lab Test Meta ID"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:38
+msgid "Lowest Value"
+msgstr "میزان حداقل"
+
+#: apps/emr/questionnaires/models.py:39
+msgid "Vector"
+msgstr "فاصله بین پاسخ ها"
+
+#: apps/emr/questionnaires/models.py:40
+msgid "Highest Value"
+msgstr "میزان حداکثر"
+
+#: apps/emr/questionnaires/models.py:41
+msgid "Instructions in English"
+msgstr "دستورالعمل و معرفی پرسشنامه به انگلیسی"
+
+#: apps/emr/questionnaires/models.py:42
+msgid "Instructions in Persian"
+msgstr "دستورالعمل و معرفی پرسشنامه به فارسی"
+
+#: apps/emr/questionnaires/models.py:43
+#: templates/emr/questionnaires/questionnaire_form.html:34
+msgid "Reference Article"
+msgstr "مقاله مرجع"
+
+#: apps/emr/questionnaires/models.py:44
+msgid "Persian Validator"
+msgstr "اعتبار سنجی پرسشنامه برای زبان فارسی توسط"
+
+#: apps/emr/questionnaires/models.py:46
+msgid "Level 1 in English"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:47
+msgid "Level 1 in Persian"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:48
+msgid "Level 2 in English"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:49
+msgid "Level 2 in Persian"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:50
+msgid "Level 3 in English"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:51
+msgid "Level 3 in Persian"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:52
+msgid "Level 4 in English"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:53
+msgid "Level 4 in Persian"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:54
+msgid "Level 5 in English"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:55
+msgid "Level 5 in Persian"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:56
+msgid "Level 6 in English"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:57
+msgid "Level 6 in Persian"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:58
+msgid "Level 7 in English"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:59
+msgid "Level 7 in Persian"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:60
+msgid "Level 8 in English"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:61
+msgid "Level 8 in Persian"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:62
+msgid "Level 9 in English"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:63
+msgid "Level 9 in Persian"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:64
+msgid "Level 10 in English"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:65
+msgid "Level 10 in Persian"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:68 apps/emr/questionnaires/models.py:69
+msgid "Meta"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:76
+#: templates/emr/identity/identity_form.html:178
+#: templates/emr/identity/identity_list.html:42
+#: templates/emr/rtms/rtms_overview.html:35
+msgid "Patient ID"
+msgstr "شمارۀ پرونده"
+
+#: apps/emr/questionnaires/models.py:78 templates/emr/events/event_list.html:13
+msgid "Date"
+msgstr "تاریخ"
+
+#: apps/emr/questionnaires/models.py:79 templates/emr/events/event_list.html:14
+msgid "Time"
+msgstr "زمان"
+
+#: apps/emr/questionnaires/models.py:88 apps/emr/questionnaires/models.py:118
+#: apps/emr/questionnaires/models.py:136 apps/emr/questionnaires/models.py:161
+#: apps/emr/questionnaires/models.py:179 apps/emr/questionnaires/models.py:197
+#: apps/emr/questionnaires/models.py:215 apps/emr/questionnaires/models.py:233
+#: apps/emr/questionnaires/models.py:251 apps/emr/questionnaires/models.py:269
+#: apps/emr/questionnaires/models.py:287 apps/emr/questionnaires/models.py:305
+#: apps/emr/questionnaires/models.py:323 apps/emr/questionnaires/models.py:341
+#: apps/emr/questionnaires/models.py:359 apps/emr/questionnaires/models.py:377
+#: apps/emr/questionnaires/models.py:395 apps/emr/questionnaires/models.py:413
+#: apps/emr/questionnaires/models.py:431
+#, fuzzy, python-brace-format
+#| msgid "Question {q}"
+msgid "Question {q}"
+msgstr "پرسش "
+
+#: apps/emr/questionnaires/models.py:106
+msgid "Subscore"
+msgstr "نمره بخش"
+
+#: apps/emr/questionnaires/models.py:110
+msgid "YEMSQ Sheet"
+msgstr "پرسشنامه طرحواره های ناسازگار اولیه یانگ"
+
+#: apps/emr/questionnaires/models.py:111
+msgid "YEMSQ Questions"
+msgstr "سوالات پرسشنامه طرحواره های ناسازگار اولیه یانگ"
+
+#: apps/emr/questionnaires/models.py:122
+msgid "YEMSQ Record"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:123
+msgid "YEMSQ Records"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:129
+msgid "McSCI-S Sheet"
+msgstr "پرسشنامه غربالگری حافظه"
+
+#: apps/emr/questionnaires/models.py:130
+msgid "McSCI-S Questions"
+msgstr "پرسشنامه غربالگری حافظه"
+
+#: apps/emr/questionnaires/models.py:140
+msgid "McSCI-S Record"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:141
+msgid "McSCI-S Records"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:154
+msgid "PHQ Sheet (Somatoform disorders)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:155
+msgid "PHQ Questions (Somatoform disorders)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:165
+msgid "PHQ Record (Somatoform disorders)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:166
+msgid "PHQ Records (Somatoform disorders)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:172
+msgid "PHQ Sheet (Somatoform disorders - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:173
+msgid "PHQ Questions (Somatoform disorders - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:183
+msgid "PHQ Record (Somatoform disorders - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:184
+msgid "PHQ Records (Somatoform disorders - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:190
+msgid "PHQ Sheet (Depressive disorders)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:191
+msgid "PHQ Questions (Depressive disorders)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:201
+msgid "PHQ Record (Depressive disorders)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:202
+msgid "PHQ Records (Depressive disorders)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:208
+msgid "PHQ Sheet (Depressive disorders - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:209
+msgid "PHQ Questions (Depressive disorders - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:219
+msgid "PHQ Record (Depressive disorders - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:220
+msgid "PHQ Records (Depressive disorders - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:226
+msgid "PHQ Sheet (Panic disorder - part 1)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:227
+msgid "PHQ Questions (Panic disorder - part 1)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:237
+msgid "PHQ Record (Panic disorder - part 1)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:238
+msgid "PHQ Records (Panic disorder - part 1)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:244
+msgid "PHQ Sheet (Panic disorder - part 2)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:245
+msgid "PHQ Questions (Panic disorder - part 2)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:255
+msgid "PHQ Record (Panic disorder - part 2)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:256
+msgid "PHQ Records (Panic disorder - part 2)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:262
+msgid "PHQ Sheet (Panic disorder - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:263
+msgid "PHQ Questions (Panic disorder - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:273
+msgid "PHQ Record (Panic disorder - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:274
+msgid "PHQ Records (Panic disorder - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:280
+msgid "PHQ Sheet (Anxiety disorders)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:281
+msgid "PHQ Questions (Anxiety disorders)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:291
+msgid "PHQ Record (Anxiety disorders)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:292
+msgid "PHQ Records (Anxiety disorders)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:298
+msgid "PHQ Sheet (Anxiety disorders - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:299
+msgid "PHQ Questions (Anxiety disorders - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:309
+msgid "PHQ Record (Anxiety disorders - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:310
+msgid "PHQ Records (Anxiety disorders - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:316
+msgid "PHQ Sheet (Eating disorders - part 1)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:317
+msgid "PHQ Questions (Eating disorders - part 1)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:327
+msgid "PHQ Record (Eating disorders - part 1)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:328
+msgid "PHQ Records (Eating disorders - part 1)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:334
+msgid "PHQ Sheet (Eating disorders - part 2)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:335
+msgid "PHQ Questions (Eating disorders - part 2)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:345
+msgid "PHQ Record (Eating disorders - part 2)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:346
+msgid "PHQ Records (Eating disorders - part 2)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:352
+msgid "PHQ Sheet (Eating disorders - part 3)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:353
+msgid "PHQ Questions (Eating disorders - part 3)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:363
+msgid "PHQ Record (Eating disorders - part 3)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:364
+msgid "PHQ Records (Eating disorders - part 3)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:370
+msgid "PHQ Sheet (Eating disorders - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:371
+msgid "PHQ Questions (Eating disorders - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:381
+msgid "PHQ Record (Eating disorders - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:382
+msgid "PHQ Records (Eating disorders - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:388
+msgid "PHQ Sheet (Alcohol consumption)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:389
+msgid "PHQ Questions (Alcohol consumption)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:399
+msgid "PHQ Record (Alcohol consumption)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:400
+msgid "PHQ Records (Alcohol consumption)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:406
+msgid "PHQ Sheet (Alcohol abuse disorder)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:407
+msgid "PHQ Questions (Alcohol abuse disorder)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:417
+msgid "PHQ Record (Alcohol abuse disorder)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:418
+msgid "PHQ Records (Alcohol abuse disorder)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:424
+msgid "PHQ Sheet (Alcohol abuse disorder - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:425
+msgid "PHQ Questions (Alcohol abuse disorder - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:435
+msgid "PHQ Record (Alcohol abuse disorder - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/models.py:436
+msgid "PHQ Records (Alcohol abuse disorder - Severity)"
+msgstr ""
+
+#: apps/emr/questionnaires/views.py:18
+msgid "Questionnaire not found or not available."
+msgstr "پرسشنامه درخواستی یافت نشد."
+
+#: apps/emr/ros/views.py:36
+msgid "The selected patient no longer exists. Please select another patient."
+msgstr "بیمار انتخاب شده حذف شده است، لطفا بیمار دیگری را انتخاب کنید."
+
+#: apps/emr/ros/views.py:82
+msgid "ROS data successfully submitted."
+msgstr "اطلاعات مرور سیستم ها ذخیره شد."
+
+#: apps/emr/ros/views.py:99 templates/emr/ros/ros_form.html:12
+#: templates/includes/my-sidebar.html:112
+msgid "Review of Systems"
+msgstr "مرور سیستم ها"
+
+#: apps/emr/rtms/forms.py:11 apps/emr/rtms/models.py:22
+#: apps/emr/rtms/models.py:234
+#, fuzzy
+#| msgid "Patient ID"
+msgid "Patient Identity"
+msgstr "شمارۀ پرونده"
+
+#: apps/emr/rtms/forms.py:12
+msgid "MT"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:13 apps/emr/rtms/models.py:16
+#: apps/emr/rtms/models.py:37 templates/emr/rtms/rtms_overview.html:40
+#: templates/emr/rtms/rtms_overview.html:79
+#, fuzzy
+#| msgid "Event Type"
+msgid "Pulse Type"
+msgstr "نوع اقدام"
+
+#: apps/emr/rtms/forms.py:14 apps/emr/rtms/models.py:61
+#: templates/emr/rtms/rtms_overview.html:60
+#: templates/emr/rtms/rtms_overview.html:81
+#, fuzzy
+#| msgid "Total Score"
+msgid "Total Pulse"
+msgstr "نمره کل"
+
+#: apps/emr/rtms/forms.py:15 apps/emr/rtms/models.py:68
+msgid "DLPFC Left"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:16 apps/emr/rtms/models.py:74
+msgid "DLPFC Right"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:17 apps/emr/rtms/models.py:80
+msgid "OFC Left"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:18 apps/emr/rtms/models.py:86
+msgid "OFC Right"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:19 apps/emr/rtms/models.py:92
+msgid "Somatosensory Left"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:20 apps/emr/rtms/models.py:98
+msgid "Somatosensory Right"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:21 apps/emr/rtms/models.py:104
+msgid "Parietal Left"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:22 apps/emr/rtms/models.py:110
+msgid "Parietal Right"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:23 apps/emr/rtms/models.py:116
+msgid "Occipital Left"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:24 apps/emr/rtms/models.py:122
+msgid "Occipital Middle"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:25 apps/emr/rtms/models.py:128
+msgid "Occipital Inferior"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:26 apps/emr/rtms/models.py:134
+msgid "Occipital Right"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:27 apps/emr/rtms/models.py:140
+msgid "M1 Left"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:28 apps/emr/rtms/models.py:146
+msgid "M1 Right"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:29 apps/emr/rtms/models.py:152
+msgid "SMA Left"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:30 apps/emr/rtms/models.py:158
+msgid "SMA Right"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:31 apps/emr/rtms/models.py:164
+msgid "Right Post Central"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:32 apps/emr/rtms/models.py:170
+msgid "Left Poat Central"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:33 apps/emr/rtms/models.py:176
+msgid "Broca Left"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:34 apps/emr/rtms/models.py:182
+msgid "Broca Right"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:35 apps/emr/rtms/models.py:188
+msgid "Sub Temporal Right"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:36 apps/emr/rtms/models.py:194
+msgid "Sub Temporal Left"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:37 apps/emr/rtms/models.py:200
+msgid "Middle Temporal Left"
+msgstr ""
+
+#: apps/emr/rtms/forms.py:38 apps/emr/rtms/models.py:206
+msgid "Middle Temporal Right"
+msgstr ""
+
+#: apps/emr/rtms/models.py:10
+msgid "Name (FA)"
+msgstr "نام:"
+
+#: apps/emr/rtms/models.py:17
+msgid "Pulse Types"
+msgstr ""
+
+#: apps/emr/rtms/models.py:26
+msgid "Precent of the MT for the first session."
+msgstr ""
+
+#: apps/emr/rtms/models.py:41
+msgid "unknown_variable_1"
+msgstr ""
+
+#: apps/emr/rtms/models.py:48
+msgid "unknown_variable_2"
+msgstr ""
+
+#: apps/emr/rtms/models.py:55
+msgid "Total Session Number"
+msgstr "تعداد کل جلسات"
+
+#: apps/emr/rtms/models.py:216 apps/emr/rtms/models.py:217
+#: apps/emr/rtms/models.py:236
+msgid "rTMS"
+msgstr ""
+
+#: apps/emr/rtms/models.py:222
+msgid "نام"
+msgstr ""
+
+#: apps/emr/rtms/models.py:228
+msgid "Tag"
+msgstr "برچسب"
+
+#: apps/emr/rtms/models.py:238
+msgid "Session Number"
+msgstr "شماره‌ی جلسه"
+
+#: apps/emr/rtms/models.py:241
+msgid "Session Date and Time"
+msgstr ""
+
+#: apps/emr/rtms/models.py:244
+msgid "Motor Threshold"
+msgstr ""
+
+#: apps/emr/rtms/models.py:250
+msgid "Done"
+msgstr ""
+
+#: apps/emr/rtms/models.py:252
+msgid "Pulse Power"
+msgstr ""
+
+#: apps/emr/rtms/models.py:254
+msgid "Session Notes"
+msgstr "یادداشت‌های جلسه"
+
+#: apps/emr/rtms/models.py:261
+msgid "RTMS Session"
+msgstr "جلسه‌ی rTMS"
+
+#: apps/emr/rtms/models.py:262
+msgid "RTMS Sessions"
+msgstr "جلسات rTMS"
+
+#: sources/django/home/models.py:24 sources/django/home/models.py:25
+msgid "UserProfile"
+msgstr "پروفایل کاربری"
+
+#: templates/authentication/sign-in.html:18
+msgid "Log-in with Username and Password"
+msgstr "ورود با نام کاربری و رمز عبور"
+
+#: templates/authentication/sign-in.html:25
+msgid "Log in"
+msgstr "ورود"
+
+#: templates/authentication/sign-in.html:30
+msgid "One-Click Sign-in"
+msgstr "ورود از طریق حساب های دیگر"
+
+#: templates/authentication/sign-in.html:40
+msgid "Sign-in with Gmail"
+msgstr "ورود با ایمیل"
+
+#: templates/emr/ccpi/ccpi_form.html:15
+msgid "Edit CC & PI Record"
+msgstr "ویرایش شرح حال"
+
+#: templates/emr/ccpi/ccpi_form.html:40
+#: templates/emr/ccpi/ccpi_previous_visit.html:8
+msgid "Chief Complaint"
+msgstr "شکایت اصلی"
+
+#: templates/emr/ccpi/ccpi_form.html:51
+#: templates/emr/ccpi/ccpi_previous_visit.html:12
+msgid "Present Illness"
+msgstr "شرح بیماری"
+
+#: templates/emr/ccpi/ccpi_form.html:62
+#: templates/emr/ccpi/ccpi_previous_visit.html:17
+msgid "Present Illness Image"
+msgstr "شرح بیماری (تصویر)"
+
+#: templates/emr/ccpi/ccpi_form.html:73
+#: templates/emr/ccpi/ccpi_previous_visit.html:26
+msgid "Present Illness Scan (PDF)"
+msgstr "شرح بیماری (PDF)"
+
+#: templates/emr/ccpi/ccpi_form.html:87
+#: templates/emr/identity/identity_form.html:458
+msgid "Cancel"
+msgstr "لغو"
+
+#: templates/emr/ccpi/ccpi_form.html:93
+#: templates/emr/identity/identity_form.html:474
+msgid "Save"
+msgstr "ذخیره"
+
+#: templates/emr/ccpi/ccpi_previous_visit.html:5
+msgid "Previous CC & PI Record"
+msgstr "شرح حال قبلی"
+
+#: templates/emr/ccpi/ccpi_previous_visit.html:21
+msgid "No image"
+msgstr "فاقد تصویر"
+
+#: templates/emr/ccpi/ccpi_previous_visit.html:29
+msgid "Open PDF"
+msgstr "باز کردن PDF"
+
+#: templates/emr/ccpi/ccpi_previous_visit.html:32
+msgid "No PDF"
+msgstr "فاقد PDF"
+
+#: templates/emr/ccpi/ccpi_previous_visit.html:39
+msgid "Start Editing"
+msgstr "ویرایش"
+
+#: templates/emr/events/event_detail_readonly.html:7
+msgid "Event Details"
+msgstr "جزئیات گزارش"
+
+#: templates/emr/events/event_detail_readonly.html:11
+msgid "Patient:"
+msgstr "بیمار:"
+
+#: templates/emr/events/event_detail_readonly.html:15
+msgid "Date:"
+msgstr "تاریخ:"
+
+#: templates/emr/events/event_detail_readonly.html:19
+msgid "Time:"
+msgstr "زمان"
+
+#: templates/emr/events/event_detail_readonly.html:23
+msgid "Event Type:"
+msgstr "نوع گزارش:"
+
+#: templates/emr/events/event_detail_readonly.html:27
+#: templates/includes/my-navigation-patients.html:37
+msgid "User:"
+msgstr "کاربر:"
+
+#: templates/emr/events/event_detail_readonly.html:34
+msgid "Back"
+msgstr "بازگشت"
+
+#: templates/emr/events/event_list.html:7
+msgid "Events List"
+msgstr "لیست اقدامات"
+
+#: templates/emr/events/event_list.html:12
+#: templates/emr/rtms/rtms_overview.html:78
+msgid "Patient"
+msgstr "بیمار"
+
+#: templates/emr/events/event_list.html:15
+msgid "Event Type"
+msgstr "نوع اقدام"
+
+#: templates/emr/events/event_list.html:17
+#: templates/emr/identity/identity_list.html:180
+#: templates/emr/rtms/rtms_overview.html:83
+msgid "Actions"
+msgstr "امکانات"
+
+#: templates/emr/events/event_list.html:30
+#: templates/emr/identity/identity_list.html:192
+msgid "View"
+msgstr "مشاهده"
+
+#: templates/emr/events/event_list.html:38
+msgid "No events found."
+msgstr "هیچ رویدادی یافت نشد."
+
+#: templates/emr/identity/identity_form.html:22
+#: templates/includes/my-navigation-patients.html:41
+msgid "Patient ID:"
+msgstr "شماره پرونده:"
+
+#: templates/emr/identity/identity_form.html:27
+#: templates/emr/oneglance/oneglance.html:62
+#: templates/includes/my-navigation-patients.html:44
+msgid "SSN:"
+msgstr "شماره ملی:"
+
+#: templates/emr/identity/identity_form.html:32
+msgid "First Name:"
+msgstr "نام:"
+
+#: templates/emr/identity/identity_form.html:37
+msgid "Last Name:"
+msgstr "نام خانوادگی:"
+
+#: templates/emr/identity/identity_form.html:42
+#: templates/emr/oneglance/oneglance.html:29
+msgid "Gender:"
+msgstr "جنسیت:"
+
+#: templates/emr/identity/identity_form.html:47
+msgid "Birthday (Jalali):"
+msgstr "تاریخ تولد:"
+
+#: templates/emr/identity/identity_form.html:52
+#: templates/emr/oneglance/oneglance.html:35
+msgid "Marital Status:"
+msgstr "وضعیت تاهل:"
+
+#: templates/emr/identity/identity_form.html:57
+#: templates/emr/oneglance/oneglance.html:76
+msgid "Language:"
+msgstr "زبان مادری:"
+
+#: templates/emr/identity/identity_form.html:62
+#: templates/emr/oneglance/oneglance.html:39
+msgid "Education Level:"
+msgstr "سطح تحصیلات:"
+
+#: templates/emr/identity/identity_form.html:67
+#: templates/emr/oneglance/oneglance.html:65
+msgid "Occupation:"
+msgstr "شغل:"
+
+#: templates/emr/identity/identity_form.html:72
+msgid "Blood Group:"
+msgstr "گروه خونی:"
+
+#: templates/emr/identity/identity_form.html:77
+#: templates/emr/oneglance/oneglance.html:51
+msgid "Dominant Hand:"
+msgstr "دست غالب:"
+
+#: templates/emr/identity/identity_form.html:82
+msgid "Height (cm):"
+msgstr "قد:"
+
+#: templates/emr/identity/identity_form.html:87
+msgid "Weight (kg):"
+msgstr "وزن:"
+
+#: templates/emr/identity/identity_form.html:92
+msgid "Insurances:"
+msgstr "بیمه:"
+
+#: templates/emr/identity/identity_form.html:100
+msgid "Ethnicities:"
+msgstr "قومیت:"
+
+#: templates/emr/identity/identity_form.html:107
+msgid "Payment Label:"
+msgstr "روش پرداخت:"
+
+#: templates/emr/identity/identity_form.html:112
+msgid "Phone:"
+msgstr "شماره تماس:"
+
+#: templates/emr/identity/identity_form.html:117
+msgid "Messenger #1:"
+msgstr "شماره واتساپ:"
+
+#: templates/emr/identity/identity_form.html:122
+msgid "Messenger #2:"
+msgstr "شماره ایتا:"
+
+#: templates/emr/identity/identity_form.html:127
+#: templates/emr/oneglance/oneglance.html:55
+msgid "Address:"
+msgstr "آدرس:"
+
+#: templates/emr/identity/identity_form.html:132
+msgid "Secretary Notes:"
+msgstr "یادداشت های منشی:"
+
+#: templates/emr/identity/identity_form.html:137
+msgid "Secretary Tags (JSON):"
+msgstr "تگ های منشی:"
+
+#: templates/emr/identity/identity_form.html:189
+#: templates/emr/identity/identity_list.html:179
+msgid "Social Security Number"
+msgstr "شماره ملی"
+
+#: templates/emr/identity/identity_form.html:200
+#: templates/emr/identity/identity_list.html:55
+#: templates/emr/identity/identity_list.html:177
+msgid "First Name"
+msgstr "نام"
+
+#: templates/emr/identity/identity_form.html:212
+#: templates/emr/identity/identity_list.html:68
+#: templates/emr/identity/identity_list.html:178
+msgid "Last Name"
+msgstr "نام خانوادگی"
+
+#: templates/emr/identity/identity_form.html:223
+#: templates/emr/identity/identity_list.html:98
+msgid "Gender"
+msgstr "جنسیت"
+
+#: templates/emr/identity/identity_form.html:235
+msgid "Birthday (Jalali)"
+msgstr "تاریخ تولد"
+
+#: templates/emr/identity/identity_form.html:240
+msgid "Select your birth date"
+msgstr "تاریخ تولد را انتخاب کنید"
+
+#: templates/emr/identity/identity_form.html:250
+msgid "Marital Status"
+msgstr "وضعیت تاهل"
+
+#: templates/emr/identity/identity_form.html:261
+msgid "Mother Language"
+msgstr "زبان مادری"
+
+#: templates/emr/identity/identity_form.html:283
+msgid "Occupation"
+msgstr "شغل"
+
+#: templates/emr/identity/identity_form.html:303
+msgid "Blood Group"
+msgstr "گروه خونی"
+
+#: templates/emr/identity/identity_form.html:314
+#: templates/emr/identity/identity_list.html:119
+msgid "Dominant Hand"
+msgstr "دست غالب"
+
+#: templates/emr/identity/identity_form.html:325
+msgid "Height (cm)"
+msgstr "قد"
+
+#: templates/emr/identity/identity_form.html:336
+msgid "Weight (kg)"
+msgstr "وزن"
+
+#: templates/emr/identity/identity_form.html:347
+msgid "Insurances"
+msgstr "بیمه"
+
+#: templates/emr/identity/identity_form.html:356
+msgid "Ethnicities"
+msgstr "قومیت"
+
+#: templates/emr/identity/identity_form.html:364
+msgid "Payment Label"
+msgstr "روش پرداخت"
+
+#: templates/emr/identity/identity_form.html:375
+msgid "Phone No for Call"
+msgstr "شماره تماس"
+
+#: templates/emr/identity/identity_form.html:386
+msgid "Phone No for Messenger 1"
+msgstr "شماره واتساپ"
+
+#: templates/emr/identity/identity_form.html:397
+msgid "Phone No for Messenger 2"
+msgstr "شماره ایتا"
+
+#: templates/emr/identity/identity_form.html:419
+msgid "Secretary Notes"
+msgstr "یادداشت های منشی"
+
+#: templates/emr/identity/identity_form.html:430
+#: templates/emr/identity/identity_form.html:446
+msgid "Secretary Tags"
+msgstr "تگ های منشی"
+
+#: templates/emr/identity/identity_form.html:464
+msgid "Save and Add Another"
+msgstr "ذخیره و ایجاد یک بیمار جدید"
+
+#: templates/emr/identity/identity_list.html:14
+msgid "Patient Management"
+msgstr "مدیریت بیماران"
+
+#: templates/emr/identity/identity_list.html:28
+msgid "All Patients"
+msgstr "تمام بیماران"
+
+#: templates/emr/identity/identity_list.html:31
+msgid "Add New Patient"
+msgstr "افزودن بیمار جدید"
+
+#: templates/emr/identity/identity_list.html:81
+msgid "SSN"
+msgstr "شماره ملی"
+
+#: templates/emr/identity/identity_list.html:105
+#: templates/emr/identity/identity_list.html:126
+#: templates/emr/identity/identity_list.html:147
+msgid "Any"
+msgstr ""
+
+#: templates/emr/identity/identity_list.html:140
+msgid "Insurance"
+msgstr "بیمه"
+
+#: templates/emr/identity/identity_list.html:165
+#: templates/emr/rtms/rtms_overview.html:67
+msgid "Search"
+msgstr "جستجو"
+
+#: templates/emr/identity/identity_list.html:176
+msgid "Reference NO"
+msgstr "شمارۀ پرونده"
+
+#: templates/emr/identity/identity_list.html:193
+msgid "Delete"
+msgstr "حذف"
+
+#: templates/emr/identity/identity_list.html:212
+#: templates/emr/rtms/rtms_overview.html:122
+msgid "Rows per page:"
+msgstr "تعداد در صفحه:"
+
+#: templates/emr/identity/identity_list.html:232
+#: templates/emr/rtms/rtms_overview.html:141
+msgid "Page navigation"
+msgstr "جابجایی در صفحات"
+
+#: templates/emr/identity/identity_list.html:240
+#: templates/emr/identity/identity_list.html:254
+#: templates/emr/rtms/rtms_overview.html:149
+#: templates/emr/rtms/rtms_overview.html:163
+msgid "First"
+msgstr "اولین صفحه"
+
+#: templates/emr/identity/identity_list.html:248
+#: templates/emr/identity/identity_list.html:259
+#: templates/emr/rtms/rtms_overview.html:157
+#: templates/emr/rtms/rtms_overview.html:168
+msgid "Previous"
+msgstr "قبلی"
+
+#: templates/emr/identity/identity_list.html:267
+#: templates/emr/rtms/rtms_overview.html:176
+msgid "Page"
+msgstr "صفحه"
+
+#: templates/emr/identity/identity_list.html:267
+#: templates/emr/rtms/rtms_overview.html:176
+msgid "of"
+msgstr "از"
+
+#: templates/emr/identity/identity_list.html:277
+#: templates/emr/identity/identity_list.html:291
+#: templates/emr/rtms/rtms_overview.html:186
+#: templates/emr/rtms/rtms_overview.html:200
+msgid "Next"
+msgstr "بعدی"
+
+#: templates/emr/identity/identity_list.html:285
+#: templates/emr/identity/identity_list.html:296
+#: templates/emr/rtms/rtms_overview.html:194
+#: templates/emr/rtms/rtms_overview.html:205
+msgid "Last"
+msgstr "آخرین صفحه"
+
+#: templates/emr/lab/father_form.html:14
+msgid "Lab Categories"
+msgstr "طبقه بندی آزمایشات"
+
+#: templates/emr/lab/father_form.html:27
+msgid "Category:"
+msgstr "دسته:"
+
+#: templates/emr/lab/father_form.html:69
+msgid "No lab test forms available."
+msgstr "هیچ فرم آزمایشی در دسترس نیست."
+
+#: templates/emr/lab/father_form.html:73
+msgid "Save All"
+msgstr "ذخیره همه موارد"
+
+#: templates/emr/oneglance/oneglance.html:32
+msgid "Age:"
+msgstr "سن:"
+
+#: templates/emr/oneglance/oneglance.html:43
+msgid "Height:"
+msgstr "قد:"
+
+#: templates/emr/oneglance/oneglance.html:47
+msgid "Weight:"
+msgstr "وزن:"
+
+#: templates/emr/oneglance/oneglance.html:68
+msgid "Insurance:"
+msgstr "بیمه:"
+
+#: templates/emr/oneglance/oneglance.html:72
+msgid "Ethnicity:"
+msgstr "قومیت:"
+
+#: templates/emr/oneglance/oneglance.html:80
+msgid "Plan:"
+msgstr "پکیج خدمات:"
+
+#: templates/emr/oneglance/oneglance.html:87
+msgid "Visit History"
+msgstr "ویزیت‌ها"
+
+#: templates/emr/oneglance/oneglance.html:97
+msgid "Differential Diagnoses"
+msgstr ""
+
+#: templates/emr/oneglance/oneglance.html:102
+#: templates/emr/oneglance/oneglance.html:112
+msgid "None listed."
+msgstr "موردی موجود نیست"
+
+#: templates/emr/oneglance/oneglance.html:107
+msgid "Comorbidities"
+msgstr ""
+
+#: templates/emr/oneglance/oneglance.html:120
+msgid "No patient selected. Please search and select a patient first."
+msgstr "شما بیمار را انتخاب نکرده اید، لطفا ابتدا بیمار مد نظر را انتخاب کنید."
+
+#: templates/emr/questionnaires/questionnaire_form.html:16
+msgid "Questionnaire"
+msgstr "پرسشنامه‌ی"
+
+#: templates/emr/questionnaires/questionnaire_form.html:40
+msgid "Local validator"
+msgstr "اعتبار سنجی پرسشنامه برای زبان فارسی توسط"
+
+#: templates/emr/questionnaires/questionnaire_form.html:60
+msgid "Question"
+msgstr "پرسش"
+
+#: templates/emr/questionnaires/questionnaire_form.html:63
+msgid "Answer"
+msgstr "پاسخ"
+
+#: templates/emr/questionnaires/questionnaire_form.html:96
+msgid "Submit Questionnaire"
+msgstr "ثبت پاسخ های پرسشنامه"
+
+#: templates/emr/rtms/rtms_overview.html:15
+msgid "rTMS Overview"
+msgstr ""
+
+#: templates/emr/rtms/rtms_overview.html:23
+msgid "All Orders"
+msgstr "تمام دستورات"
+
+#: templates/emr/rtms/rtms_overview.html:26
+msgid "add a record"
+msgstr "افزودن"
+
+#: templates/emr/rtms/rtms_overview.html:45
+msgid "Unknown Variable 1"
+msgstr ""
+
+#: templates/emr/rtms/rtms_overview.html:50
+msgid "Unknown Variable 2"
+msgstr ""
+
+#: templates/emr/rtms/rtms_overview.html:55
+#: templates/emr/rtms/rtms_overview.html:80
+msgid "Total Sessions"
+msgstr "تعداد جلسات"
+
+#: templates/emr/rtms/rtms_overview.html:77
+msgid "Reference No"
+msgstr "شماره پرونده"
+
+#: templates/emr/rtms/rtms_overview.html:82
+msgid "Latest Event"
+msgstr "آخرین رویداد"
+
+#: templates/emr/rtms/rtms_overview.html:92
+msgid "N/A"
+msgstr "نامشخص"
+
+#: templates/emr/rtms/rtms_overview.html:100
+msgid "No events"
+msgstr "هیچ رویدادی یافت نشد."
+
+#: templates/emr/rtms/rtms_overview.html:109
+msgid "No rTMS records found."
+msgstr "هیچ گزارشی از rTMS یافت نشد."
+
+#: templates/includes/document_box.html:11
+msgid "Generate File"
+msgstr "افزودن"
+
+#: templates/includes/document_box.html:33
+#, fuzzy
+#| msgid "No events found."
+msgid "No documents found."
+msgstr "هیچ رویدادی یافت نشد."
+
+#: templates/includes/footer.html:8
+msgid "Terms"
+msgstr "حقوق کاربر"
+
+#: templates/includes/footer.html:10
+msgid "About Us"
+msgstr "درباره ما"
+
+#: templates/includes/footer.html:12 templates/includes/my-sidebar.html:125
+msgid "Blog"
+msgstr "مطالب سایت"
+
+#: templates/includes/footer.html:15
+msgid "Docs"
+msgstr "مقالات علمی"
+
+#: templates/includes/image-input.html:18
+#: templates/includes/product-image-input.html:17
+msgid " Click to upload</span> or drag and drop "
+msgstr "برای بارگزاری کلیک کنید </span> یا بکشید و رها کنید."
+
+#: templates/includes/image-input.html:20
+#: templates/includes/product-image-input.html:19
+msgid "PNG, JPG or GIF"
+msgstr ""
+
+#: templates/includes/my-navigation-patients.html:47
+msgid "Name:"
+msgstr "نام:"
+
+#: templates/includes/my-navigation-patients.html:50
+msgid "Family Name:"
+msgstr "نام خانوادگی:"
+
+#: templates/includes/my-navigation-patients.html:58
+msgid "No patient selected"
+msgstr "بیماری انتخاب نشده است"
+
+#: templates/includes/my-navigation.html:37
+msgid "Search patient..."
+msgstr "جستجوی بیمار ..."
+
+#: templates/includes/my-sidebar-patients.html:18
+msgid "My Data"
+msgstr "اطلاعات من"
+
+#: templates/includes/my-sidebar-patients.html:27
+msgid "My Identity"
+msgstr "اطلاعات هویتی من"
+
+#: templates/includes/my-sidebar-patients.html:33
+msgid "Medical History"
+msgstr "شرح حال"
+
+#: templates/includes/my-sidebar-patients.html:41
+#: templates/includes/my-sidebar.html:82
+msgid "Questionnaires"
+msgstr "پرسشنامه ها"
+
+#: templates/includes/my-sidebar-patients.html:50
+msgid "McSCI-S"
+msgstr "خود اظهاری مشکلات حافظه"
+
+#: templates/includes/my-sidebar-patients.html:56
+msgid "YEMSQ"
+msgstr "پرسشنامه طرحواره های ناسازگار"
+
+#: templates/includes/my-sidebar-patients.html:65
+msgid "Upload Lab Tests"
+msgstr "بارگذاری گزارش آزمایشگاه"
+
+#: templates/includes/my-sidebar-patients.html:74
+msgid "Blood Test"
+msgstr "آزمایش خون"
+
+#: templates/includes/my-sidebar-patients.html:84
+msgid "Support"
+msgstr "ثبت سوال کوتاه"
+
+#: templates/includes/my-sidebar.html:19
+msgid "In One Glance"
+msgstr "در یک نگاه"
+
+#: templates/includes/my-sidebar.html:25
+msgid "Identity"
+msgstr "اطلاعات هویتی"
+
+#: templates/includes/my-sidebar.html:34
+msgid "Create Patient"
+msgstr "افزودن بیمار"
+
+#: templates/includes/my-sidebar.html:39
+msgid "Patients List"
+msgstr "لیست بیماران"
+
+#: templates/includes/my-sidebar.html:48
+msgid "Investigations"
+msgstr "اقدامات تشخیصی"
+
+#: templates/includes/my-sidebar.html:58
+msgid "Blood Tests"
+msgstr "آزمایش خون"
+
+#: templates/includes/my-sidebar.html:66
+msgid "CSF"
+msgstr ""
+
+#: templates/includes/my-sidebar.html:74
+msgid "Cognitive Tests"
+msgstr "آزمون های شناختی"
+
+#: templates/includes/my-sidebar.html:93
+msgid "Physician"
+msgstr "پزشک"
+
+#: templates/includes/my-sidebar.html:104
+msgid "CC and PI"
+msgstr "شرح حال"
+
+#: templates/includes/my-sidebar.html:135
+msgid "Write Article"
+msgstr "نوشتن مطلب جدید"
+
+#: templates/includes/my-sidebar.html:142
+msgid "Bookmarked Articles"
+msgstr "مطالب نشانه گذاری شده"
+
+#: templates/includes/my-sidebar.html:149
+msgid "Manage Articles"
+msgstr "مدیریت مطالب"
+
+#: templates/includes/my-sidebar.html:158
+msgid "Logs"
+msgstr "گزارش‌ها"
+
+#: templates/includes/my-sidebar.html:168
+msgid "All Events"
+msgstr "تمام اقدامات"
+
+#: templates/includes/my-sidebar.html:175
+msgid "Visited Patients"
+msgstr "گزارش عملکرد پزشک"
+
+#: templates/includes/sliding_panel.html:19
+msgid "Document Panel"
+msgstr "پنل مدارک"
+
+#: templates/layouts/base-dashboard-patients.html:77
+#: templates/layouts/my-base-dashboard.html:77
+msgid "Dr Arzaghi's Clinic"
+msgstr "کلینیک دکتر ارزاقی"
+
+#: templates/layouts/base-dashboard-patients.html:77
+#: templates/layouts/my-base-dashboard.html:77
+msgid "Designed by Dr. Ghavimehr"
+msgstr "طراحی شده توسط دکتر قوی‌مهر"
+
+#: templates/layouts/my-base-dashboard.html:14
+msgid "Electronic Medical Record"
+msgstr "پرونده الکترونیک"
+
+#: templates/pages/home2.html:154
+msgid "Log Out"
+msgstr "خروج"
+
+#: templates/pages/home2.html:156
+msgid "Log In"
+msgstr "ورود"
+
+#: templates/pages/home2.html:178
+msgid "Wellcome to Electronic Medical Record sever of"
+msgstr "به سامانه پرونده الکترونیک"
+
+#: templates/pages/home2.html:178
+msgid "!"
+msgstr " خوش آمدید"
+
+#: templates/pages/home2.html:192
+msgid "My Medical Records"
+msgstr "پرونده الکترونیک"
+
+#: templates/pages/home2.html:199
+msgid "Schedule an Appointment"
+msgstr "رزرو وقت ویزیت"
+
+#: templates/pages/home2.html:271
+msgid "Free Online Screening Service"
+msgstr "خدمات غربالگری آنلاین رایگان"
+
+#~ msgid "Documents"
+#~ msgstr "مدارک"
+
+#~ msgid "Will be assigned after saving."
+#~ msgstr "پس از ثبت بیمار اختصاص داده می‌شود."
+
+#~ msgid "Search or enter occupation"
+#~ msgstr "جستجو بین مشاغل یا ثبت شغل جدید"
+
+#~ msgid "signin"
+#~ msgstr "ورود"
+
+#~ msgid "#"
+#~ msgstr "ردیف"
+
+#~ msgid "office!"
+#~ msgstr "خوش آمدید!"
+
+#~ msgid "Lab Performer"
+#~ msgstr "متخصص انجام دهنده LP"
+
+#~ msgid "Psychometrics"
+#~ msgstr "روان سنجی"
+
+#~ msgid "Lab Test Data for Category:"
+#~ msgstr "آزمایش ها برای دسته‌ی:"
+
+#~ msgid "Input Date"
+#~ msgstr "تاریخ وارد کردن"
+
+#~ msgid "Assistant Physician"
+#~ msgstr "پزشک دستیار"
+
+#, fuzzy
+#~| msgid "Birthday (Jalali)"
+#~ msgid "Date (Jalali)"
+#~ msgstr "تاریخ تولد"
+
+#, fuzzy
+#~ msgid "Email address"
+#~ msgstr "نشانی پست الکترونیکی"
+
+#~ msgid "Commands"
+#~ msgstr "فرمان ها"
+
+#~ msgid "Missing command."
+#~ msgstr "فرمان مفقود."
+
+#, python-brace-format
+#~ msgid "Invalid value: {message}"
+#~ msgstr "مقدار غیر قابل قبول: {message}"
+
+#~ msgid "file"
+#~ msgstr "فایل"
+
+#~ msgid "path"
+#~ msgstr "مسیر"
+
+#~ msgid "Messages"
+#~ msgstr "پیام"
+
+#~ msgid "Site Maps"
+#~ msgstr "نقشه سایت"
+
+#~ msgid "Static Files"
+#~ msgstr "فایل های آماری"
+
+#~ msgid "Syndication"
+#~ msgstr "همگام سازی"
+
+#~ msgid "…"
+#~ msgstr "..."
+
+#~ msgid "Decimal number"
+#~ msgstr "عدد اعشاری"
+
+#~ msgid "File path"
+#~ msgstr "آدرس فایل"
+
+#~ msgid "Integer"
+#~ msgstr "عدد صحیح"
+
+#~ msgid "URL"
+#~ msgstr "آدرس الکترونیکی"
+
+#~ msgid "Raw binary data"
+#~ msgstr "فایل خام"
+
+#~ msgid "File"
+#~ msgstr "فایل"
+
+#~ msgid "This field is required."
+#~ msgstr "این فیلد الزامی است."
+
+#~ msgid "Enter a valid date."
+#~ msgstr "یک تاریخ معتبر وارد کنید."
+
+#~ msgid "Enter a valid time."
+#~ msgstr "یک زمان معتبر وارد نمائید."
+
+#~ msgid "Enter a valid date/time."
+#~ msgstr "یک تاریخ/زمان صحیح وارد نمائید."
+
+#~ msgid "Clear"
+#~ msgstr "پاک کردن"
+
+#~ msgid "Currently"
+#~ msgstr "در حال حاضر"
+
+#~ msgid "Change"
+#~ msgstr "تغییر"
+
+#~ msgid "Unknown"
+#~ msgstr "نا مشخص"
+
+#~ msgid "Yes"
+#~ msgstr "بلی"
+
+#~ msgid "No"
+#~ msgstr "خیر"
+
+#~ msgid "yes,no,maybe"
+#~ msgstr "بله، خیر، شاید"
+
+#~ msgid "p.m."
+#~ msgstr "بعد از ظهر"
+
+#~ msgid "a.m."
+#~ msgstr "قبل از ظهر"
+
+#~ msgid "Monday"
+#~ msgstr "دوشنبه"
+
+#~ msgid "Tuesday"
+#~ msgstr "سه شنبه"
+
+#~ msgid "Wednesday"
+#~ msgstr "چهارشنبه"
+
+#~ msgid "Thursday"
+#~ msgstr "پنج شنبه"
+
+#~ msgid "Friday"
+#~ msgstr "جمعه"
+
+#~ msgid "Saturday"
+#~ msgstr "شنبه"
+
+#~ msgid "Sunday"
+#~ msgstr "یک شنبه"
+
+#~ msgid "Mon"
+#~ msgstr "2 شنبه"
+
+#~ msgid "Tue"
+#~ msgstr "3 شنبه"
+
+#~ msgid "Wed"
+#~ msgstr "4 شنبه"
+
+#~ msgid "Thu"
+#~ msgstr "5 شنبه"
+
+#~ msgid "Fri"
+#~ msgstr "جمعه"
+
+#~ msgid "Sat"
+#~ msgstr "شنبه"
+
+#~ msgid "Sun"
+#~ msgstr "1 شنبه"
+
+#~ msgid "or"
+#~ msgstr "یا"
+
+#~ msgid ""
+#~ "If you have configured your browser to disable cookies, please re-enable "
+#~ "them, at least for this site, or for “same-origin” requests."
+#~ msgstr ""
+#~ "چنانچه مرورگر خود را تنظیم نموده اید تا کوکی ها را غیر فعال کند، لطفا آن "
+#~ "(حداقل برای این وبسایت)  را به حالت اول بازگردانید."
+
+#~ msgid "No year specified"
+#~ msgstr "سال انتخاب نشده است"
+
+#~ msgid "Date out of range"
+#~ msgstr "تاریخ در محدوده صحیحی نیست"
+
+#~ msgid "No month specified"
+#~ msgstr "ماه انتخار نشده است"

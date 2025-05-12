@@ -1,0 +1,153 @@
+{% extends "layouts/my-base-dashboard.html" %}
+{% load i18n static widget_tweaks jsonify %}
+
+{% block extrastyle %}
+  <!-- External CSS dependencies -->
+  <link rel="stylesheet" href="{% static 'dist/jquery.multi-select.css' %}">
+  <link rel="stylesheet" href="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <!-- Main Tailwind + custom styles -->
+  <link rel="stylesheet" href="{% static 'main.css' %}">
+{% endblock extrastyle %}
+
+
+{% block content %}
+<div class="max-w-5xl mx-auto my-6">
+  <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-md p-6">
+  
+    {% if patient %}
+      <!-- Header -->
+      <h1 class="text-3xl font-bold dark:text-white mb-6" style="font-family: 'BTitr', sans-serif;">
+        {{ patient.first_name }} {{ patient.last_name }}
+        <span class="text-lg font-medium text-gray-500 dark:text-gray-400">({{ patient.patient_id }})</span>
+      </h1>
+
+      <!-- Patient Info + Document Box -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="md:col-span-1 space-y-2">
+          <p class="text-gray-700 dark:text-gray-300">
+            <strong style="font-family: 'Sahel', sans-serif;">{% trans "Gender:" %}</strong> {{ patient.gender|default_if_none:"---" }}
+          </p>
+          <p class="text-gray-700 dark:text-gray-300">
+            <strong style="font-family: 'Sahel', sans-serif;">{% trans "Age:" %}</strong> {{ patient.age|default_if_none:"---" }}
+          </p>
+          <p class="text-gray-700 dark:text-gray-300">
+            <strong style="font-family: 'Sahel', sans-serif;">{% trans "Marital Status:" %}</strong> {{ patient.marital_status|default_if_none:"---" }}
+          </p>
+
+          <p class="text-gray-700 dark:text-gray-300">
+            <strong style="font-family: 'Sahel', sans-serif;">{% trans "Education Level:" %}</strong> {{ patient.education_level|default_if_none:"---" }}
+          </p>
+
+          <p class="text-gray-700 dark:text-gray-300">
+            <strong style="font-family: 'Sahel', sans-serif;">{% trans "Height:" %}</strong> {{ patient.height|default_if_none:"---" }}
+          </p>
+
+          <p class="text-gray-700 dark:text-gray-300">
+            <strong style="font-family: 'Sahel', sans-serif;">{% trans "Weight:" %}</strong> {{ patient.weight|default_if_none:"---" }}
+          </p>
+
+          <p class="text-gray-700 dark:text-gray-300">
+            <strong style="font-family: 'Sahel', sans-serif;">{% trans "Dominant Hand:" %}</strong> {{ patient.dominanthand|default_if_none:"---" }}
+          </p>
+
+          <p class="col-span-1 text-gray-700 dark:text-gray-300">
+            <strong style="font-family: 'Sahel', sans-serif;">{% trans "Address:" %}</strong> {{ patient.address|default_if_none:"---" }}
+          </p>
+
+        </div>
+
+        <div class="md:col-span-1 space-y-2">
+          <p class="text-gray-700 dark:text-gray-300">
+            <strong style="font-family: 'Sahel', sans-serif;">{% trans "SSN:" %}</strong> {{ patient.ssn|default_if_none:"---" }}
+          </p>
+          <p class="text-gray-700 dark:text-gray-300">
+            <strong style="font-family: 'Sahel', sans-serif;">{% trans "Occupation:" %}</strong> {{ patient.occupation|default_if_none:"---" }}
+          </p>
+          <p class="text-gray-700 dark:text-gray-300">
+            <strong style="font-family: 'Sahel', sans-serif;">{% trans "Insurance:" %}</strong> {{ insurance }}
+          </p>
+
+          <p class="text-gray-700 dark:text-gray-300">
+            <strong style="font-family: 'Sahel', sans-serif;">{% trans "Ethnicity:" %}</strong> {{ ethnicity }}
+          </p>
+
+          <p class="text-gray-700 dark:text-gray-300">
+            <strong style="font-family: 'Sahel', sans-serif;">{% trans "Language:" %}</strong> {{ patient.language_option|default_if_none:"---" }}
+          </p>
+
+          <p class="text-gray-700 dark:text-gray-300">
+            <strong style="font-family: 'Sahel', sans-serif;">{% trans "Plan:" %}</strong> {{ patient.payment_label|default_if_none:"---" }}
+          </p>
+
+
+        </div>
+        <!-- Document Box -->
+        <div class="border bg-gray-50 dark:bg-gray-700 rounded-lg p-4 h-48 overflow-y-auto mb-6">
+            <h2 class="text-lg font-semibold dark:text-white mb-2" style="font-family: 'Sahel', sans-serif;">{% trans "Visit History" %}</h2>
+            {% include "includes/document_box.html" with documents=documents %}
+        </div>
+          <!-- Sliding Panel -->
+        {% include "includes/sliding_panel.html" with documents=documents %}
+      </div>
+
+      <!-- Differential & Comorbidities -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-gray-50 dark:bg-gray-700 border border-gray-100 dark:border-gray-700 rounded-lg p-5">
+          <h3 class="text-xl font-semibold dark:text-white mb-3">{% trans "Differential Diagnoses" %}</h3>
+          <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
+            {% for dx in patient.differentials %}
+            <li>{{ dx }}</li>
+            {% empty %}
+            <li class="text-gray-500 dark:text-gray-400">{% trans "None listed." %}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="bg-gray-50 dark:bg-gray-700 border border-gray-100 dark:border-gray-700 rounded-lg p-5">
+          <h3 class="text-xl font-semibold dark:text-white mb-3">{% trans "Comorbidities" %}</h3>
+          <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
+            {% for c in patient.comorbidities %}
+            <li>{{ c }}</li>
+            {% empty %}
+            <li class="text-gray-500 dark:text-gray-400">{% trans "None listed." %}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+    {% else %}
+      <div class="py-20 text-center text-gray-500 dark:text-gray-400">
+        {% trans "No patient selected. Please search and select a patient first." %}
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+
+
+
+
+{% endblock content %}
+
+{% block extra_js %}
+<script src="{{ ds_host }}/web-apps/apps/api/documents/api.js"
+        onload="console.log('[OnlyOffice] api.js loaded')"
+        onerror="console.error('[OnlyOffice] failed to load api.js')">
+</script>
+
+<script>
+  const callbackUrl = "{{callbackUrl}}";
+  const user_name =    "{{ user_name }}";
+  const user_id =    "{{ user_id }}";
+  const dsHost =      "{{ ds_host }}";
+  const mode =        "{{ mode }}";
+
+</script>
+
+
+
+
+
+<script src="{% static 'assets/sliding_panel.js' %}"></script>
+{% endblock %}

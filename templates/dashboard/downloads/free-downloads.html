@@ -1,0 +1,65 @@
+{% extends "layouts/base-dashboard.html" %}
+{% load static custom_tags %}
+
+
+{% block content %}
+
+<div class="m-5 px-6 py-8 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-800 rounded-lg overflow-hidden">
+
+    {% include "includes/component-onboarding-kit.html" %}
+
+    <h2 class="text-2xl font-bold pb-3 dark:text-white text-center mt-10 pb-6">My Products</h2>
+    <div class="relative overflow-x-auto">
+        {% if downloads %}
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">Product</th>
+                    <th scope="col" class="px-6 py-3">Downloaded At</th>
+                    <th scope="col" class="px-6 py-3">Latest Version</th>
+                    <th scope="col" class="px-6 py-3">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for download in downloads %}
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        
+                        <th scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <a 
+                            href="{% url 'product_detail' download.product.design download.product.tech1 %}"  
+                            target="_blank"
+                            class="underline">
+                            {{ download.product.name }} 
+                         </a> 
+                        </th>
+                        <td class="px-6 py-4"> {{ download.downloaded_at }} </td>
+                        <td class="px-6 py-4"> <a href="{% url "download_product" download.product.slug %}" target="_blank" class="underline">{{ download.product.version }} | {{ download.product.release_date }} </a></td>
+                        <td class="px-6 py-4">
+                            {% if download.id|check_new_version %}
+                            <form action="{% url "download_product" download.product.slug %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="dw_url" value="{{ download.product.url_dw }}">
+                                <button type="submit" class="text-blue-600 underline bg-transparent">New Version Available </button>
+                            </form>
+                            {% else %}
+                            <form action="{% url "download_product" download.product.slug %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="dw_url" value="{{ download.product.url_dw }}">
+                                <button type="submit" class="text-blue-600 underline bg-transparent">Download </button>
+                            </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="flex items-center justify-center w-full h-64 my-8">
+            <p class="text-gray-600">No downloaded products found</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

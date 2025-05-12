@@ -1,0 +1,85 @@
+{% extends "layouts/my-base-dashboard.html" %}
+{% load i18n %}
+{% load direction_tags %}
+{% load jformat %}
+{% load static %}
+
+{% block title %}Review of Systems{% endblock %}
+{% block content %}
+
+<form method="POST" class="max-w-5xl mx-auto my-5 bg-white dark:bg-gray-800 p-5 rounded-xl border border-gray-200 dark:border-gray-700 shadow-md">
+  {% csrf_token %}
+  <h1 class="text-center mt-3 font-bold text-4xl dark:text-white">{% trans "Review of Systems" %}</h1>
+
+<!--   <div class="mt-6"> -->
+    <!-- Patient ID -->
+<!--    <div class="mb-5">
+      <label for="patient_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        Patient ID (numbers only):
+      </label>
+      <input type="number" name="patient_id" id="patient_id" required
+             class="rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" />
+    </div>-->
+
+    <!-- Visit Date -->
+<!--    <div class="mb-5">
+      <label for="visit_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        Visit Date:
+      </label>
+      <input type="text" name="visit_date" id="visit_date" data-jdp data-jdp-only-date placeholder="لطفا یک تاریخ وارد نمایید"
+             class="rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white"/>
+    </div>-->
+
+    <!-- Session Number -->
+<!--    <div class="mb-5">
+      <label for="session_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        Session Number:
+      </label>
+      <input type="number" name="session_number" id="session_number"
+             class="rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white"/>
+    </div>-->
+<!--   </div> -->
+
+  <!-- Categories and Symptoms -->
+  {% for system_name, systems_in_cat in categories.items %}
+    <h2 class="mt-8 mb-4 text-xl font-semibold dark:text-white underline">{{ system_name }}</h2>
+    <div class="overflow-x-auto mb-6">
+      <table class="min-w-full bg-white dark:bg-gray-800">
+        <thead>
+          <tr>
+            <th class="px-4 py-2"></th>
+            <th class="px-4 py-2 w-20 text-center text-gray-900 dark:text-white">N/A</th>
+            <th class="px-4 py-2 w-20 text-center text-gray-900 dark:text-white">No</th>
+            <th class="px-4 py-2 w-20 text-center text-gray-900 dark:text-white">Yes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for system in systems_in_cat %}
+            {% for symptom in system.symptoms.all %}
+              <tr>
+                <td class="px-4 py-2 text-gray-900 dark:text-white">{{ symptom.name }}</td>
+                <td class="px-4 py-2 text-center">
+                  <input type="radio" name="status_{{ symptom.id }}" value="0" checked />
+                </td>
+                <td class="px-4 py-2 text-center">
+                  <input type="radio" name="status_{{ symptom.id }}" value="1" />
+                </td>
+                <td class="px-4 py-2 text-center">
+                  <input type="radio" name="status_{{ symptom.id }}" value="2" />
+                </td>
+              </tr>
+            {% endfor %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endfor %}
+
+  <div class="flex justify-end">
+    <button type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+      Submit
+    </button>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% load static %}
+{% load i18n static %}
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-K9FNR9WF');</script>
+  <!-- End Google Tag Manager -->
+
+<title>{{ page_title }} | {{ customer_name }}</title>
+
+<meta name="author"      content="Made by RoSoft | https://rosoftware.ro/">
+<meta name="description" content="{{ page_info }}">
+<meta name="keywords"    content="{{ page_keywords }}">
+
+<link rel="canonical" href="https://app-generator.dev/{{ page_canonical }}" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="icon" type="image/png" href="{% static "common/favicon.ico" %}">
+<link rel="apple-touch-icon" sizes="76x76" href="{% static "common/apple-icon.png" %}">
+
+<link rel="shortcut icon" type="image/x-icon" href="{% static "common/favicon-196x196.png" %}" sizes="196x196" />
+<link rel="shortcut icon" type="image/x-icon" href="{% static "common/favicon-160x160.png" %}" sizes="160x160" />
+<link rel="shortcut icon" type="image/x-icon" href="{% static "common/favicon-96x96.png" %}"   sizes="96x96"   />
+<link rel="shortcut icon" type="image/x-icon" href="{% static "common/favicon-16x16.png" %}"   sizes="16x16"   />
+<link rel="shortcut icon" type="image/x-icon" href="{% static "common/favicon-32x32.png" %}"   sizes="32x32"   />      
+
+<script src="{% static 'assets/language_toggle.js' %}"></script>
+
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/js/all.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="{% static 'dist/main.css' %}">
+
+<script>
+
+  if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+</script>

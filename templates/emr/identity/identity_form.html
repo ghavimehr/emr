@@ -1,0 +1,514 @@
+{% extends "layouts/my-base-dashboard.html" %}
+{% load i18n %}
+{% load static %}
+{% load custom_filters %}
+
+
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static "dist/jquery.multi-select.css" %}">
+    <link rel="stylesheet" href="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.css">
+{% endblock extrastyle %}
+
+{% block content %}
+
+{% if read_only %}
+<!-- READ ONLY VIEW -->
+<div class="max-w-5xl mx-auto my-5 bg-white dark:bg-gray-800 p-5 rounded-xl">
+    <h2 class="text-2xl font-bold dark:text-white mb-4">{{ form_title }}</h2>
+    <!-- Show fields in read-only mode as a table -->
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border-separate border-spacing-y-2">
+      <tbody>
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200 w-1/3">{% trans "Patient ID:" %}</td>
+          <td>{{ identity_obj.patient_id }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "SSN:" %}</td>
+          <td>{{ identity_obj.ssn }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "First Name:" %}</td>
+          <td>{{ identity_obj.first_name }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Last Name:" %}</td>
+          <td>{{ identity_obj.last_name }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Gender:" %}</td>
+          <td>{{ identity_obj.gender }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Birthday (Jalali):" %}</td>
+          <td>{{ identity_obj.birthday }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Marital Status:" %}</td>
+          <td>{{ identity_obj.marital_status }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Language:" %}</td>
+          <td>{{ identity_obj.language_option }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Education Level:" %}</td>
+          <td>{{ identity_obj.education_level }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Occupation:" %}</td>
+          <td>{{ identity_obj.occupation }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Blood Group:" %}</td>
+          <td>{{ identity_obj.blood_group }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Dominant Hand:" %}</td>
+          <td>{{ identity_obj.dominanthand }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Height (cm):" %}</td>
+          <td>{{ identity_obj.height }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Weight (kg):" %}</td>
+          <td>{{ identity_obj.weight }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Insurances:" %}</td>
+          <td>
+            <!-- If you want to show JSON or parse it to show readable text -->
+            {{ identity_obj.insurance }}
+          </td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Ethnicities:" %}</td>
+          <td>
+            {{ identity_obj.ethnicity }}
+          </td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Payment Label:" %}</td>
+          <td>{{ identity_obj.payment_label }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Phone:" %}</td>
+          <td>{{ identity_obj.phone }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Messenger #1:" %}</td>
+          <td>{{ identity_obj.messenger1 }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Messenger #2:" %}</td>
+          <td>{{ identity_obj.messenger2 }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Address:" %}</td>
+          <td>{{ identity_obj.address }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Secretary Notes:" %}</td>
+          <td>{{ identity_obj.tags }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Secretary Tags (JSON):" %}</td>
+          <td>{{ identity_obj.Secretarytags }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" name="start_edit"
+        class="mt-6 px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded">
+        Start Edit
+      </button>
+      <button type="button" onclick="window.location.href='{% url 'identity-list' %}'"
+        class="mt-6 px-4 py-2 text-gray-800 bg-gray-100 rounded ml-2">
+        Cancel
+      </button>
+    </form>
+</div>
+
+{% else %}
+<!-- EDIT/CREATE FORM -->
+<form method="post"
+    id="patient-identity-form"
+    class="max-w-5xl mx-auto my-5 bg-white dark:bg-gray-800 p-5 rounded-xl border border-gray-200 dark:border-gray-700"
+>
+    <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold pb-3 dark:text-white">{{ form_title }}</h2>
+    </div>
+
+    {% csrf_token %}
+    <!-- Non-field errors (if any) -->
+    {% if form.non_field_errors %}
+        <div class="mb-4">
+            <p class="text-sm text-red-600">{{ form.non_field_errors|join:", " }}</p>
+        </div>
+    {% endif %}
+
+    <div class="grid grid-cols-2 gap-4 py-6">
+        <!-- Patient ID -->
+        <div class="col-span-1">
+            <label for="id_patient_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Patient ID" %}
+            </label>
+            {{ form.patient_id|add_class:"rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" }}
+            {% if form.patient_id.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.patient_id.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <!-- SSN -->
+        <div class="col-span-1">
+            <label for="id_ssn" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Social Security Number" %}
+            </label>
+            {{ form.ssn|add_class:"rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" }}
+            {% if form.ssn.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.ssn.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <!-- First Name -->
+        <div class="col-span-1">
+            <label for="id_first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "First Name" %}
+            </label>
+            {{ form.first_name|add_class:"rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" }}
+            {% if form.first_name.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.first_name.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+
+        <!-- Last Name -->
+        <div class="col-span-1">
+            <label for="id_last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Last Name" %}
+            </label>
+            {{ form.last_name|add_class:"rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" }}
+            {% if form.last_name.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.last_name.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Gender -->
+        <div class="col-span-1">
+            <label for="id_gender" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Gender" %}
+            </label>
+            {{ form.gender|add_class:"rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" }}
+            {% if form.gender.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.gender.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+
+        <!-- Birthday Field -->
+        <div class="col-span-1">
+            <label for="id_birthday" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Birthday (Jalali)" %}
+            </label>
+            <input type="text" id="id_birthday" name="birthday"
+                value="{{ form.birthday.value|default_if_none:'' }}"
+                class="rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white"
+                placeholder="{% trans 'Select your birth date' %}">
+            {% if form.birthday.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.birthday.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+
+        <!-- Marital Status -->
+        <div class="col-span-1">
+            <label for="id_marital_status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Marital Status" %}
+            </label>
+            {{ form.marital_status|add_class:"rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" }}
+            {% if form.marital_status.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.marital_status.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Language Option -->
+        <div class="col-span-1">
+            <label for="id_language_option" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Mother Language" %}
+            </label>
+            {{ form.language_option|add_class:"rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" }}
+            {% if form.language_option.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.language_option.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Education Level -->
+        <div class="col-span-1">
+            <label for="id_education_level" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Education Level" %}
+            </label>
+            {{ form.education_level|add_class:"rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" }}
+            {% if form.education_level.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.education_level.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Occupation -->
+        <div class="col-span-1">
+            <label for="occupationSearch" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Occupation" %}
+            </label>
+            <!-- Manual field for typed occupation -->
+            <input type="text" id="occupationSearch" name="occupation_search"
+                class="rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white"
+                placeholder="Search or enter occupation"
+            />
+            <ul id="occupationSuggestions"
+                class="hidden absolute z-50 bg-white border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-600 text-gray-900 dark:text-white w-full mt-1 max-h-40 overflow-y-auto">
+            </ul>
+            <input type="hidden" name="occupation_id" id="id_occupation" />
+
+            {% if form.occupation.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.occupation.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Blood Group -->
+        <div class="col-span-1">
+            <label for="id_blood_group" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Blood Group" %}
+            </label>
+            {{ form.blood_group|add_class:"rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" }}
+            {% if form.blood_group.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.blood_group.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Dominant Hand -->
+        <div class="col-span-1">
+            <label for="id_dominant_hand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Dominant Hand" %}
+            </label>
+            {{ form.dominanthand|add_class:"rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" }}
+            {% if form.dominanthand.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.dominanthand.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Height -->
+        <div class="col-span-1">
+            <label for="id_height" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Height (cm)" %}
+            </label>
+            {{ form.height|add_class:"rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" }}
+            {% if form.height.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.height.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Weight -->
+        <div class="col-span-1">
+            <label for="id_weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Weight (kg)" %}
+            </label>
+            {{ form.weight|add_class:"rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" }}
+            {% if form.weight.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.weight.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Insurances -->
+        <div class="col-span-1">
+            <label for="id_insurances" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Insurances" %}
+            </label>
+            {{ form.insurances_field }}
+            {# If you'd like to style it with add_class, you'd use a custom widget approach or multi-check #}
+        </div>
+
+        <!-- Ethnicities -->
+        <div class="col-span-1">
+            <label for="id_ethnicities_field" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Ethnicities" %}
+            </label>
+            {{ form.ethnicities_field }}
+        </div>
+
+        <!-- Payment Label -->
+        <div class="col-span-1">
+            <label for="id_payment_label" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Payment Label" %}
+            </label>
+            {{ form.payment_label|add_class:"rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" }}
+            {% if form.payment_label.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.payment_label.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Phone -->
+        <div class="col-span-1">
+            <label for="id_phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Phone No for Call" %}
+            </label>
+            {{ form.phone|add_class:"rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" }}
+            {% if form.phone.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.phone.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Messenger1 -->
+        <div class="col-span-1">
+            <label for="id_messenger1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Phone No for Messenger 1" %}
+            </label>
+            {{ form.messenger1|add_class:"rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" }}
+            {% if form.messenger1.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.messenger1.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Messenger2 -->
+        <div class="col-span-1">
+            <label for="id_messenger2" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Phone No for Messenger 2" %}
+            </label>
+            {{ form.messenger2|add_class:"rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" }}
+            {% if form.messenger2.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.messenger2.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Address -->
+        <div class="col-span-2">
+            <label for="id_address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Address" %}
+            </label>
+            {{ form.address|add_class:"rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" }}
+            {% if form.address.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.address.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Secretary Notes (tags) -->
+        <div class="col-span-2">
+            <label for="id_tags" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Secretary Notes" %}
+            </label>
+            {{ form.tags|add_class:"rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" }}
+            {% if form.tags.errors %}
+                <p class="text-sm text-red-600 mt-2">{{ form.tags.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Secretary Tags: Realtime Search Field -->
+        <div class="col-span-2">
+            <label for="SecretaryTagsSearch" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Secretary Tags" %}
+            </label>
+            <input type="text" id="SecretaryTagsSearch" name="Secretary_tags_search"
+                class="rounded-lg block w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white"
+                placeholder="Search or add a new tag"
+            />
+            <ul id="SecretaryTagsSuggestions" class="hidden absolute z-50 bg-white border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-600 text-gray-900 dark:text-white w-full mt-1 max-h-40 overflow-y-auto">
+                <!-- Suggestions will be dynamically added -->
+            </ul>
+            <div id="selectedSecretaryTags" class="flex flex-wrap mt-3 gap-2">
+                <!-- Chosen tags displayed here -->
+            </div>
+        </div>
+
+        <div class="col-span-2">
+            <label for="Secretary_tags_field" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {% trans "Secretary Tags" %}
+            </label>
+            {{ form.Secretary_tags_field }}
+        </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="z-10 flex justify-between items-center gap-4">
+        <button type="button"
+                onclick="window.location.href='{% url 'identity-list' %}'"
+                class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100
+                       focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5">
+            {% trans "Cancel" %}
+        </button>
+
+        <div class="flex items-center gap-4">
+            <button type="submit" name="save_and_add"
+                class="px-4 py-2 bg-green-600 text-white rounded">
+                {% trans "Save and Add Another" %}
+            </button>
+
+            <button id="saveSubmitButton"
+                    name="saveSubmitButton"
+                    type="submit"
+                    class="px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-800
+                           focus:ring-4 focus:ring-blue-300 font-medium text-sm
+                           focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-300
+                           hidden md:flex items-center justify-center gap-2">
+                {% trans "Save" %}
+            </button>
+        </div>
+    </div>
+</form>
+{% endif %}
+
+{% endblock content %}
+
+{% block extra_js %}
+<script src="{% static 'assets/occupation_search.js' %}"></script>
+<script src="{% static 'assets/Secretarytags_search.js' %}"></script>
+
+    <!-- Jalali Datepicker -->
+    <script type="text/javascript" src="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            jalaliDatepicker.startWatch({
+                separatorChar: "/",
+                changeMonthRotateYear: true,
+            });
+
+            // Get the birthday input field
+            let birthdayInput = document.getElementById("id_birthday");
+
+            // Convert "-" to "/" dynamically when the user types
+            birthdayInput.addEventListener("input", function () {
+                this.value = this.value.replace(/-/g, "/");  // Replace all "-" with "/"
+            });
+
+            // Force the Jalali datepicker to open when the user clicks/focuses the input
+            birthdayInput.addEventListener("focus", function () {
+                jalaliDatepicker.show(birthdayInput);
+            });
+
+        });
+
+
+    </script>
+{% endblock extra_js %}

@@ -1,0 +1,140 @@
+\documentclass[12pt]{article}
+
+% --- Page Setup ---
+\usepackage[paper=a4paper, left=2cm, right=2 cm, top=1.5cm , bottom=3cm]{geometry}
+
+% --- decorations ---
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{fontspec}
+\usepackage{fontawesome5}
+\usepackage{tabularx}
+
+% --- Persian Support ---
+\usepackage{xepersian}
+\settextfont{XB Zar.ttf}
+\newfontfamily\XBZarBd{XB Zar Bd.ttf}
+\newfontfamily\titr{XB Titre.ttf}
+
+% --- Header & Footer ---
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{array}
+
+\pagestyle{fancy}
+
+\fancyfoot[L]{\footnotesize
+  \faBuilding\space
+  تهران، کارگر شمالی، بالاتر از مرکز قلب تهران، بن بست سوم، پلاک 2، طبقه 4، واحد 10
+}
+\fancyfoot[C]{صفحۀ \thepage}
+\fancyfoot[R]{\footnotesize
+  88533271-021\space \faPhone*
+  \\
+  www.Drarzaghi.com  \space \faGlobe
+}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% --- Document ---
+\begin{document}
+
+%--- Header Table ---
+\begin{table}[h!]
+\begin{tabular}{m{5.5cm} m{4.5cm} m{5.5cm}}
+\includegraphics[width=4cm]{"<<base-dir>>/latex/compact.png"} &
+\begin{tcolorbox}[
+    colback=black!50, colframe=black!50, coltext=white,
+    boxrule=0.1mm, width=\linewidth,
+    halign=center, valign=center,fonttitle=\sffamily\bfseries
+]
+\normalsize\titr{برگ اطلاعات اولیه}
+\end{tcolorbox} &
+\includegraphics[width=3cm]{"<<base-dir>>/static/common/logo.png"}
+\end{tabular}
+\end{table}
+
+\hrule
+\vspace{1cm}
+
+%--- Demographics ---
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\footnotesize
+\newcolumntype{B}{>{\fontsize{8}{9.5}\selectfont\XBZarBd}p{1.5cm}}
+\newcolumntype{N}{p{3.35cm}}
+\begin{tabular}{B N | B N | B N}
+  شماره پرونده & <<patient-id>> &
+  \textbf{کد ملی} & <<ssn>> &
+  \textbf{بیمه} & <<insurance>> \\
+  \textbf{نام} & <<first-name>> &
+  \textbf{نام خانوادگی} & <<last-name>> &
+  \textbf{تاریخ تولد} & <<birthday>> \\
+  \textbf{جنسیت} & <<gender>> &
+  \textbf{قد} & <<height>> &
+  \textbf{وزن} & <<weight>> \\
+  \textbf{وضعیت تاهل} & <<marital-status>> &
+  \textbf{تحصیلات} & <<education-level>> &
+  \textbf{شغل} & <<occupation>>  \\
+  \textbf{زبان مادری} & <<language-option>> &
+  \textbf{قومیت} & <<ethnicity>> &
+  \textbf{گروه خونی} & <<blood-group>>  \\
+  \textbf{شماره تماس} & <<phone>> &
+  \textbf{واتساپ} & <<messenger1>> &
+  \textbf{ایتا} & <<messenger2>>  \\
+  \textbf{دست غالب} & <<dominanthand>> &
+  \textbf{آدرس} & \multicolumn{3}{>{\raggedleft\arraybackslash}p{9cm}}{<<address>>}
+\end{tabular}
+\end{table}
+
+\hrule
+\vspace{1cm}
+
+%--- Title ---
+\begin{center}
+  {\large\titr{تعهدنامه بیمار به کلینیک دکتر سید مسعود ارزاقی}}
+\end{center}
+\vspace{1cm}
+
+%--- Unilateral Commitment Text ---
+\normalfont
+اینجانبِ <<patient>> (که اطلاعات بالا، مشخصات بنده را نشان می‌دهد)، با آگاهی کامل از قوانین و مقررات و شرایط استفاده از خدمات این کلینیک، موارد زیر را به‌صورت یک‌طرفه و بدون نیاز به امضای پزشک و مهر کلینیک، تعهد می‌نمایم:
+
+\begin{enumerate}
+  \item مدت ویزیت: برای بیماران جدید حداکثر ۳۰ دقیقه و بیماران دارای پرونده حداکثر ۱۵ دقیقه بوده و در صورت طولانی‌تر شدن، زمان اضافی مشمول هزینه خواهد بود.
+  \item هماهنگی وقت‌های بعدی با پذیرش، و اطلاع‌رسانی حداقل ۴۸ ساعت پیش از عدم امکان مراجعه.
+  \item حضور در مطب زودتر از ۱۵ دقیقه پیش از وقت تعیین‌شده خودداری شود.
+  \item رعایت نظم، بهداشت مطب و همکاری با پرسنل در حفظ آرامش.
+  \item در صورت نارضایتی از هر یک از خدمات (پذیرش، تعیین وقت، درمان و ...)، مراتب را به شماره ۰۹۰۵۸۹۶۱۸۵۰ اطلاع می‌دهم.
+  \item آگاهانه پزشک را در انتخاب روش درمان امین دانسته و از هرگونه اقدام ضروری، برائت می‌دهم.
+  \item هزینه‌های تشخیصی و درمانی پس از ویزیت، در هیچ زمانی قابل استرداد نیست.
+  \item اطّلاعات پرونده و جزئیات مراجعات، محرمانه بوده و هیچ‌کس حق افشاء ندارد.
+  \item با علم به ماده ۶۱۸ قانون مجازات اسلامی از هرگونه رفتار نامناسب با پرسنل درمانی خودداری می‌کنم.
+\end{enumerate}
+
+%--- Research Consent ---
+\vspace{0.5cm}
+\large\XBZarBd{رضایت‌نامه استفاده از داده‌های مراجع در تحقیقات}
+\normalfont
+\begin{enumerate}
+  \item با رعایت محرمانگی، اجازه می‌دهم داده‌های تشخیصی و درمانی‌ام در پروژه‌های پژوهشی استفاده شود.
+  \item اطلاعات هویتی پیش از هر پژوهش، ناشناس یا کدگذاری‌شده نگهداری می‌شود.
+  \item حق انصراف از اشتراک‌گذاری را در هر زمان دارم؛ داده‌های منتشرشده تا قبل از انصراف مورد استناد قرار می‌گیرند.
+  \item در صورت درخواست، پس از پایان پژوهش، خلاصه‌ای از نتایج به‌صورت غیرشخصی‌ساز در اختیارم قرار می‌گیرد.
+\end{enumerate}
+
+%--- Date & Signature ---
+\vspace{1cm}
+\begin{tabularx}{\textwidth}{X}
+  \XBZarBd
+  تاریخ: <<today>> \\
+  \vspace{1cm}
+  \XBZarBd
+  نام و نام خانوادگی مراجع یا قیم قانونی وی: \\
+  \vspace{2cm}
+  \XBZarBd
+  امضاء و اثر انگشت مراجع:
+\end{tabularx}
+
+\end{document}

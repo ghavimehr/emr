@@ -1,0 +1,324 @@
+{% extends "layouts/my-base-dashboard.html" %}
+{% load i18n %}
+{% load direction_tags %}
+{% load static %}
+
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static "dist/jquery.multi-select.css" %}">
+{% endblock extrastyle %}
+
+{% block content %}
+<div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
+    <div class="mb-4 col-span-full xl:mb-2">
+        <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
+            {% trans "Patient Management" %}
+        </h1>
+    </div>
+
+
+
+
+
+
+
+    <div class="col-span-3">
+        <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+            <div class="flex items-center justify-between mb-8">
+                <h3 class="mb-4 text-xl font-semibold dark:text-white">
+                    {% trans "All Patients" %}
+                </h3>
+                <a href="{% url 'identity-create' %}" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                    {% trans "Add New Patient" %}
+                </a>
+            </div>
+
+
+<!-- ADVANCED SEARCH FORM -->
+<form method="GET" class="bg-white p-4 rounded-lg shadow mb-4 flex flex-col space-y-4 dark:bg-gray-800">
+    <!-- First row: basic text fields -->
+    <div class="flex flex-wrap gap-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-200" for="patient_id">
+          {% trans "Patient ID" %}
+        </label>
+        <input
+          type="text"
+          name="patient_id"
+          id="patient_id"
+          value="{{ request.GET.patient_id|default_if_none:'' }}"
+          class="mt-1 block w-48 p-2 border rounded dark:bg-gray-700 dark:text-white"
+        />
+      </div>
+  
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-200" for="first_name">
+          {% trans "First Name" %}
+        </label>
+        <input
+          type="text"
+          name="first_name"
+          id="first_name"
+          value="{{ request.GET.first_name|default_if_none:'' }}"
+          class="mt-1 block w-48 p-2 border rounded dark:bg-gray-700 dark:text-white"
+        />
+      </div>
+  
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-200" for="last_name">
+          {% trans "Last Name" %}
+        </label>
+        <input
+          type="text"
+          name="last_name"
+          id="last_name"
+          value="{{ request.GET.last_name|default_if_none:'' }}"
+          class="mt-1 block w-48 p-2 border rounded dark:bg-gray-700 dark:text-white"
+        />
+      </div>
+  
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-200" for="ssn">
+          {% trans "SSN" %}
+        </label>
+        <input
+          type="text"
+          name="ssn"
+          id="ssn"
+          value="{{ request.GET.ssn|default_if_none:'' }}"
+          class="mt-1 block w-48 p-2 border rounded dark:bg-gray-700 dark:text-white"
+        />
+      </div>
+    </div>
+  
+    <!-- Second row: dropdowns for ForeignKeys / ManyToMany -->
+    <div class="flex flex-wrap gap-4">
+      <!-- Gender dropdown -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-200" for="gender">
+          {% trans "Gender" %}
+        </label>
+        <select
+          name="gender"
+          id="gender"
+          class="mt-1 block w-48 p-2 border rounded dark:bg-gray-700 dark:text-white"
+        >
+          <option value="">{% trans "Any" %}</option>
+          {% for g in all_genders %}
+            <option value="{{ g.id }}"
+              {% if request.GET.gender == g.id|stringformat:"s" %}selected{% endif %}
+            >
+              {{ g.name }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+  
+      <!-- Dominant Hand dropdown -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-200" for="dominanthand">
+          {% trans "Dominant Hand" %}
+        </label>
+        <select
+          name="dominanthand"
+          id="dominanthand"
+          class="mt-1 block w-48 p-2 border rounded dark:bg-gray-700 dark:text-white"
+        >
+          <option value="">{% trans "Any" %}</option>
+          {% for dh in all_dominant_hands %}
+            <option value="{{ dh.id }}"
+              {% if request.GET.dominanthand == dh.id|stringformat:"s" %}selected{% endif %}
+            >
+              {{ dh.name }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+  
+      <!-- Insurance (ManyToMany) dropdown -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-200" for="insurance">
+          {% trans "Insurance" %}
+        </label>
+        <select
+          name="insurance"
+          id="insurance"
+          class="mt-1 block w-48 p-2 border rounded dark:bg-gray-700 dark:text-white"
+        >
+          <option value="">{% trans "Any" %}</option>
+          {% for ins in all_insurances %}
+            <option value="{{ ins.id }}"
+              {% if request.GET.insurance == ins.id|stringformat:"s" %}selected{% endif %}
+            >
+              {{ ins.name }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  
+    <!-- Submit button -->
+    <div>
+      <button
+        type="submit"
+        class="inline-flex items-center px-4 py-2 bg-primary-700 text-white font-medium rounded hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-blue-600 dark:hover:bg-primary-700"
+      >
+        {% trans "Search" %}
+      </button>
+    </div>
+  </form>
+  
+
+
+            <div class="overflow-x-auto relative">
+                <table class="w-full text-sm text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 {% get_alignment %}">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">{% trans "Reference NO" %}</th>
+                            <th scope="col" class="px-6 py-3">{% trans "First Name" %}</th>
+                            <th scope="col" class="px-6 py-3">{% trans "Last Name" %}</th>
+                            <th scope="col" class="px-6 py-3">{% trans "Social Security Number" %}</th>
+                            <th scope="col" class="px-6 py-3">{% trans "Actions" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for identity in identities %}
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td class="px-6 py-4">{{ identity.patient_id }}</td>
+                            <td class="px-6 py-4">{{ identity.first_name }}</td>
+                            <td class="px-6 py-4">{{ identity.last_name }}</td>
+                            <td class="px-6 py-4">{{ identity.ssn }}</td>
+                            <td class="px-6 py-4">
+                                <a href="{% url 'generate-report' identity.id %}" class="text-blue-600 hover:underline">PDF</a> |
+                                <a href="{% url 'identity-update' identity.pk %}" class="text-yellow-600 hover:underline">{% trans "View" %}</a> |
+                                <a href="{% url 'identity-delete' identity.pk %}" class="text-red-600 hover:underline">{% trans "Delete" %}</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+
+<!-- Container for rows-per-page and pagination in one row, with top padding -->
+<div class="flex items-center justify-between mb-4 pt-4">
+
+    <!-- Rows-per-page Selector (left side) -->
+    <form method="GET" class="flex items-center space-x-2 rtl:space-x-reverse">
+      <!-- Always reset to page=1 on change -->
+      <input type="hidden" name="page" value="1">
+  
+      <label for="rows" class="font-medium text-gray-700 dark:text-gray-200">
+        {% trans "Rows per page:" %}
+      </label>
+  
+      <!-- Wider dropdown (w-28) -->
+      <select
+        name="rows"
+        id="rows"
+        class="w-28 bg-white border border-gray-300 text-gray-700 text-sm rounded-lg 
+               focus:ring-2 focus:ring-primary-300 focus:border-primary-300
+               p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white
+               appearance-none"
+        onchange="this.form.submit()"
+      >
+        <option value="10" {% if identities.paginator.per_page == 10 %} selected {% endif %}>10</option>
+        <option value="25" {% if identities.paginator.per_page == 25 %} selected {% endif %}>25</option>
+        <option value="50" {% if identities.paginator.per_page == 50 %} selected {% endif %}>50</option>
+      </select>
+    </form>
+  
+    <!-- Pagination (right side) -->
+    <nav class="flex items-center" aria-label="{% trans 'Page navigation' %}">
+      <ul class="inline-flex items-center space-x-2 rtl:space-x-reverse">
+        {% if identities.has_previous %}
+          <li>
+            <a href="?page=1&rows={{ identities.paginator.per_page }}"
+               class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 
+                      font-medium rounded-lg text-sm px-5 py-2.5 text-center 
+                      dark:bg-blue-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+              {% trans "First" %}
+            </a>
+          </li>
+          <li>
+            <a href="?page={{ identities.previous_page_number }}&rows={{ identities.paginator.per_page }}"
+               class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 
+                      font-medium rounded-lg text-sm px-5 py-2.5 text-center 
+                      dark:bg-blue-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+              {% trans "Previous" %}
+            </a>
+          </li>
+        {% else %}
+          <li>
+            <span class="text-gray-500 bg-gray-200 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+              {% trans "First" %}
+            </span>
+          </li>
+          <li>
+            <span class="text-gray-500 bg-gray-200 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+              {% trans "Previous" %}
+            </span>
+          </li>
+        {% endif %}
+  
+        <li>
+          <span class="text-gray-700 bg-white border border-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center 
+                       dark:bg-gray-700 dark:text-white dark:border-gray-600">
+            {% trans "Page" %} {{ identities.number }} {% trans "of" %} {{ identities.paginator.num_pages }}
+          </span>
+        </li>
+  
+        {% if identities.has_next %}
+          <li>
+            <a href="?page={{ identities.next_page_number }}&rows={{ identities.paginator.per_page }}"
+               class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 
+                      font-medium rounded-lg text-sm px-5 py-2.5 text-center 
+                      dark:bg-blue-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+              {% trans "Next" %}
+            </a>
+          </li>
+          <li>
+            <a href="?page={{ identities.paginator.num_pages }}&rows={{ identities.paginator.per_page }}"
+               class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 
+                      font-medium rounded-lg text-sm px-5 py-2.5 text-center 
+                      dark:bg-blue-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+              {% trans "Last" %}
+            </a>
+          </li>
+        {% else %}
+          <li>
+            <span class="text-gray-500 bg-gray-200 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+              {% trans "Next" %}
+            </span>
+          </li>
+          <li>
+            <span class="text-gray-500 bg-gray-200 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+              {% trans "Last" %}
+            </span>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+  
+
+                  
+                
+  
+
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+<script src="{% static "dist/js/jquery-2.2.4.min.js" %}"></script>
+<script src="{% static "dist/js/jquery.multi-select.min.js" %}"></script>
+<script>
+    // Example script for future use if multi-select is implemented
+    $('#id_example').multiSelect({
+        'noneText': 'Select Options',
+    });
+</script>
+{% endblock extra_js %}

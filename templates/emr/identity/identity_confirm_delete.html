@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Delete Patient?</h2>
+<p>Are you sure you want to delete this patient?</p>
+
+<ul>
+  <li><strong>ID:</strong> {{ identity.id }}</li>
+  <li><strong>Patient ID:</strong> {{ identity.patient_id }}</li>
+  <li><strong>Name:</strong> {{ identity.first_name }} {{ identity.last_name }}</li>
+</ul>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Yes, delete</button>
+  <a href="{% url 'identity-list' %}">Cancel</a>
+</form>
+{% endblock %}

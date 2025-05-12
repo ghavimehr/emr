@@ -1,0 +1,184 @@
+{% extends "layouts/base2.html" %}
+{% load static embed_url %}
+
+{% block content %}
+
+<section class="max-w-screen-xl mx-3 md:mx-auto py-16">
+    <div class="grid grid-cols-6 gap-0 md:gap-24">
+        <div class="col-span-6 md:col-span-4">
+            <div class="flex items-center justify-between mb-8">
+                <h1 class="text-gray-900 text-2xl dark:text-white font-bold">{{ article.title }}</h1>
+                <a href="{% url "add_bookmark" article.slug %}"
+                    class="hover:scale-105 transition-all"
+                    title="Bookmark (read later)">
+                    {% if is_bookmarked %}
+                        <svg class="w-8 h-8 text-gray-800"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                fill="currentColor"
+                                viewBox="0 0 24 24">
+                            <path d="M7.833 2c-.507 0-.98.216-1.318.576A1.92 1.92 0 0 0 6 3.89V21a1 1 0 0 0 1.625.78L12 18.28l4.375 3.5A1 1 0 0 0 18 21V3.889c0-.481-.178-.954-.515-1.313A1.808 1.808 0 0 0 16.167 2H7.833Z" />
+                        </svg>
+                    {% else %}
+                        <svg class="w-8 h-8 text-gray-800"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                fill="none"
+                                viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z" />
+                        </svg>
+                    {% endif %}
+                </a>
+            </div>
+            <img 
+                src="{{ article.thumbnail.file.url }}"
+                alt="{{ article.title }}"
+                class="w-full max-h-72 object-cover rounded-2xl mb-4"
+            >
+            <div class="flex items-start gap-5 md:gap-0 md:items-center justify-between flex-col md:flex-row mb-5">
+                <div>
+                    {% for tag in article.tags.all %}
+                        <span data-tag="{{ tag.slug }}" class="tag cursor-pointer bg-blue-100 text-blue-800 text-xs font-medium me-2 px-3 py-1 rounded-md dark:bg-blue-900 dark:text-blue-300">{{ tag.name }}</span>
+                    {% endfor %}
+                </div>
+                <div>
+                    <p class="text-gray-500 dark:text-gray-300 text-sm font-medium">Published on: {{ article.published_at|date:"F d, Y" }}</p>
+                </div>
+            </div>
+
+            <div class="prose max-w-full mb-6">{{ article.content.html|safe }}</div>
+
+            {% if article.video.url %}
+                <div class="aspect-video overflow-hidden object-cover object-center w-full rounded-lg mb-16">
+                    <iframe 
+                        width="100%"
+                        height="100%"
+                        src="{{ article.video.url|to_embed_url }}"
+                        title="YouTube video player"
+                        frameborder="0"
+                        id="article_video"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                    ></iframe>
+                </div>
+            {% endif %}
+
+            <div class="hidden md:block">
+                {% include "includes/component-promo.html" %}
+                <div>
+                    <h4 class="text-gray-900 dark:text-white text-sm font-bold mb-10">See related articles</h4>
+                    <div class="grid grid-cols-2 gap-5">
+                        {% for article in articles %}
+                            <div class="col-span-1">
+                                <a href="{% url 'blog_detail' slug=article.slug %}">
+                                <img class="w-full max-h-32 object-cover rounded-2xl mb-4" src="{{ article.thumbnail.file.url }}" alt="">
+                                </a>
+                                <h2 class="mb-2">
+                                    <a class="text-gray-900 dark:text-white font-semibold" href="{% url 'blog_detail' slug=article.slug %}">{{ article.title }}</a>
+                                </h2>
+                                <p class="text-gray-500 dark:text-gray-300 text-sm mb-3">{{ article.subtitle }}</p>
+                                <a class="text-primary-700 inline-flex items-center gap-2 text-sm font-medium" href="{% url 'blog_detail' slug=article.slug %}">
+                                    <span>Read now</span>
+                                    <svg class="w-4 h-4 text-primary-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+                                    </svg>  
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-6 md:col-span-2">
+            {% include "includes/blog-right.html" %}
+        </div>
+
+        <div class="col-span-6 block md:hidden mt-10">
+            {% include "includes/component-promo.html" %}
+            <div>
+                <h4 class="text-gray-900 dark:text-white text-sm font-bold mb-10">See related articles</h4>
+                <div class="grid grid-cols-2 gap-5">
+                    {% for article in articles %}
+                        <div class="col-span-2 md:col-span-1">
+                            <a href="{% url 'blog_detail' slug=article.slug %}">
+                            <img class="w-full max-h-32 object-cover rounded-2xl mb-4" src="{{ article.thumbnail.file.url }}" alt="">
+                            </a>
+                            <h2 class="mb-2">
+                                <a class="text-gray-900 dark:text-white font-semibold" href="{% url 'blog_detail' slug=article.slug %}">{{ article.title }}</a>
+                            </h2>
+                            <p class="text-gray-500 dark:text-gray-300 text-sm mb-3">{{ article.subtitle }}</p>
+                            <a class="text-primary-700 inline-flex items-center gap-2 text-sm font-medium" href="{% url 'blog_detail' slug=article.slug %}">
+                                <span>Read now</span>
+                                <svg class="w-4 h-4 text-primary-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+                                </svg>  
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+
+
+{% block extra_js %}
+
+<script src="{% static "dist/js/clear-search.js" %}"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const selectedTags = new Set();
+    
+        const currentPath = window.location.pathname;
+        const tagMatch = currentPath.match(/blog\/tags\/([^\/]+)\//);
+    
+        if (tagMatch) {
+            tagMatch[1].split(',').forEach(tag => {
+                selectedTags.add(tag);
+            });
+        }
+    
+        function updateQueryParams() {
+            const queryParams = new URLSearchParams(window.location.search);
+            queryParams.delete('tags');
+    
+            let newUrl;
+            if (selectedTags.size > 0) {
+                newUrl = '/blog/tags/' + Array.from(selectedTags).join(',') + '/?' + queryParams.toString();
+            } else {
+                newUrl = '/blog/?' + queryParams.toString();
+            }
+    
+            window.location.href = newUrl;
+        }
+    
+        document.querySelectorAll('.tag').forEach(tagEl => {
+            const tagValue = tagEl.getAttribute('data-tag');
+    
+            if (selectedTags.has(tagValue)) {
+                tagEl.classList.add("bg-blue-600", "text-white");
+            }
+    
+            tagEl.addEventListener('click', () => {
+                if (selectedTags.has(tagValue)) {
+                    selectedTags.delete(tagValue);
+                    tagEl.classList.remove("bg-blue-600", "text-white");
+                } else {
+                    selectedTags.add(tagValue);
+                    tagEl.classList.add("bg-blue-600", "text-white");
+                }
+                updateQueryParams();
+            });
+        });
+    });
+    
+</script>
+
+{% endblock extra_js %}

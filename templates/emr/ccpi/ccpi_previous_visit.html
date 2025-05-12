@@ -1,0 +1,43 @@
+{% extends "my-base-dashboard.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>{% trans "Previous CC & PI Record" %}</h2>
+
+<p>
+  <strong>{% trans "Chief Complaint" %}:</strong>
+  {{ record.chief_complaint }}
+</p>
+<p>
+  <strong>{% trans "Present Illness" %}:</strong>
+  {{ record.present_illness|safe }}
+</p>
+
+<p>
+  <strong>{% trans "Present Illness Image" %}:</strong><br/>
+  {% if record.present_illness_img %}
+    <img src="{{ record.present_illness_img.url }}" width="200" />
+  {% else %}
+    <em>{% trans "No image" %}</em>
+  {% endif %}
+</p>
+
+<p>
+  <strong>{% trans "Present Illness Scan (PDF)" %}:</strong><br/>
+  {% if record.present_illness_scan %}
+    <a href="{{ record.present_illness_scan.url }}" target="_blank">
+      {% trans "Open PDF" %}
+    </a>
+  {% else %}
+    <em>{% trans "No PDF" %}</em>
+  {% endif %}
+</p>
+
+<hr/>
+{% if can_edit %}
+<button onclick="window.location.href='?edit=1'">
+  {% trans "Start Editing" %}
+</button>
+{% endif %}
+
+{% endblock %}

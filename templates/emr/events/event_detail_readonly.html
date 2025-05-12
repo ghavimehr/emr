@@ -1,0 +1,38 @@
+{# templates/emr/events/event_detail_readonly.html #}
+{% extends "layouts/my-base-dashboard.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto my-5 bg-white dark:bg-gray-800 p-5 rounded-xl shadow">
+  <h2 class="text-2xl font-bold dark:text-white mb-4">{% trans "Event Details" %}</h2>
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border-separate border-spacing-y-2">
+    <tbody>
+      <tr>
+        <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Patient:" %}</td>
+        <td>{{ event.patient }}</td>
+      </tr>
+      <tr>
+        <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Date:" %}</td>
+        <td>{{ event.date }}</td>
+      </tr>
+      <tr>
+        <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Time:" %}</td>
+        <td>{{ event.time }}</td>
+      </tr>
+      <tr>
+        <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Event Type:" %}</td>
+        <td>{{ event.event_type }}</td>
+      </tr>
+      <tr>
+        <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "User:" %}</td>
+        <td>{{ event.user }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="mt-4">
+    <button type="button" onclick="window.history.back();" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+      {% trans "Back" %}
+    </button>
+  </div>
+</div>
+{% endblock %}

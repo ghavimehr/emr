@@ -1,0 +1,169 @@
+{% extends "layouts/base2.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="max-w-screen-xl mx-3 md:mx-auto py-8 md:py-16">
+    <div class="grid grid-cols-6 gap-0 md:gap-24">
+        <div class="col-span-6 md:col-span-4">
+            <h3 class="text-gray-900 dark:text-white text-2xl font-bold mb-3">App Generator Blog</h3>
+            <p class="text-gray-500 dark:text-gray-300 mb-10">Explore our blog to deepen your understanding of programming and modern technologies. Dive into topics like Flask, Django, and Python, and stay updated with the latest trends and best practices in the tech world.</p>
+            {% for article in articles %}
+            <div class="mb-20">
+                <a href="{% url 'blog_detail' slug=article.slug %}">
+                    <img class="rounded-2xl h-64 object-cover w-full mb-4" src="{{ article.thumbnail.file.url }}" alt="">
+                </a>
+                <div class="flex items-start gap-5 md:gap-0 md:items-center justify-between flex-col md:flex-row mb-5">
+                    <div>
+                        {% for tag in article.tags.all %}
+                            <span data-tag="{{ tag.slug }}" class="tag cursor-pointer bg-blue-100 text-blue-800 text-xs font-medium me-2 px-3 py-1 rounded-md dark:bg-blue-900 dark:text-blue-300">{{ tag.name }}</span>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <p class="text-gray-500 dark:text-gray-300 text-sm font-medium">Published on: {{ article.published_at|date:"F d, Y" }}</p>
+                    </div>
+                </div>
+                <h1 class="mb-3">
+                    <a class="text-gray-900 dark:text-white hover:text-gray-900 text-2xl font-bold" href="{% url 'blog_detail' slug=article.slug %}">{{ article.title }}</a>
+                </h1>
+                <p class="text-gray-500 dark:text-gray-300 mb-5">{{ article.subtitle }}</p>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        {% if article.created_by.profile.avatar %}
+                        <img class="w-6 h-6 rounded-full" src="{{ article.created_by.profile.avatar.url }}" alt="{{ article.created_by.username }}">
+                        {% else %}
+                        <img class="w-6 h-6 rounded-full" src="{% static "dist/img/Avatar.png" %}" alt="{{ article.created_by.username }}">       
+                        {% endif %}
+                        <p class="text-gray-900 dark:text-white text-sm font-semibold">{{ article.created_by.username }}</p>
+                    </div>
+                    <div>
+                        <a class="inline-flex items-center gap-3 font-medium text-primary-700" href="{% url 'blog_detail' slug=article.slug %}">
+                            Read more
+                            <svg class="w-6 h-6 text-primary-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+                            </svg>                              
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+
+            <div class="flex justify-end">
+                {% if articles.has_other_pages %}
+                    <nav aria-label="Page navigation example" class="mt-5 ml-4">
+                        <ul class="inline-flex -space-x-px text-base h-10">
+                            {% if articles.has_previous %}
+                            <li>
+                                <a href="#" data-page="1" class="page-link flex items-center justify-center px-4 h-10 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">First</a>
+                            </li>
+                            <li>
+                                <a href="#" data-page="{{ articles.previous_page_number }}" class="page-link flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Prev</a>
+                            </li>
+                            {% endif %}
+                    
+                            {% for n in articles.paginator.page_range %}
+                                {% if articles.number == n %}
+                                    <li>
+                                    <span class="flex items-center justify-center px-4 h-10 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">{{ n }}<span class="sr-only"></span></span>
+                                    </li>
+                                {% elif n > articles.number|add:'-3' and n < articles.number|add:'3' %}
+                                    <li>
+                                    <a class="page-link flex items-center justify-center px-4 h-10 leading-tight {% if articles.number == i %}text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white{% else %}text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white{% endif %}" data-page="{{ n }}" href="#">
+                                        {{ n }}
+                                    </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {% if articles.has_next %}
+                            <li>
+                                <a href="#" data-page="{{ articles.next_page_number }}" class="page-link flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+                            </li>
+                            <li>
+                                <a href="#" data-page="{{ articles.paginator.num_pages }}" class="page-link flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Last</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+
+        </div>
+        {% include "includes/blog-right.html" %}
+    </div>
+</section>
+
+{% endblock content %}
+
+
+{% block extra_js %}
+<script src="{% static "dist/js/clear-search.js" %}"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const selectedTags = new Set();
+    
+        const currentPath = window.location.pathname;
+        const tagMatch = currentPath.match(/blog\/tags\/([^\/]+)\//);
+    
+        if (tagMatch) {
+            tagMatch[1].split(',').forEach(tag => {
+                selectedTags.add(tag);
+            });
+        }
+    
+        function updateQueryParams() {
+            const queryParams = new URLSearchParams(window.location.search);
+            queryParams.delete('tags');
+    
+            let newUrl;
+            if (selectedTags.size > 0) {
+                newUrl = '/blog/tags/' + Array.from(selectedTags).join(',') + '/?' + queryParams.toString();
+            } else {
+                newUrl = '/blog/?' + queryParams.toString();
+            }
+    
+            window.location.href = newUrl;
+        }
+    
+        document.querySelectorAll('.tag').forEach(tagEl => {
+            const tagValue = tagEl.getAttribute('data-tag');
+    
+            if (selectedTags.has(tagValue)) {
+                tagEl.classList.add("bg-blue-600", "text-white");
+            }
+    
+            tagEl.addEventListener('click', () => {
+                if (selectedTags.has(tagValue)) {
+                    selectedTags.delete(tagValue);
+                    tagEl.classList.remove("bg-blue-600", "text-white");
+                } else {
+                    selectedTags.add(tagValue);
+                    tagEl.classList.add("bg-blue-600", "text-white");
+                }
+                updateQueryParams();
+            });
+        });
+    });
+    
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const paginationLinks = document.querySelectorAll('.page-link');
+      
+      paginationLinks.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const page = link.getAttribute('data-page');
+          const params = new URLSearchParams(window.location.search);
+          params.set('page', page);
+          window.location.href = `${window.location.pathname}?${params.toString()}`;
+        });
+      });
+    });
+</script>
+
+
+{% endblock extra_js %}

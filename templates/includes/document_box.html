@@ -1,0 +1,39 @@
+{% load i18n static widget_tweaks jsonify %}
+
+<!-- document_box.html -->
+<div class="document-box bg-gray-50 dark:bg-gray-700 p-4 rounded-lg overflow-y-auto" dir="ltr">
+  <h3 class="text-lg font-semibold dark:text-white mb-2">{{ title }}</h3>
+  <div dir="rtl">
+    <button
+      id="generate-pdf-btn"
+      class="mb-3 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+    >
+      {% trans "Generate File" %}
+    </button>
+  </div>
+  <ul id="document-list" class="document-list space-y-2">
+    {% for doc in documents %}
+      <li>
+        <button
+          type="button"
+          class="open-panel flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-500 focus:outline-none"
+          data-key         ="{{ doc.key }}"
+          data-referencedata ="{{ doc.referenceData }}"
+          data-url         ="{{ doc.url }}"
+          data-token       ="{{ doc.token }}"
+          data-title       ="{{ doc.title }}"
+          data-extension   ="{{ doc.extension }}"
+          data-permissions ='{{ doc.permissions|jsonify}}'
+          aria-label="Open {{ doc.title }}"
+        >
+          <i class="fa-solid fa-file-pdf mr-2" aria-hidden="true"></i>
+          <span>{{ doc.title }}</span>
+        </button>
+      </li>
+    {% empty %}
+      <li class="text-gray-500 dark:text-gray-400">
+        {% trans "No documents found." %}
+      </li>
+    {% endfor %}
+  </ul>
+</div>

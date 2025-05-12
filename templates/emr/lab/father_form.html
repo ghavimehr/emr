@@ -1,0 +1,114 @@
+{% extends "layouts/my-base-dashboard.html" %}
+{% load i18n static widget_tweaks %}
+
+{% block extrastyle %}
+  <link rel="stylesheet" href="{% static 'dist/jquery.multi-select.css' %}">
+  <link rel="stylesheet" href="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock extrastyle %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto my-5">
+  <!-- Mosaic Menu for Lab Categories -->
+  <div class="mb-6">
+    <h2 class="text-2xl font-bold dark:text-white mb-4">{% trans "Lab Categories" %}</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      {% for cat in lab_categories %}
+        <a href="{% url 'lab:lab_category' cat.name %}" class="block bg-white dark:bg-gray-800 p-4 rounded shadow hover:bg-blue-100 dark:hover:bg-blue-900 text-center">
+          <span class="font-bold text-lg dark:text-white">{{ cat.fname|default:cat.name }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Main Lab Test Forms -->
+  <div class="bg-white dark:bg-gray-800 p-5 rounded-xl border border-gray-200 dark:border-gray-700">
+    <h1 class="text-2xl font-bold dark:text-white mb-4">
+      {% trans "Category:" %} {{ category_name }}
+    </h1>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      <!-- Loop through each test form -->
+      {% for test_name, form in forms.items %}
+        <div class="mb-6 border border-gray-300 dark:border-gray-600 rounded shadow overflow-hidden">
+          <details class="w-full" close>
+            <summary class="px-4 py-2 bg-gray-50 dark:bg-gray-700 font-bold text-lg dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600">
+              {{ test_name }}
+            </summary>
+            <div class="p-4">
+              <!-- Render form fields in a grid -->
+              <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-4">
+                <!-- Test Date Input -->
+                  <div class="mb-6">
+                    <label for="{{ form.date.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                      {% trans "Test Date" %}
+                    </label>
+                    {{ form.date }}
+                    {% if form.date.errors %}
+                      <p class="text-sm text-red-600 mt-2">{{ form.date.errors }}</p>
+                    {% endif %}
+                </div>
+              
+
+                {% for field in form %}
+                  <div>
+                    <label for="{{ field.id_for_label }}" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                      {{ field.label }}
+                    </label>
+                    {{ field }}
+                    {% if field.errors %}
+                      <p class="text-sm text-red-600 mt-1">{{ field.errors|join:", " }}</p>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </details>
+        </div>
+      {% empty %}
+        <p class="text-gray-500 dark:text-gray-400">{% trans "No lab test forms available." %}</p>
+      {% endfor %}
+      <div class="mt-6 flex justify-end">
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+          {% trans "Save All" %}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{% static 'django_select2/django_select2.js' %}"></script>
+<script src="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Initialize the jalali datepicker
+    jalaliDatepicker.startWatch({
+      separatorChar: "/",
+      changeMonthRotateYear: true,
+    });
+    let dateInputs = document.querySelectorAll('.test-date');
+    dateInputs.forEach(function(input) {
+      input.addEventListener("focus", function () {
+        jalaliDatepicker.show(input);
+      });
+      input.addEventListener("input", function () {
+        this.value = this.value.replace(/-/g, "/");
+      });
+    });
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Now that jQuery, select2, and django_select2.js are loaded, trigger auto-init.
+    if (typeof window.__django_select2__.initAll === 'function') {
+      window.__django_select2__.initAll();
+    }
+  });
+</script>
+{% endblock extra_js %}
+
+

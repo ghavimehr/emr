@@ -1,0 +1,27 @@
+{% if articles %}
+<div class="grid grid-cols-3 gap-5">
+    {% for article in articles %}
+    <div class="col-span-3 md:col-span-1 border border-gray-200 rounded-lg p-3 shadow-md">
+      <div class="relative rounded-2xl aspect-[4/3] overflow-hidden mb-3">
+        <a href="{% url 'blog_detail' slug=article.slug %}">
+          <img 
+            src="{{ article.thumbnail.file.url }}" 
+            alt="{{ article.title }}"
+            class="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-150 ease-in-out"
+          >
+        </a>
+      </div>
+      <div class="mb-2">
+        <h4 class="font-bold">
+          <a class="text-gray-900 dark:text-white hover:text-gray-900" href="{% url 'blog_detail' slug=article.slug %}">{{ article.title }}</a>
+        </h4>
+      </div>
+      <p class="text-gray-500 dark:text-gray-300 text-sm mb-2">{{ article.subtitle }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="flex items-center justify-center w-full h-64 my-8">
+    <p class="text-gray-600">No articles found</p>
+</div>
+{% endif %}

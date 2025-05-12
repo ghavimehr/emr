@@ -1,0 +1,78 @@
+{% extends "layouts/my-base-dashboard.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static "dist/jquery.multi-select.css" %}">
+{% endblock extrastyle %}
+
+
+
+{% block content %}
+
+<form method="post"
+    id="create-article"
+    class="max-w-5xl mx-auto my-5 bg-white dark:bg-gray-800 p-5 rounded-xl border border-gray-200 dark:border-gray-700"
+    enctype="multipart/form-data"
+>
+    <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold pb-3 dark:text-white">Create Article</h2>
+    </div>
+    {% csrf_token %}
+    <div class="grid grid-cols-2 gap-4 py-6">
+
+        {% for field in form %}
+            {% if field.label|lower == "thumbnail" %}
+                <div class="col-span-2" dir="ltr">{% include "includes/image-input.html" with field=field %}</div>
+            {% elif "video" in field.label|lower %}
+                <div class="col-span-2">
+                    <label for="{{ field.name }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
+                    
+                    {{ field }}
+                </div>
+                <div id="video-preview-container" class="hidden col-span-2">
+                    <iframe id="videoPreview" class="w-full h-80 object-cover rounded-lg mb-3" src="#" frameborder="0" allowfullscreen></iframe>
+                </div>
+            {% else %}
+            <div class="col-span-2">
+                <label for="{{ field.name }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
+                {{ field }}
+                <span class="block text-red-800 mt-2 text-sm">{{ field.errors }}</span>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="z-10 flex justify-between items-center gap-4">
+        <button type="button"
+                class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5">
+            Cancel
+        </button>
+        <div class="flex items-center">
+            <button id="publishSubmitButton"
+                    type="submit"
+                    class="hidden md:flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none items-center justify-center gap-2 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500">
+                Publish
+            </button>
+        </div>
+    </div>
+
+</form>
+
+{% endblock content %}
+
+{% block extra_js %}
+
+<script src="{% static "dist/js/preview-input.js" %}"></script>
+<script src="{% static "dist/js/jquery-2.2.4.min.js" %}"></script>
+<script src="{% static "dist/js/jquery.multi-select.min.js" %}"></script>
+
+<script>
+    $('#tags').multiSelect({
+        'noneText':'Select tags',
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        initVideoPreview('id_video', 'video-preview-container', 'videoPreview');
+    });
+</script>
+
+{% endblock extra_js %}

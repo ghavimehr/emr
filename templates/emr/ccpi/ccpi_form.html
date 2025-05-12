@@ -1,0 +1,105 @@
+{% extends "layouts/my-base-dashboard.html" %}
+{% load i18n static widget_tweaks %}
+{% load widget_tweaks %}
+
+
+{% block extrastyle %}
+<!-- If you need extra CSS, load it here -->
+{% endblock extrastyle %}
+
+{% block content %}
+<div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
+  <!-- Title header -->
+  <div class="col-span-full mb-4 xl:mb-2">
+    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
+      {% trans "Edit CC & PI Record" %}
+    </h1>
+  </div>
+
+  <!-- Main Card -->
+  <div class="col-span-3">
+    <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm
+                dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+
+
+
+      <!-- The Form -->
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Non-field errors if any -->
+        {% if form.non_field_errors %}
+          <div class="text-red-600 mb-4">
+            {{ form.non_field_errors }}
+          </div>
+        {% endif %}
+
+        <!-- Chief Complaint -->
+        <div class="mb-6">
+          <label for="id_chief_complaint" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            {% trans "Chief Complaint" %}
+          </label>
+          {{ form.chief_complaint }}
+          {% if form.chief_complaint.errors %}
+            <p class="text-red-600 text-sm mt-1">{{ form.chief_complaint.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Present Illness -->
+        <div class="mb-6">
+          <label for="id_present_illness" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            {% trans "Present Illness" %}
+          </label>
+          {{ form.present_illness }}
+          {% if form.present_illness.errors %}
+            <p class="text-red-600 text-sm mt-1">{{ form.present_illness.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Present Illness Image -->
+        <div class="mb-6">
+          <label for="id_present_illness_img" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            {% trans "Present Illness Image" %}
+          </label>
+          {{ form.present_illness_img }}
+          {% if form.present_illness_img.errors %}
+            <p class="text-red-600 text-sm mt-1">{{ form.present_illness_img.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Present Illness Scan (PDF) -->
+        <div class="mb-6">
+          <label for="id_present_illness_scan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            {% trans "Present Illness Scan (PDF)" %}
+          </label>
+          {{ form.present_illness_scan }}
+          {% if form.present_illness_scan.errors %}
+            <p class="text-red-600 text-sm mt-1">{{ form.present_illness_scan.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Submit Buttons -->
+        <div class="flex items-center justify-between">
+          <button type="button"
+                  onclick="window.history.back()"
+                  class="px-4 py-2 text-gray-900 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 \
+                         dark:text-gray-200 rounded transition">
+            {% trans "Cancel" %}
+          </button>
+          <button type="submit"
+                  class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 \
+                         focus:ring-4 focus:ring-blue-300 font-medium text-sm focus:outline-none \
+                         dark:focus:ring-blue-800">
+            {% trans "Save" %}
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+<script src="{% static 'assets/cc_autocomplete.js' %}"></script>
+{% endblock extra_js %}
