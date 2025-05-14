@@ -67,13 +67,13 @@ class IdentityForm(forms.ModelForm):
         # Load Ethnicities (Language-Specific)
         all_ethnicities = Ethnicity.objects.all().order_by("name")
         self.fields["ethnicities_field"].choices = [
-            (str(e.id), e.fname if lang == "fa" else e.name) for e in all_ethnicities
+            (str(e.id), e.name_fa if lang == "fa" else e.name) for e in all_ethnicities
         ]
 
         # Load Insurances (Language-Specific)
         all_insurances = Insurance.objects.all().order_by("name")
         self.fields["insurances_field"].choices = [
-            (str(e.id), e.fname if lang == "fa" else e.name) for e in all_insurances
+            (str(e.id), e.name_fa if lang == "fa" else e.name) for e in all_insurances
         ]
 
         # Handle pre-filled data when editing an existing Patient
@@ -159,7 +159,7 @@ class IdentityForm(forms.ModelForm):
             lang = get_language()
             if lang == "fa":
                 occ_obj, _ = Occupation.objects.get_or_create(
-                    fname=new_occ
+                    name_fa=new_occ
                 )  # Store in Persian
             else:
                 occ_obj, _ = Occupation.objects.get_or_create(

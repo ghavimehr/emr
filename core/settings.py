@@ -58,7 +58,7 @@ ONLYOFFICE_JWT_EXPIRE = 7200
 
 # Hosts Settings
 ALLOWED_HOSTS = [ 'formsdev.ghavimehr.com', '.formsdev.ghavimehr.com', 'www.formsdev.ghavimehr.com', 'emr.ghavimehr.com', '.emr.ghavimehr.com',
-                'www.emr.ghavimehr.com', 'emr.drarzaghi.com', '.emr.drarzaghi.com', 'www.emr.drarzaghi.com', 'emrtest.drarzaghi.com', '.emrtest.drarzaghi.com', 'www.emrtest.drarzaghi.com', ]
+                'www.emr.ghavimehr.com', 'emr.drarzaghi.com', '.emr.drarzaghi.com', 'www.emr.drarzaghi.com', 'emrtest.drarzaghi.com', '.emrtest.drarzaghi.com', 'www.emrtest.drarzaghi.com', 'emrlab.ghavimehr.com' ]
 CSRF_TRUSTED_ORIGINS = [ 'http://emrdemo.ghavimehr.com', 'https://emrdemo.ghavimehr.com', 'https://emr.drarzaghi.com', 'http://emr.drarzaghi.com', 'https://emrlab.ghavimehr.com', 'https://www.emrlab.ghavimehr.com']
 USE_X_FORWARDED_HOST = True
 

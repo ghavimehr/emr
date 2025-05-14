@@ -1,6 +1,6 @@
 # apps/emr/oneglance/views.py
 
-import os, json, urllib, requests, base64, jwt, time, logging, subprocess
+import os, json, urllib, requests, base64, jwt, time, logging, subprocess, re
 from pathlib import Path
 
 from django.shortcuts import render, get_object_or_404
@@ -35,10 +35,7 @@ from apps.emr.files.utils import patient_documents
 from apps.common.get_localized_name import get_localized_name
 
 
-
-
-
-from django.urls import reverse
+from apps.emr.files.models import Document
 
 logger = logging.getLogger(__name__)
 
@@ -83,6 +80,52 @@ def oneglance_page(request):
         document_type=1,
     )
 
+    # ─── custom sort ────────────────────────────────────────────────────────────
+    # 1) split into scan* vs. everything else
+    scan_docs = []
+    other_docs = []
+    for doc in documents:
+        title_l = doc['title'].lower()
+        if title_l.startswith('scan'):
+            scan_docs.append(doc)
+        else:
+            other_docs.append(doc)
+
+    # 2) build a natural‐sort key
+    def natural_key(doc):
+        name = doc['title'][:-4]          # strip “.pdf”
+        parts = re.split(r'(\d+)', name)  # split into digit vs non‐digit
+        key = []
+        for part in parts:
+            if part.isdigit():
+                key.append(int(part))
+            else:
+                key.append(part.lower())
+        return tuple(key)
+
+    # 3) detect “base” files (those whose name exactly matches the start
+    #    of at least one other file + ‘-’ suffix)
+    names = [d['title'][:-4].lower() for d in other_docs]
+    def is_base(doc):
+        nm = doc['title'][:-4].lower()
+        return any(other.startswith(f"{nm}-") for other in names)
+
+    # 4) sort “others” descending by (is_base, natural_key)
+    #    → base files (True) come before variants (False), and
+    #      natural_key is reversed for descending
+    sorted_others = sorted(
+        other_docs,
+        key=lambda d: (is_base(d), natural_key(d)),
+        reverse=False
+    )
+
+    # 5) sort scans ascending by natural_key
+    sorted_scans = sorted(scan_docs, key=natural_key)
+
+    # 6) recombine
+    documents = sorted_others + sorted_scans
+    # ────────────────────────────────────────────────────────────────────────────
+
     context = {
         'page_title'     : _("One-Glance"),
         'page_info'      : _("Patient's Summerized Data"),
@@ -117,29 +160,24 @@ def generate_pdf(request):
         directory_path = request.GET.get("directory_path", "data")  # Use `data` folder by default
         file_extension = request.GET.get("file_extension", "pdf")  # Default is `pdf`
         patient_folder = os.path.join(settings.BASE_DIR, directory_path, str(patient.patient_id))
+        os.makedirs(patient_folder, exist_ok=True)
 
         # Generate the PDF filename (today's Jalali date)
 
         today_jalali = jdatetime.today().strftime("%Y-%m-%d")  # Today's date in Jalali format
-        index = 1
-
-        # Find the highest existing index
-        while os.path.exists(os.path.join(settings.BASE_DIR, directory_path, str(patient.patient_id), f"{today_jalali}-{index}.pdf")):
+        index = 0
+        while True:
+            if index == 0:
+                file_name = today_jalali
+            else:
+                file_name = f"{today_jalali}—{index}"
+            pdf_filename = f"{file_name}.pdf"
+            pdf_path = os.path.join(patient_folder, pdf_filename)
+            if not os.path.exists(pdf_path):
+                break
             index += 1
-        
-        # Create the filename with index
-        if index == 1:
-            file_name = f"{today_jalali}"
-        else:
-            file_name = f"{today_jalali}-{index}"
 
-        # Path to save the new PDF
-        file_path = os.path.join(settings.BASE_DIR, directory_path, str(patient.patient_id), file_name)
-        os.makedirs(patient_folder, exist_ok=True) 
 
-        # Debugging: Check if directory exists and is writable
-        if not os.path.isdir(os.path.dirname(file_path)):
-            return JsonResponse({"error": f"Directory does not exist: {os.path.dirname(file_path)}"}, status=500)
 
         # Define LaTeX template file path
         template_path = os.path.join(settings.BASE_DIR, "latex", "handwriting_pages.tex")
@@ -206,11 +244,16 @@ def generate_pdf(request):
             return JsonResponse({"error": "Error during LaTeX compilation."}, status=500)
 
         # Define the path of the generated PDF
-        pdf_path = os.path.join(
-            settings.BASE_DIR,
-            directory_path,
-            str(patient.patient_id),
-            f"{file_name}.pdf"
+        rel_path  = os.path.join(str(patient.patient_id), f"{file_name}.pdf")
+
+        # adding the newly generated PDF to DB
+        new_doc = Document.objects.create(
+            patient        = patient,
+            relative_path  = rel_path,
+            file_name      = f"{file_name}.pdf",
+            file_extension_id = 1,     # 1 → PDF
+            document_type_id = 1,      # 1 → physician note
+            protocol_id = 1,
         )
 
         for ext in ["tex", "aux", "log"]:
@@ -220,19 +263,18 @@ def generate_pdf(request):
 
 
         # Return the generated PDF details to the client
-        documents = document_box_generator(
-            patient=patient,
-            directory_path=directory_path,
-            file_extension="pdf",
-            exclude_files=[],
+        documents = patient_documents(
             request=request,
+            patient=patient,
+            document_type=1,
         )
 
         if documents is None or len(documents) == 0:
             return JsonResponse({"error": "Failed to generate the document list."}, status=500)
 
         # Find the newly generated document in the list and return it
-        new_document = next((doc for doc in documents if doc['label'] == f"{file_name}"), None)
+        expected = f"{file_name}.pdf"
+        new_document = next((doc for doc in documents if doc['title'] == expected), None)
 
         if new_document:
             return JsonResponse(new_document)

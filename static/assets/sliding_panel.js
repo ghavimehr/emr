@@ -45,28 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  document.getElementById("generate-pdf-btn").addEventListener("click", async () => {
-    const resp = await fetch(
-      `/oneglance/generate_pdf/?directory_path=data&file_extension=pdf`
-    );
-    const doc = await resp.json();
-    if (doc.error) {
-      return console.error("Generation failed:", doc.error);
-    }
 
-    // 1) Insert it into the list dynamically
-    const li  = document.createElement("li");
-    const btn = document.createElement("button");
-    btn.className = "open-panel flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-500 focus:outline-none";
-    btn.innerHTML = `<i class="fa-solid fa-file-pdf"></i>
-                    <span class="ml-2 font-medium">${doc.label}</span>`;
-    btn.dataset.pdfUrl   = doc.url;
-    btn.dataset.pdfKey   = doc.key;
-    btn.dataset.pdfToken = doc.token;
-    btn.dataset.pdfTitle = doc.label;
-    btn.dataset.pdfPerms = JSON.stringify(doc.perms);
-    li.appendChild(btn);
-  });
 });
 
 // 2) Show / hide panel
@@ -174,4 +153,78 @@ function openDocument(doc) {
   }
 }
 
+// sliding_panel.js
 
+// 1) Grab the button & track state
+const generateBtn     = document.getElementById("generate-pdf-btn");
+let   hasGeneratedOne = false;
+
+generateBtn.addEventListener("click", async () => {
+  // 2) On second+ click, confirm
+  if (hasGeneratedOne) {
+    const ok = confirm("Are you sure you want to add another file?");
+    if (!ok) return;
+  }
+  hasGeneratedOne = true;
+
+  // 3) Show “Please wait…” and disable
+  const waitMsg = document.createElement("div");
+  waitMsg.id        = "pdf-wait-msg";
+  waitMsg.className = "text-sm text-gray-700 dark:text-gray-300 mb-2";
+  waitMsg.textContent = "Processing";
+  generateBtn.insertAdjacentElement("afterend", waitMsg);
+  generateBtn.disabled = true;
+
+  try {
+    // 4) Fetch the new PDF
+    const resp = await fetch(
+      `/oneglance/generate_pdf/?directory_path=data&file_extension=pdf`
+    );
+    const doc = await resp.json();
+    if (doc.error) {
+      console.error("Generation failed:", doc.error);
+      return;
+    }
+
+    // 5) Build payload for openDocument()
+    const payload = {
+      key:         doc.key,
+      url:         doc.url,
+      token:       doc.token,
+      title:       doc.title,             // must match your JSON
+      extension:   doc.extension || "pdf",
+      permissions: doc.permissions || doc.perms
+    };
+
+    // 6) Create new <li><button>
+    const li  = document.createElement("li");
+    const btn = document.createElement("button");
+    btn.type      = "button";
+    btn.className = "open-panel flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-500 focus:outline-none";
+    btn.innerHTML = `
+      <i class="fa-solid fa-file-circle-plus mr-2" aria-hidden="true"></i><span class="font-medium">${payload.title}</span>
+    `;
+    // 7) Set data-attrs your panel code reads
+    btn.dataset.key         = payload.key;
+    btn.dataset.url         = payload.url;
+    btn.dataset.token       = payload.token;
+    btn.dataset.title       = payload.title;
+    btn.dataset.extension   = payload.extension;
+    btn.dataset.permissions = JSON.stringify(payload.permissions);
+
+    li.appendChild(btn);
+    // 8) Append into your UL#document-list
+    document.getElementById("document-list").appendChild(li);
+
+    // 9) Wire it up and open immediately
+    btn.addEventListener("click", () => openDocument(payload));
+    btn.click();
+
+  } catch (err) {
+    console.error("Unexpected error:", err);
+  } finally {
+    // 10) Clean up “Please wait…” & re-enable button
+    document.getElementById("pdf-wait-msg")?.remove();
+    generateBtn.disabled = false;
+  }
+});

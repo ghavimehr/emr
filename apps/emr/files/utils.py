@@ -170,6 +170,7 @@ def patient_documents(
     updated_to: str = None,
 ):
     """
+    Old name = document_box_generator()
     Returns a LIST of OnlyOffice payload dicts for all Documents
     belonging to `patient`, optionally filtered by any of:
       • file_name (substring)
