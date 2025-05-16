@@ -2,7 +2,7 @@
 
 <!-- document_box.html -->
 <div class="document-box bg-gray-50 dark:bg-gray-700 p-4 rounded-lg overflow-y-auto" dir="ltr">
-  <h3 class="text-lg font-semibold dark:text-white mb-2">{{ title }}</h3>
+  <h3 class="text-lg font-semibold dark:text-white mb-2">{{ document_box_title }}</h3>
   <div dir="rtl">
     <button
       id="generate-pdf-btn"
@@ -11,7 +11,13 @@
       {% trans "Generate File" %}
     </button>
   </div>
-  <ul id="document-list" class="document-list space-y-2">
+  <ul 
+    id="document-list" 
+    class="document-list space-y-2"
+    {% if document_box_max_height %}
+      style="max-height: {{ document_box_max_height }};"
+    {% endif %}
+  >
     {% for doc in documents %}
       <li>
         <button

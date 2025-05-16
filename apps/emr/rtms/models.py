@@ -29,6 +29,13 @@ class RTMS(models.Model):
         validators=[MaxValueValidator(999)],
     )
 
+    power = models.PositiveSmallIntegerField(
+        verbose_name=_("Precent of the MT for other sessions."),
+        null=True,
+        blank=True,
+        validators=[MaxValueValidator(999)],
+    )    
+
     pulse_type = models.ForeignKey(
         PulseType,
         on_delete=models.SET_NULL,

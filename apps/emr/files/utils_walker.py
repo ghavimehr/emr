@@ -38,7 +38,10 @@ def update_document_index(base_path=None):
         'updated': 0,
         'skipped_no_protocol': 0,
         'skipped_no_patient': 0,
+        'deleted': 0,
     }
+
+    seen = set()
 
     # 3) Walk each patient folder
     for patient_dir in sorted(os.listdir(base_path)):
@@ -57,7 +60,8 @@ def update_document_index(base_path=None):
         for root, dirs, files in os.walk(patient_path):
             rel_root = os.path.relpath(root, base_path)  # e.g. "628/reports"
             parts    = rel_root.split(os.sep)
-            subfolder = parts[1] if len(parts) > 1 else None
+            subfolder = rel_root.split(os.sep)[1] if os.sep in rel_root else None
+
 
             # Resolve DocumentType (prompt logic omitted for brevity)
             try:
@@ -69,7 +73,7 @@ def update_document_index(base_path=None):
 
             for fname in files:
                 rel_path = os.path.join(rel_root, fname)  # e.g. "628/reports/scan.pdf"
-
+                seen.add(rel_path)
                 # 5) Find the first matching protocol
                 protocol = None
                 for pa in assignments:
@@ -123,10 +127,16 @@ def update_document_index(base_path=None):
                             ])
                             stats['updated'] += 1
 
+
+    stale = Document.objects.exclude(relative_path__in=seen)
+    stats['deleted'] = stale.count()
+    stale.delete()
+
     # 8) Summary
     print(
         f"Indexing complete: {stats['created']} created, "
         f"{stats['updated']} updated, "
+        f"{stats['deleted']} deleted, "
         f"{stats['skipped_no_protocol']} skipped (no protocol), "
         f"{stats['skipped_no_patient']} skipped (no patient)"
     )

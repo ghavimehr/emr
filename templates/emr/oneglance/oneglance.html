@@ -92,27 +92,26 @@
       </div>
 
       <!-- Differential & Comorbidities -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="bg-gray-50 dark:bg-gray-700 border border-gray-100 dark:border-gray-700 rounded-lg p-5">
-          <h3 class="text-xl font-semibold dark:text-white mb-3">{% trans "Differential Diagnoses" %}</h3>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" dir = "ltr">
+        <!-- <div class="bg-gray-50 dark:bg-gray-700 border border-gray-100 dark:border-gray-700 rounded-lg p-5">
+          <h3 class="text-xl font-semibold dark:text-white mb-3">Differential Diagnoses</h3>
           <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
             {% for dx in patient.differentials %}
             <li>{{ dx }}</li>
             {% empty %}
-            <li class="text-gray-500 dark:text-gray-400">{% trans "None listed." %}</li>
+            <li class="text-gray-500 dark:text-gray-400">None listed.</li>
             {% endfor %}
           </ul>
-        </div>
-        <div class="bg-gray-50 dark:bg-gray-700 border border-gray-100 dark:border-gray-700 rounded-lg p-5">
-          <h3 class="text-xl font-semibold dark:text-white mb-3">{% trans "Comorbidities" %}</h3>
-          <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
-            {% for c in patient.comorbidities %}
-            <li>{{ c }}</li>
-            {% empty %}
-            <li class="text-gray-500 dark:text-gray-400">{% trans "None listed." %}</li>
-            {% endfor %}
-          </ul>
-        </div>
+        </div> -->
+
+
+          <div 
+            dir = "ltr"
+            class="bg-gray-50 dark:bg-gray-700 border border-gray-100 dark:border-gray-700 rounded-lg p-5">
+            <h3 class="text-xl font-semibold dark:text-white mb-3">rTMS protocols</h3>
+            {% include "includes/rtms_list.html" with documents=documents %}
+          </div>
+
       </div>
 
     {% else %}

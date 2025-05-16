@@ -29,8 +29,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 
 from apps.emr.identity.models import Patient
-# from apps.emr.files.models import FilePermission
-# from apps.common.views_sliding_panel import document_box_generator
+from apps.emr.rtms.utils import get_rtms_protcols
 from apps.emr.files.utils import patient_documents
 from apps.common.get_localized_name import get_localized_name
 
@@ -50,13 +49,6 @@ def oneglance_page(request):
 
     patient = get_object_or_404(Patient, id=patient_db_id)
 
-    # Define the directory path to check for files
-    # You could pass this in via the URL or use a default value.
-    directory_path = request.GET.get("directory_path", "data")  # Use the `data` folder as the default.
-    file_extension = request.GET.get("file_extension", "pdf")  # Default file extension is "pdf"
-    
-    # Get the list of files to exclude
-    exclude_files = request.GET.getlist("exclude_files", [])  # List of filenames to exclude (e.g., "example.pdf")
     
     # Special fields
     selected_insurances = (
@@ -126,19 +118,27 @@ def oneglance_page(request):
     documents = sorted_others + sorted_scans
     # ────────────────────────────────────────────────────────────────────────────
 
+    patient_rtms_protcols = get_rtms_protcols(patient)
+
     context = {
         'page_title'     : _("One-Glance"),
         'page_info'      : _("Patient's Summerized Data"),
-        "documents": documents,
-        "title": "",
         "patient": patient,
-        "user_id": request.user.id,
-        "user_name": request.user.get_full_name(),
-        "ds_host": settings.ONLYOFFICE_DOCSERVER_URL,
-        "callbackUrl": settings.ONLYOFFICE_CALLBACK,
         "insurance": insurance_on_view,
         "ethnicity": ethnicity_on_view,
-        "mode": "edit"
+
+        "user_id": request.user.id,
+        "user_name": request.user.get_full_name(),
+
+        "documents": documents,
+        "document_box_max_height": '200px',
+        "document_box_title": "",
+        "ds_host": settings.ONLYOFFICE_DOCSERVER_URL,
+        "callbackUrl": settings.ONLYOFFICE_CALLBACK,
+        "mode": "edit",
+
+
+        "rtms_list":  patient_rtms_protcols,
     }
 
     # Render the oneglance page with the generated documents
@@ -172,7 +172,7 @@ def generate_pdf(request):
             else:
                 file_name = f"{today_jalali}—{index}"
             pdf_filename = f"{file_name}.pdf"
-            pdf_path = os.path.join(patient_folder, pdf_filename)
+            pdf_path = os.path.join(patient_folder, "physician_notes", pdf_filename)
             if not os.path.exists(pdf_path):
                 break
             index += 1
@@ -183,7 +183,7 @@ def generate_pdf(request):
         template_path = os.path.join(settings.BASE_DIR, "latex", "handwriting_pages.tex")
 
         # Generate LaTeX file path
-        tex_file_path = os.path.join(settings.BASE_DIR, "data", str(patient.patient_id), f"{file_name}.tex")
+        tex_file_path = os.path.join(settings.BASE_DIR, "data", str(patient.patient_id), "physician_notes", f"{file_name}.tex")
 
         # Copy the LaTeX template to the new location
         copyfile(template_path, tex_file_path)
@@ -244,7 +244,7 @@ def generate_pdf(request):
             return JsonResponse({"error": "Error during LaTeX compilation."}, status=500)
 
         # Define the path of the generated PDF
-        rel_path  = os.path.join(str(patient.patient_id), f"{file_name}.pdf")
+        rel_path  = os.path.join(str(patient.patient_id), "physician_notes", f"{file_name}.pdf")
 
         # adding the newly generated PDF to DB
         new_doc = Document.objects.create(
@@ -257,7 +257,7 @@ def generate_pdf(request):
         )
 
         for ext in ["tex", "aux", "log"]:
-            aux_file = os.path.join(settings.BASE_DIR, directory_path, str(patient.patient_id), f"{file_name}.{ext}")
+            aux_file = os.path.join(settings.BASE_DIR, directory_path, str(patient.patient_id), "physician_notes", f"{file_name}.{ext}")
             if os.path.exists(aux_file):
                 os.remove(aux_file)
 
