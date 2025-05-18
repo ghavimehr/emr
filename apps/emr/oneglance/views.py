@@ -28,10 +28,10 @@ from django.utils.decorators import method_decorator
 # allowing click-jaking
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 
-from apps.emr.identity.models import Patient
+from apps.emr.identity.models import *
 from apps.emr.rtms.utils import get_rtms_protcols
 from apps.emr.files.utils import patient_documents
-from apps.common.get_localized_name import get_localized_name
+# from apps.common.get_localized_name import get_localized_name
 
 
 from apps.emr.files.models import Document
@@ -48,23 +48,6 @@ def oneglance_page(request):
         return render(request, 'emr/oneglance/oneglance.html', {"patient": None, "pdfs": []})
 
     patient = get_object_or_404(Patient, id=patient_db_id)
-
-    
-    # Special fields
-    selected_insurances = (
-        patient.get_selected_insurances()
-    )
-    insurance_list = []
-    for insurance in selected_insurances:
-        insurance_list.append(get_localized_name(insurance))
-    insurance_on_view = ", ".join(insurance_list) or "---"
-
-    selected_ethnicities = patient.get_selected_ethnicities()  
-    ethnicity_list = []
-    for eth in selected_ethnicities:
-        ethnicity_list.append(get_localized_name(eth))
-    ethnicity_on_view = ", ".join(ethnicity_list) or "---"
-
 
     documents = patient_documents(
         request=request,
@@ -124,8 +107,6 @@ def oneglance_page(request):
         'page_title'     : _("One-Glance"),
         'page_info'      : _("Patient's Summerized Data"),
         "patient": patient,
-        "insurance": insurance_on_view,
-        "ethnicity": ethnicity_on_view,
 
         "user_id": request.user.id,
         "user_name": request.user.get_full_name(),
@@ -182,19 +163,19 @@ def generate_pdf(request):
         # Define LaTeX template file path
         template_path = os.path.join(settings.BASE_DIR, "latex", "handwriting_pages.tex")
 
+
         # Generate LaTeX file path
-        tex_file_path = os.path.join(settings.BASE_DIR, "data", str(patient.patient_id), "physician_notes", f"{file_name}.tex")
+        folder_path = os.path.join(settings.BASE_DIR, "data", str(patient.patient_id), "physician_notes")
+        os.makedirs(folder_path, exist_ok=True)
+        tex_file_path = os.path.join(folder_path, f"{file_name}.tex")
+
+
 
         # Copy the LaTeX template to the new location
         copyfile(template_path, tex_file_path)
 
-        selected_insurances = (
-            patient.get_selected_insurances()
-        )  # returns a queryset for M2M
-        insurance_list = []
-        for insurance in selected_insurances:
-            insurance_list.append(get_localized_name(insurance))
-        # Prepare the patient data for LaTeX
+
+        # # Prepare the patient data for LaTeX
         patient_data = {
             "base_dir": settings.BASE_DIR,
             # Basic fields
@@ -208,7 +189,7 @@ def generate_pdf(request):
             ),
             "today": today_jalali,
             "patient_id": patient.patient_id,
-            "insurance": ", ".join(insurance_list) or "---",
+            "insurance": patient.insurances_display,
         }
 
         # Inject patient data into LaTeX template

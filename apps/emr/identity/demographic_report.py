@@ -68,39 +68,13 @@ def demographic_report(patient_id):
         os.makedirs(patient_folder)
 
     # Copy the LaTeX template into the patient's folder
-    template_path = os.path.join(settings.BASE_DIR, "latex", "demographic_view.tex")
+    template_path = os.path.join(settings.BASE_DIR, "latex", "commitment_letter.tex")
     tex_file_path = os.path.join(
         patient_folder,
-        f"demography-{patient.patient_id}-{patient.last_name}-{patient.first_name}-{version_number}.tex",
+        f"commitment_letter-{version_number}.tex",
     )
     copyfile(template_path, tex_file_path)
 
-    # Utility function to get the Persian name if it exists, otherwise the English name
-    def persian_or_english(obj):
-        """
-        obj is any object with 'name_fa' and 'name' fields
-        or None if that object doesn't exist.
-        """
-        if not obj:
-            return ""
-        if hasattr(obj, "name_fa") and obj.name_fa:
-            return obj.name_fa
-        # fallback to 'name'
-        return getattr(obj, "name", "")
-
-    # Construct the list of Persian Ethnicity names
-    selected_ethnicities = patient.get_selected_ethnicities()  # returns a queryset
-    ethnicity_list = []
-    for eth in selected_ethnicities:
-        ethnicity_list.append(persian_or_english(eth))
-
-    # Construct the list of Persian Insurance names (for M2M)
-    selected_insurances = (
-        patient.get_selected_insurances()
-    )  # returns a queryset for M2M
-    insurance_list = []
-    for insurance in selected_insurances:
-        insurance_list.append(persian_or_english(insurance))
 
     # Prepare patient data for LaTeX file (favor .name_fa over .name)
     patient_data = {
@@ -115,15 +89,15 @@ def demographic_report(patient_id):
             else "---"
         ),
         # Use the Persian name if it exists, else fallback
-        "ethnicity": ", ".join(ethnicity_list) or "---",
-        "marital_status": persian_or_english(patient.marital_status) or "---",
-        "education_level": persian_or_english(patient.education_level) or "---",
-        "blood_group": persian_or_english(patient.blood_group) or "---",
-        "gender": persian_or_english(patient.gender) or "---",
-        "language_option": persian_or_english(patient.language_option) or "---",
-        "occupation": persian_or_english(patient.occupation) or "---",
-        "dominanthand": persian_or_english(patient.dominanthand) or "---",
-        "insurance": ", ".join(insurance_list) or "---",  # Add insurance to the report
+        "ethnicity": patient.ethnicity_display or "---",
+        "marital_status": patient.marital_status or "---",
+        "education_level": patient.education_level or "---",
+        "blood_group": patient.blood_group or "---",
+        "gender": patient.gender or "---",
+        "language_option": patient.language_option or "---",
+        "occupation": patient.occupation or "---",
+        "dominanthand": patient.dominanthand or "---",
+        "insurance": patient.insurances_display or "---",
         # For phone, messenger, height, etc.
         "phone": patient.phone or "---",
         "messenger1": patient.messenger1 or "---",
@@ -184,19 +158,18 @@ def demographic_report(patient_id):
         )
         return message, None
 
-        base_path = os.path.splitext(tex_file_path)[0]
-        if not save_tex and os.path.exists(f"{base_path}.tex"):
-            os.remove(f"{base_path}.tex")
-        if not save_aux and os.path.exists(f"{base_path}.aux"):
-            os.remove(f"{base_path}.aux")
-        if not save_log and os.path.exists(f"{base_path}.log"):
-            os.remove(f"{base_path}.log")
 
     # Define the path of the generated PDF
     pdf_path = os.path.join(
         patient_folder,
-        f"demography-{patient.patient_id}-{patient.last_name}-{patient.first_name}-{version_number}.pdf",
+        f"commitment_letter-{version_number}.pdf",
     )
+
+    for ext in ["tex", "aux", "log"]:
+        aux_file = os.path.join(patient_folder, f"commitment_letter-{version_number}.{ext}")
+        if os.path.exists(aux_file):
+            os.remove(aux_file)
+
 
     # Save the version info to the report column
     if report_date:

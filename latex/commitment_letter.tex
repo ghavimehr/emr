@@ -24,6 +24,7 @@
 \pagestyle{fancy}
 
 \fancyfoot[L]{\footnotesize
+\\
   \faBuilding\space
   تهران، کارگر شمالی، بالاتر از مرکز قلب تهران، بن بست سوم، پلاک 2، طبقه 4، واحد 10
 }
@@ -42,20 +43,30 @@
 %--- Header Table ---
 \begin{table}[h!]
 \begin{tabular}{m{5.5cm} m{4.5cm} m{5.5cm}}
-\includegraphics[width=4cm]{"<<base-dir>>/latex/compact.png"} &
+\includegraphics[width=4cm]{"<<base-dir>>/latex/compact.png"} 
+
+&
+
 \begin{tcolorbox}[
     colback=black!50, colframe=black!50, coltext=white,
     boxrule=0.1mm, width=\linewidth,
     halign=center, valign=center,fonttitle=\sffamily\bfseries
 ]
 \normalsize\titr{برگ اطلاعات اولیه}
-\end{tcolorbox} &
+\end{tcolorbox} 
+
+&
+\raggedright
 \includegraphics[width=3cm]{"<<base-dir>>/static/common/logo.png"}
 \end{tabular}
 \end{table}
 
+\begin{center}
+  {\large\titr{تعهدنامه بیمار به کلینیک دکتر سید مسعود ارزاقی}}
+\end{center}
+
+
 \hrule
-\vspace{1cm}
 
 %--- Demographics ---
 \begin{table}[h!]
@@ -89,17 +100,14 @@
 \end{table}
 
 \hrule
-\vspace{1cm}
+
 
 %--- Title ---
-\begin{center}
-  {\large\titr{تعهدنامه بیمار به کلینیک دکتر سید مسعود ارزاقی}}
-\end{center}
-\vspace{1cm}
+\vspace{0.5cm}
 
 %--- Unilateral Commitment Text ---
 \normalfont
-اینجانبِ <<patient>> (که اطلاعات بالا، مشخصات بنده را نشان می‌دهد)، با آگاهی کامل از قوانین و مقررات و شرایط استفاده از خدمات این کلینیک، موارد زیر را به‌صورت یک‌طرفه و بدون نیاز به امضای پزشک و مهر کلینیک، تعهد می‌نمایم:
+اینجانبِ <<patient>> (که اطلاعات بالا، مشخصات بنده را نشان می‌دهد)، با آگاهی کامل از قوانین و مقررات و شرایط استفاده از خدمات این کلینیک، موارد زیر را تعهد می‌نمایم:
 
 \begin{enumerate}
   \item مدت ویزیت: برای بیماران جدید حداکثر ۳۰ دقیقه و بیماران دارای پرونده حداکثر ۱۵ دقیقه بوده و در صورت طولانی‌تر شدن، زمان اضافی مشمول هزینه خواهد بود.
@@ -114,9 +122,23 @@
 \end{enumerate}
 
 %--- Research Consent ---
-\vspace{0.5cm}
+
+
+\vspace{2.5cm}
+\begin{tabularx}{\textwidth}{X}
+
+  \textbf{امضاء و اثر انگشت مراجع:} \\
+  \textbf{نام و نام خانوادگی مراجع یا قیم قانونی وی: }\\
+  \textbf{تاریخ: <<today>>}
+
+\end{tabularx}
+
+\newpage
+
+\vspace{2cm}
+
 \large\XBZarBd{رضایت‌نامه استفاده از داده‌های مراجع در تحقیقات}
-\normalfont
+\normalfont \normalsize
 \begin{enumerate}
   \item با رعایت محرمانگی، اجازه می‌دهم داده‌های تشخیصی و درمانی‌ام در پروژه‌های پژوهشی استفاده شود.
   \item اطلاعات هویتی پیش از هر پژوهش، ناشناس یا کدگذاری‌شده نگهداری می‌شود.
@@ -125,16 +147,13 @@
 \end{enumerate}
 
 %--- Date & Signature ---
-\vspace{1cm}
+\vspace{3cm}
 \begin{tabularx}{\textwidth}{X}
-  \XBZarBd
-  تاریخ: <<today>> \\
-  \vspace{1cm}
-  \XBZarBd
-  نام و نام خانوادگی مراجع یا قیم قانونی وی: \\
-  \vspace{2cm}
-  \XBZarBd
-  امضاء و اثر انگشت مراجع:
+
+  \textbf{امضاء و اثر انگشت مراجع:} \\
+  \textbf{نام و نام خانوادگی مراجع یا قیم قانونی وی: }\\
+  \textbf{تاریخ: <<today>>}
+
 \end{tabularx}
 
 \end{document}

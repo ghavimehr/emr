@@ -1,6 +1,9 @@
 from django.utils.translation import get_language
 from django.db.models import Model
 
+
+
+# for ethnicity and insurance 
 def get_localized_name(instance: Model) -> str:
     """
     Function to return the localized name field of a reference model.

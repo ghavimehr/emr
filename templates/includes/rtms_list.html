@@ -6,7 +6,7 @@
   {% if rtms_list %}
     <table class="min-w-full text-left text-sm">
       <thead class="text-gray-700 dark:text-gray-300">
-        <tr class="bg-gray-100 bg-gray-800">
+        <tr class="bg-gray-100 dark:bg-gray-800">
           <th>row</th>
           <th>Start Power</th>
           <th>Power</th>
@@ -40,7 +40,6 @@
                 {% endfor %}
               </tbody>
             </table>
-            </a>
           </td>
         </tr>
         {% endfor %}
@@ -52,50 +51,3 @@
     </p>
   {% endif %}
 </div>
-
-
-
-
-
-
-
-
-
-
-<!-- {% for rtms in rtms_list %}
-  <div class="rtms-card relative border rounded-lg p-4 mb-6 bg-white">
-    {# — Top row: formula + optional (PulseType) in red — #}
-    <div class="flex justify-between items-start">
-      <div class="flex items-center">
-        <span class="text-base">
-          {{ rtms.first_power }} % MT × {{ rtms.unknown_1 }} × {{ rtms.unknown_2 }}
-        </span>
-        {% if rtms.pulse_type and rtms.pulse_type.id != 1 %}
-          <span class="ml-2 text-red-600">( {{ rtms.pulse_type.name }} )</span>
-        {% endif %}
-      </div>
-
-      {# — Right side: variable-length list of “areas” — #}
-      <div class="grid grid-cols-1 gap-1 text-sm text-right">
-        {% for area in rtms.areas %}
-          <div>{{ area.name }}: {{ area.value }} %</div>
-        {% endfor %}
-      </div>
-    </div>
-
-    {# — The horizontal “scratch” line — #}
-    <hr class="my-2 border-t-2 border-gray-300" />
-
-    {# — Big total_pulse — #}
-    <div class="text-2xl font-extrabold">
-      {{ rtms.total_pulse }}
-    </div>
-
-    {# — Bottom-right corner: N = total_sessions — #}
-    <div class="absolute bottom-2 right-4 text-lg font-bold">
-      N = {{ rtms.total_sessions }}
-    </div>
-  </div>
-{% empty %}
-  <p class="text-gray-600">No rTMS sessions recorded.</p>
-{% endfor %} -->

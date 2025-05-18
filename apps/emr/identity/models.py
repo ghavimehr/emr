@@ -5,6 +5,9 @@ from django.db.models import JSONField
 from django.contrib.auth import get_user_model
 
 
+from apps.common.models_localization import LocalizedNameMixin
+# from apps.common.utils_localization import get_localized_name
+
 User = get_user_model()
 
 
@@ -69,30 +72,24 @@ class Patient(models.Model):
     def __str__(self):
         return f"PID: {self.patient_id} - {self.first_name} {self.last_name}"
 
-    def get_selected_ethnicities(self):
-        """
-        Returns a list of Ethnicity objects the user selected.
-        """
-        # Ensure ethnicity is a dictionary, if not, use an empty dictionary
-        ethnicities_data = self.ethnicity if isinstance(self.ethnicity, dict) else {}
-
-        selected_ids = [int(eid) for eid, val in ethnicities_data.items() if val == 1]
-
-        # Fetch from DB based on selected ids
-        return Ethnicity.objects.filter(id__in=selected_ids)
-
-    def get_selected_insurances(self):
-        """
-        Returns a list of Insurance objects the user selected.
-        """
-        # Ensure insurance is a dictionary, if not, use an empty dictionary
-        insurance_data = self.insurance if isinstance(self.insurance, dict) else {}
-
+    @property
+    def ethnicity_display(self) -> str:
+        ethnicity_data = self.ethnicity or {}
+        selected_ids = [int(iid) for iid, val in ethnicity_data.items() if val == 1]
+        qs = Ethnicity.objects.filter(id__in=selected_ids)
+        # Join the localized names with commas
+        names = [str(ins) for ins in qs]
+        return ", ".join(names) if names else "---"
+    
+    @property
+    def insurances_display(self) -> str:
+        insurance_data = self.insurance or {}
         selected_ids = [int(iid) for iid, val in insurance_data.items() if val == 1]
-
-        # Fetch from DB based on selected ids
-        return Insurance.objects.filter(id__in=selected_ids)
-
+        qs = Insurance.objects.filter(id__in=selected_ids)
+        # Join the localized names with commas
+        names = [str(ins) for ins in qs]
+        return ", ".join(names) if names else "---"
+    
     marital_status = models.ForeignKey(
         "MaritalStatus", null=True, blank=True, on_delete=models.SET_NULL
     )
@@ -150,25 +147,22 @@ class Patient(models.Model):
 
 
 
-class MaritalStatus(models.Model):
+class MaritalStatus(LocalizedNameMixin, models.Model):
     id = models.PositiveSmallIntegerField(primary_key=True)
     name = models.CharField(max_length=30)
     name_fa = models.CharField(max_length=30, blank=True)
 
-    def __str__(self):
-        return self.name
 
 
-class EducationLevel(models.Model):
+class EducationLevel(LocalizedNameMixin, models.Model):
     id = models.PositiveSmallIntegerField(primary_key=True)
     name = models.CharField(max_length=20)
     name_fa = models.CharField(max_length=20, blank=True)
 
-    def __str__(self):
-        return self.name
 
 
-class BloodGroup(models.Model):
+
+class BloodGroup(LocalizedNameMixin, models.Model):
     id = models.PositiveSmallIntegerField(primary_key=True)
     name = models.CharField(max_length=3)
 
@@ -176,57 +170,45 @@ class BloodGroup(models.Model):
         return self.name
 
 
-class Gender(models.Model):
+class Gender(LocalizedNameMixin, models.Model):
     id = models.PositiveSmallIntegerField(primary_key=True)
     name = models.CharField(max_length=50)
     name_fa = models.CharField(max_length=50, blank=True)
 
-    def __str__(self):
-        return self.name
 
 
-class LanguageOption(models.Model):
+class LanguageOption(LocalizedNameMixin, models.Model):
     id = models.PositiveSmallIntegerField(primary_key=True)
     name = models.CharField(max_length=10)
     name_fa = models.CharField(max_length=10, blank=True)
 
-    def __str__(self):
-        return self.name
 
 
-class Insurance(models.Model):
+
+class Insurance(LocalizedNameMixin, models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=20, unique=True)
     name_fa = models.CharField(max_length=20, blank=True)
 
-    def __str__(self):
-        return f"{self.id} - {self.name}"
 
 
-class Ethnicity(models.Model):
+
+class Ethnicity(LocalizedNameMixin, models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=20, unique=True)
     name_fa = models.CharField(max_length=20, blank=True)
 
-    def __str__(self):
-        return self.name
 
 
-class DominantHand(models.Model):
+class DominantHand(LocalizedNameMixin, models.Model):
     id = models.PositiveSmallIntegerField(primary_key=True)
     name = models.CharField(max_length=30)
     name_fa = models.CharField(max_length=30, blank=True)
 
-    def __str__(self):
-        return self.name
 
-
-class Occupation(models.Model):
+class Occupation(LocalizedNameMixin, models.Model):
     name = models.CharField(max_length=100, unique=True, blank=True, null=True)
     name_fa = models.CharField(max_length=100, blank=True, null=True)
-
-    def __str__(self):
-        return self.name if self.name else self.name_fa if self.name_fa else "Unknown"
 
 
 class Secretarytags(models.Model):

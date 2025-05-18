@@ -16,126 +16,92 @@
 <div class="max-w-5xl mx-auto my-5 bg-white dark:bg-gray-800 p-5 rounded-xl">
     <h2 class="text-2xl font-bold dark:text-white mb-4">{{ form_title }}</h2>
     <!-- Show fields in read-only mode as a table -->
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border-separate border-spacing-y-2">
-      <tbody>
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border-separate border-spacing-y-4">
+      <tbody class="text-gray-700 dark:text-gray-300">
         <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200 w-1/3">{% trans "Patient ID:" %}</td>
-          <td>{{ identity_obj.patient_id }}</td>
-        </tr>
+          <td class="text-right">{{ identity_obj.patient_id|default_if_none:"---" }}</td>
 
-        <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "SSN:" %}</td>
-          <td>{{ identity_obj.ssn }}</td>
-        </tr>
+          <td class="text-right">{{ identity_obj.ssn|default_if_none:"---" }}</td>
 
-        <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "First Name:" %}</td>
-          <td>{{ identity_obj.first_name }}</td>
-        </tr>
+          <td class="text-right">{{ identity_obj.first_name|default_if_none:"---" }}</td>
 
-        <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Last Name:" %}</td>
-          <td>{{ identity_obj.last_name }}</td>
+          <td class="text-right">{{ identity_obj.last_name|default_if_none:"---" }}</td>
         </tr>
 
         <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Gender:" %}</td>
-          <td>{{ identity_obj.gender }}</td>
-        </tr>
+          <td class="text-right">{{ identity_obj.gender|default_if_none:"---" }}</td>
 
-        <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Birthday (Jalali):" %}</td>
-          <td>{{ identity_obj.birthday }}</td>
-        </tr>
+          <td class="text-right">{{ identity_obj.birthday|default_if_none:"---" }}</td>
 
-        <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Marital Status:" %}</td>
-          <td>{{ identity_obj.marital_status }}</td>
-        </tr>
+          <td class="text-right">{{ identity_obj.marital_status|default_if_none:"---" }}</td>
 
-        <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Language:" %}</td>
-          <td>{{ identity_obj.language_option }}</td>
+          <td class="text-right">{{ identity_obj.language_option|default_if_none:"---" }}</td>
         </tr>
 
         <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Education Level:" %}</td>
-          <td>{{ identity_obj.education_level }}</td>
-        </tr>
+          <td class="text-right">{{ identity_obj.education_level|default_if_none:"---" }}</td>
 
-        <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Occupation:" %}</td>
-          <td>{{ identity_obj.occupation }}</td>
-        </tr>
+          <td class="text-right">{{ identity_obj.occupation|default_if_none:"---" }}</td>
 
-        <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Blood Group:" %}</td>
-          <td>{{ identity_obj.blood_group }}</td>
-        </tr>
+          <td class="text-right">{{ identity_obj.blood_group|default_if_none:"---" }}</td>
 
-        <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Dominant Hand:" %}</td>
-          <td>{{ identity_obj.dominanthand }}</td>
+          <td class="text-right">{{ identity_obj.dominanthand|default_if_none:"---" }}</td>
         </tr>
 
         <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Height (cm):" %}</td>
-          <td>{{ identity_obj.height }}</td>
-        </tr>
+          <td class="text-right">{{ identity_obj.height|default_if_none:"---" }}</td>
 
-        <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Weight (kg):" %}</td>
-          <td>{{ identity_obj.weight }}</td>
-        </tr>
+          <td class="text-right">{{ identity_obj.weight|default_if_none:"---" }}</td>
 
-        <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Insurances:" %}</td>
-          <td>
+          <td class="text-right">
             <!-- If you want to show JSON or parse it to show readable text -->
-            {{ identity_obj.insurance }}
+            {{ identity_obj.insurances_display|default_if_none:"---" }}
           </td>
-        </tr>
 
-        <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Ethnicities:" %}</td>
-          <td>
-            {{ identity_obj.ethnicity }}
+          <td class="text-right">
+            {{ identity_obj.ethnicity_display|default_if_none:"---" }}
           </td>
         </tr>
 
         <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Payment Label:" %}</td>
-          <td>{{ identity_obj.payment_label }}</td>
-        </tr>
+          <td class="text-right">{{ identity_obj.payment_label|default_if_none:"---" }}</td>
 
-        <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Phone:" %}</td>
-          <td>{{ identity_obj.phone }}</td>
-        </tr>
+          <td class="text-right">{{ identity_obj.phone|default_if_none:"---" }}</td>
 
-        <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Messenger #1:" %}</td>
-          <td>{{ identity_obj.messenger1 }}</td>
-        </tr>
+          <td class="text-right">{{ identity_obj.messenger1|default_if_none:"---" }}</td>
 
-        <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Messenger #2:" %}</td>
-          <td>{{ identity_obj.messenger2 }}</td>
+          <td class="text-right">{{ identity_obj.messenger2|default_if_none:"---" }}</td>
         </tr>
 
         <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Address:" %}</td>
-          <td>{{ identity_obj.address }}</td>
-        </tr>
+          <td class="text-right">{{ identity_obj.address|default_if_none:"---" }}</td>
 
-        <tr>
           <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Secretary Notes:" %}</td>
-          <td>{{ identity_obj.tags }}</td>
-        </tr>
+          <td class="text-right">{{ identity_obj.tags|default_if_none:"---" }}</td>
 
-        <tr>
-          <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Secretary Tags (JSON):" %}</td>
-          <td>{{ identity_obj.Secretarytags }}</td>
+          <!-- <td class="py-2 font-bold text-gray-800 dark:text-gray-200">{% trans "Secretary Tags:" %}</td>
+          <td>{{ identity_obj.Secretarytags|default_if_none:"---" }}</td> -->
         </tr>
       </tbody>
     </table>
@@ -144,11 +110,11 @@
       {% csrf_token %}
       <button type="submit" name="start_edit"
         class="mt-6 px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded">
-        Start Edit
+        {% trans "Start Edit" %}
       </button>
       <button type="button" onclick="window.location.href='{% url 'identity-list' %}'"
         class="mt-6 px-4 py-2 text-gray-800 bg-gray-100 rounded ml-2">
-        Cancel
+        {% trans "Cancel" %}
       </button>
     </form>
 </div>

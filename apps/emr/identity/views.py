@@ -244,7 +244,7 @@ def generate_report(request, patient_id):
         # If report was generated successfully, return the PDF file as response
         response = FileResponse(open(pdf_path, "rb"), content_type="application/pdf")
         response["Content-Disposition"] = (
-            f'attachment; filename="demography_report_{patient_id}.pdf"'
+            f'attachment; filename="commitment_letter_{patient_id}.pdf"'
         )
         return response
     else:
