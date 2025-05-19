@@ -3,6 +3,8 @@ from django_jalali.db import models as jmodels
 from django.core.validators import RegexValidator, MaxValueValidator
 from django.db.models import JSONField
 from django.contrib.auth import get_user_model
+from datetime import date
+import jdatetime
 
 
 from apps.common.models_localization import LocalizedNameMixin
@@ -40,11 +42,44 @@ class Patient(models.Model):
         ],
     )
 
-    birthday = jmodels.jDateField(null=True, blank=True)
+    # birthday = jmodels.jDateField(null=True, blank=True)
+    birthday = models.DateField(null=True, blank=True)
 
-    ethnicity = models.JSONField(default=dict, blank=True)
+    @property
+    def jbirthday(self):
+        """
+        Returns the birthday in Jalali (Persian) calendar as a jdatetime.date,
+        or None if no birthday is set.
+        """
+        if not self.birthday:
+            return None
+        return jdatetime.date.fromgregorian(date=self.birthday)
 
-    insurance = models.JSONField(default=dict, blank=True)
+    @property
+    def age(self):
+        """
+        Returns the patient's age in whole years, rounding by months:
+        if they've passed ≥6 months since their last birthday, round up by 1.
+        """
+        if not self.birthday:
+            return None
+
+        today = date.today()
+        years = today.year - self.birthday.year
+        month_diff = today.month - self.birthday.month
+        if today.day < self.birthday.day:
+            month_diff -= 1
+
+        if month_diff < 0:
+            years -= 1
+            month_diff += 12
+
+        # round up if 6 or more months past last birthday
+        if month_diff >= 6:
+            years += 1
+
+        return years
+
 
     dominanthand = models.ForeignKey(
         "DominantHand", null=True, blank=True, on_delete=models.SET_NULL
@@ -67,11 +102,10 @@ class Patient(models.Model):
     )
 
     edit_history = models.JSONField(default=dict, blank=True)
+
     report = models.JSONField(default=dict, blank=True)
 
-    def __str__(self):
-        return f"PID: {self.patient_id} - {self.first_name} {self.last_name}"
-
+    ethnicity = models.JSONField(default=dict, blank=True)
     @property
     def ethnicity_display(self) -> str:
         ethnicity_data = self.ethnicity or {}
@@ -81,6 +115,7 @@ class Patient(models.Model):
         names = [str(ins) for ins in qs]
         return ", ".join(names) if names else "---"
     
+    insurance = models.JSONField(default=dict, blank=True)
     @property
     def insurances_display(self) -> str:
         insurance_data = self.insurance or {}
@@ -136,6 +171,9 @@ class Patient(models.Model):
     insurances = models.ManyToManyField("Insurance", blank=True)
 
     Secretarytags = models.ManyToManyField("Secretarytags", blank=True)
+
+    def __str__(self):
+        return f"PID: {self.patient_id} - {self.first_name} {self.last_name}"
 
     class Meta:
         indexes = [

@@ -1,17 +1,3 @@
-# from django.db import models
-# from django.utils.translation import get_language
-
-# class LocalizedNameMixin(models.Model):
-#     class Meta: abstract = True
-
-#     def get_localized(self, field_base="name"):
-#         lang = get_language()
-#         field = f"{field_base}_{lang}"
-#         return getattr(self, field, getattr(self, field_base))
-
-#     @property
-#     def localized_name(self):
-#         return self.get_localized("name")
 
 from django.db.models import ForeignKey, ManyToManyField
 from django.db.models import JSONField

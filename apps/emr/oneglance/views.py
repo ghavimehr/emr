@@ -13,6 +13,7 @@ from django.utils.translation import gettext as _
 from django.utils.translation import activate
 
 from jdatetime import datetime as jdatetime
+
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from shutil import copyfile
@@ -145,7 +146,7 @@ def generate_pdf(request):
 
         # Generate the PDF filename (today's Jalali date)
 
-        today_jalali = jdatetime.today().strftime("%Y-%m-%d")  # Today's date in Jalali format
+        today_jalali = jdatetime.datetime.now().strftime("%Y-%m-%d")
         index = 0
         while True:
             if index == 0:
@@ -181,16 +182,14 @@ def generate_pdf(request):
             # Basic fields
             "first_name": patient.first_name,
             "last_name": patient.last_name,
-            "ssn": patient.ssn,
-            "birthday": (
-                patient.birthday.strftime("%d\\slash%m\\slash%Y")
-                if patient.birthday
-                else "---"
-            ),
-            "today": today_jalali,
-            "patient_id": patient.patient_id,
-            "insurance": patient.insurances_display,
+            "ssn": patient.ssn or "---",
+            "birthday": patient.age or "---",
+            "today": jdatetime.date.today().strftime("%Y/‌%m/‌%d") or "---",
+            "patient_id": patient.patient_id or "---",
+            "insurance": patient.insurances_display or "---",
         }
+
+        logger.debug("Prepared patient_data for LaTeX injection: %r", patient_data)
 
         # Inject patient data into LaTeX template
         with open(tex_file_path, "r") as tex_file:

@@ -13,9 +13,9 @@ urlpatterns = [
     # Delete a patient
     path("<int:pk>/delete/", views.identity_delete, name="identity-delete"),
     path(
-        "generate-report/<int:patient_id>/",
-        views.generate_report,
-        name="generate-report",
+        "agreement/<int:patient_id>/",
+        views.agreement,
+        name="agreement",
     ),
     path("occupation-search/", views.occupation_search, name="occupation-search"),
     path(

@@ -3,6 +3,8 @@ from django.utils.translation import get_language
 from django.utils import timezone
 import datetime
 import jdatetime
+import re
+
 
 from .models import *
 
@@ -78,6 +80,7 @@ class IdentityForm(forms.ModelForm):
 
         # Handle pre-filled data when editing an existing Patient
         if self.instance.pk:
+            lang = get_language() or ""
             # Ethnicities
             selected_eth_ids = [
                 eid for eid, val in self.instance.ethnicity.items() if val == 1
@@ -96,9 +99,18 @@ class IdentityForm(forms.ModelForm):
             )
             self.fields["Secretary_tags_field"].initial = selected_tags
 
-        # Default birthday (if not set)
-        if not self.instance.pk or not self.instance.birthday:
-            self.fields["birthday"].initial = "1340/01/01"
+            if self.instance.birthday:
+                if lang.startswith("fa"):
+                    # show Jalali YYYY-MM-DD
+                    self.fields["birthday"].initial = (
+                        self.instance.jbirthday.strftime("%Y-%m-%d")
+                    )
+                else:
+                    # show Gregorian YYYY-MM-DD
+                    self.fields["birthday"].initial = (
+                        self.instance.birthday.strftime("%Y-%m-%d")
+                    )
+
 
         # Make occupation read-only
         self.fields["occupation"].widget.attrs["readonly"] = True
@@ -131,12 +143,40 @@ class IdentityForm(forms.ModelForm):
             {"style": "direction: ltr; text-align: left;", "placeholder": "09*********"}
         )
 
+
+    def clean_birthday(self):
+        """
+        If in Farsi, expect the raw input to be a Jalali date
+        and convert to Gregorian. Otherwise let Django parse it.
+        """
+        raw = (self.data.get("birthday") or "").strip()
+        lang = get_language() or ""
+
+        # only when the active language is Farsi do we treat it as Jalali
+        if lang == "fa":
+            parts = re.split(r"[-/]", raw)
+            if len(parts) == 3:
+                try:
+                    jy, jm, jd = map(int, parts)
+                    # convert to datetime.date
+                    return jdatetime.date(jy, jm, jd).togregorian()
+                except (ValueError, TypeError):
+                    raise forms.ValidationError("تاریخ تولد نامعتبر است")
+            raise forms.ValidationError(
+                "تاریخ تولد باید به صورت YYYY-MM-DD یا YYYY/MM/DD باشد"
+            )
+
+        # otherwise, fall back to Django’s built‐in parsing:
+        # cleaned_data["birthday"] will already be a datetime.date or None
+        return self.cleaned_data.get("birthday")
+
     def save(self, commit=True):
         """
         Custom save method to handle JSON fields for ethnicity, insurance, and history tracking.
         """
         patient = super().save(commit=False)
 
+        patient.birthday = self.cleaned_data.get("birthday")
         # Convert selected ethnicities to JSON {id: 0 or 1}
         chosen_eth = self.cleaned_data.get("ethnicities_field", [])
         new_ethnicities = {

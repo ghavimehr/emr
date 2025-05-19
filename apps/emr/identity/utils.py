@@ -8,6 +8,7 @@ from shutil import copyfile
 from jdatetime import datetime as jdatetime
 from django.utils.translation import gettext as _
 
+from apps.emr.files.models import Document
 
 logger = logging.getLogger(__name__)
 
@@ -18,7 +19,7 @@ save_log = False
 
 
 
-def demographic_report(patient_id):
+def agreement_generator(patient_id):
     logger.info(f"demographic_report called for patient_id={patient_id}")
     message = ""
     pdf_path = None
@@ -38,41 +39,28 @@ def demographic_report(patient_id):
     report_date = max(report.keys(), default=None)
     edit_history_date = max(edit_history.keys(), default=None)
 
-    # Compare the dates and decide whether to generate a new report
-    if report_date and edit_history_date:
-        # Convert string date to datetime
-        if datetime.strptime(
-            edit_history_date, "%Y-%m-%d %H:%M:%S"
-        ) <= datetime.strptime(report_date, "%Y-%m-%d %H:%M:%S"):
-            # No new edit, return existing report
-            latest_version = report[report_date]
-            # build the filename
-            pdf_name = f"demography-{patient.patient_id}-{patient.last_name}-{patient.first_name}-{latest_version}.pdf"
-            # point into the agreement/ subfolder under BASE_DIR/data/<id>/
-            pdf_path = os.path.join(
-                settings.BASE_DIR,
-                "data",
-                str(patient.patient_id),
-                "agreement",
-                pdf_name
-            )
-            message = f"Report already generated: {pdf_path}"
-            return message, pdf_path
-
     # Generate the report (new report)
     version_number = len(report) + 1
-    patient_folder = os.path.join(settings.BASE_DIR, "data", str(patient.patient_id), "agreement")
-    os.makedirs(patient_folder, exist_ok=True)
 
-    if not os.path.exists(patient_folder):
-        os.makedirs(patient_folder)
+    base_data_dir = os.path.join(settings.BASE_DIR, "data")
+    target_folder_rel_path = os.path.join(str(patient.patient_id), "agreement")
+    target_folder_path = os.path.join(base_data_dir, target_folder_rel_path)
+
+
+    os.makedirs(target_folder_path, exist_ok=True)
+
+    if not os.path.exists(target_folder_path):
+        os.makedirs(target_folder_path)
 
     # Copy the LaTeX template into the patient's folder
     template_path = os.path.join(settings.BASE_DIR, "latex", "commitment_letter.tex")
+
     tex_file_path = os.path.join(
-        patient_folder,
+        target_folder_path,
         f"commitment_letter-{version_number}.tex",
     )
+
+
     copyfile(template_path, tex_file_path)
 
 
@@ -83,11 +71,7 @@ def demographic_report(patient_id):
         "first_name": patient.first_name,
         "last_name": patient.last_name,
         "ssn": patient.ssn,
-        "birthday": (
-            patient.birthday.strftime("%d\\slash%m\\slash%Y")
-            if patient.birthday
-            else "---"
-        ),
+        "birthday": patient.jbirthday.strftime("%Y/‌%m/‌%d"),
         # Use the Persian name if it exists, else fallback
         "ethnicity": patient.ethnicity_display or "---",
         "marital_status": patient.marital_status or "---",
@@ -136,7 +120,7 @@ def demographic_report(patient_id):
             [
                 "/usr/local/texlive/2024/bin/x86_64-linux/xelatex",
                 "-output-directory",
-                patient_folder,
+                target_folder_path,
                 tex_file_path,
             ],
             stdout=subprocess.PIPE,
@@ -145,6 +129,18 @@ def demographic_report(patient_id):
         )
         # Send newline to simulate pressing "Enter" if there's a recoverable error
         stdout, stderr = process.communicate(input=b"\n")
+
+
+        if process.returncode == 0:
+            base_name = f"commitment_letter-{version_number}.pdf"
+            new_doc = Document.objects.create(
+                patient        = patient,
+                relative_path  = f"{target_folder_rel_path}/{base_name}",
+                file_name      = base_name,
+                file_extension_id = 1,     # 1 → PDF
+                document_type_id = 101,      # 101 → Agreements
+                protocol_id = 4,             # read-only legal and payment
+            )
 
         if process.returncode != 0:
             message = (
@@ -159,14 +155,15 @@ def demographic_report(patient_id):
         return message, None
 
 
+
     # Define the path of the generated PDF
     pdf_path = os.path.join(
-        patient_folder,
+        target_folder_path,
         f"commitment_letter-{version_number}.pdf",
     )
 
     for ext in ["tex", "aux", "log"]:
-        aux_file = os.path.join(patient_folder, f"commitment_letter-{version_number}.{ext}")
+        aux_file = os.path.join(target_folder_path, f"commitment_letter-{version_number}.{ext}")
         if os.path.exists(aux_file):
             os.remove(aux_file)
 

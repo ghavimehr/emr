@@ -14,7 +14,7 @@ import json
 
 from .models import *
 from .forms import IdentityForm
-from .demographic_report import demographic_report
+from .utils import agreement_generator
 from apps.emr.events.models import Event
 
 
@@ -236,15 +236,18 @@ def Secretarytags_add(request):
 
 
 @login_required(login_url="/users/signin/")
-def generate_report(request, patient_id):
+def agreement(request, patient_id):
     # Call the demographic_report function
-    message, pdf_path = demographic_report(patient_id)
+    message, pdf_path = agreement_generator(patient_id)
+
+    reference_number = Patient.objects.values_list("patient_id", flat=True).get(id=patient_id)
+
 
     if pdf_path:
         # If report was generated successfully, return the PDF file as response
         response = FileResponse(open(pdf_path, "rb"), content_type="application/pdf")
         response["Content-Disposition"] = (
-            f'attachment; filename="commitment_letter_{patient_id}.pdf"'
+            f'attachment; filename="commitment_letter_{reference_number}.pdf"'
         )
         return response
     else:
