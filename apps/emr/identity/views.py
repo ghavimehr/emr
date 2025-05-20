@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.urls import reverse
 from django.http import JsonResponse, FileResponse
 from django.utils.translation import gettext as _
 from django_jalali.templatetags.jformat import jformat
@@ -10,13 +11,15 @@ from django.core.paginator import Paginator
 from django.db.models import OuterRef, Subquery
 import logging
 import json
+import datetime, jwt
 
 
 from .models import *
 from .forms import IdentityForm
 from .utils import agreement_generator
 from apps.emr.events.models import Event
-
+from django.conf import settings
+from apps.emr.files.views import serve_patient_file
 
 logger = logging.getLogger("django")
 
@@ -238,21 +241,35 @@ def Secretarytags_add(request):
 @login_required(login_url="/users/signin/")
 def agreement(request, patient_id):
     # Call the demographic_report function
-    message, pdf_path = agreement_generator(patient_id)
+    message, new_doc = agreement_generator(patient_id)
 
-    reference_number = Patient.objects.values_list("patient_id", flat=True).get(id=patient_id)
+    # reference_number = Patient.objects.values_list("patient_id", flat=True).get(id=patient_id)
 
+    now = datetime.datetime.utcnow()
+    payload = {
+        "key": str(new_doc.id),               # must match serve_patient_file’s `payload["key"]`
+        "iat": now,
+        "exp": now + datetime.timedelta(hours=1),
+    }
+    token = jwt.encode(payload, settings.ONLYOFFICE_JWT_SECRET, algorithm="HS256")
 
-    if pdf_path:
-        # If report was generated successfully, return the PDF file as response
-        response = FileResponse(open(pdf_path, "rb"), content_type="application/pdf")
-        response["Content-Disposition"] = (
-            f'attachment; filename="commitment_letter_{reference_number}.pdf"'
-        )
-        return response
-    else:
-        # If there was an error, show the error message
-        messages.error(request, message)
-        return redirect(
-            "identity-list"
-        )  # Redirect to the patient list if there is an error
+    # 3) inject the Authorization header into this request
+    request.META["HTTP_AUTHORIZATION"] = f"Bearer {token}"
+
+    # 4) hand off directly to serve_patient_file
+    #    it will run your IP‐allow logic, JWT decode, lookup by id=new_doc.id, and stream.
+    return serve_patient_file(request, key=str(new_doc.id))
+
+    # if pdf_path:
+    #     # If report was generated successfully, return the PDF file as response
+    #     response = FileResponse(open(pdf_path, "rb"), content_type="application/pdf")
+    #     response["Content-Disposition"] = (
+    #         f'attachment; filename="commitment_letter_{reference_number}.pdf"'
+    #     )
+    #     return response
+    # else:
+    #     # If there was an error, show the error message
+    #     messages.error(request, message)
+    #     return redirect(
+    #         "identity-list"
+    #     )  # Redirect to the patient list if there is an error

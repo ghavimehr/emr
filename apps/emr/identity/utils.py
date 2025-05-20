@@ -71,7 +71,7 @@ def agreement_generator(patient_id):
         "first_name": patient.first_name,
         "last_name": patient.last_name,
         "ssn": patient.ssn,
-        "birthday": patient.jbirthday.strftime("%Y/‌%m/‌%d"),
+        "birthday": patient.jbirthday.strftime("%Y/‌%m/‌%d") if patient.jbirthday else "---",
         # Use the Persian name if it exists, else fallback
         "ethnicity": patient.ethnicity_display or "---",
         "marital_status": patient.marital_status or "---",
@@ -156,11 +156,11 @@ def agreement_generator(patient_id):
 
 
 
-    # Define the path of the generated PDF
-    pdf_path = os.path.join(
-        target_folder_path,
-        f"commitment_letter-{version_number}.pdf",
-    )
+    # # Define the path of the generated PDF
+    # pdf_path = os.path.join(
+    #     target_folder_path,
+    #     f"commitment_letter-{version_number}.pdf",
+    # )
 
     for ext in ["tex", "aux", "log"]:
         aux_file = os.path.join(target_folder_path, f"commitment_letter-{version_number}.{ext}")
@@ -182,7 +182,7 @@ def agreement_generator(patient_id):
         f"Report successfully generated for patient {patient.first_name} {patient.last_name}. "
         f"PDF saved at: {pdf_path}"
     )
-    return message, pdf_path
+    return message, new_doc
 
 
 PERSIAN_WEEKDAYS = {
@@ -221,7 +221,7 @@ def format_patient_name(first_name, last_name, ssn, gender):
     :param gender: Patient's gender ("male", "female", or other)
     :return: Formatted patient information string
     """
-    ssnt = f"با شماره ملی {ssn}" if ssn else ""
+    ssnt = f"ِدارنده‌ی شماره‌ی ملی {ssn}" if ssn else ""
     if gender == "male":
         return f"آقای {first_name} {last_name} {ssnt}"
     elif gender == "female":

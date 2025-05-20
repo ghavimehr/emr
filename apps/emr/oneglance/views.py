@@ -32,12 +32,14 @@ from django.views.decorators.clickjacking import xframe_options_sameorigin
 from apps.emr.identity.models import *
 from apps.emr.rtms.utils import get_rtms_protcols
 from apps.emr.files.utils import patient_documents
-# from apps.common.get_localized_name import get_localized_name
+from apps.common.decorators import group_required
+
 
 
 from apps.emr.files.models import Document
 
 logger = logging.getLogger(__name__)
+
 
 
 @csrf_exempt
