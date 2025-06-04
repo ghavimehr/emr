@@ -1,4 +1,5 @@
-import os
+import os, re
+
 import subprocess
 import logging
 from datetime import datetime
@@ -32,15 +33,31 @@ def agreement_generator(patient_id):
         return message, pdf_path
 
     # Check the report and edit history
-    report = patient.report if patient.report else {}
-    edit_history = patient.edit_history if patient.edit_history else {}
+    # report = patient.report if patient.report else {}
+    # edit_history = patient.edit_history if patient.edit_history else {}
 
-    # Get the latest date from report and edit_history
-    report_date = max(report.keys(), default=None)
-    edit_history_date = max(edit_history.keys(), default=None)
+    # # Get the latest date from report and edit_history
+    # report_date = max(report.keys(), default=None)
+    # edit_history_date = max(edit_history.keys(), default=None)
+    # # Generate the report (new report)
+    # version_number = len(report) + 1
 
-    # Generate the report (new report)
-    version_number = len(report) + 1
+    existing_names = Document.objects.filter(
+        patient=patient,
+        document_type_id=101
+    ).values_list("file_name", flat=True)
+
+    # 2) pull out the version numbers
+    version_pattern = re.compile(r"^commitment_letter-(\d+)\.pdf$")
+    versions = [
+        int(m.group(1))
+        for name in existing_names
+        if (m := version_pattern.match(name))
+    ]
+
+    # 3) next version is max+1 (or 1 if none found)
+    version_number = (max(versions) + 1) if versions else 1
+
 
     base_data_dir = os.path.join(settings.BASE_DIR, "data")
     target_folder_rel_path = os.path.join(str(patient.patient_id), "agreement")
@@ -141,6 +158,7 @@ def agreement_generator(patient_id):
                 document_type_id = 101,      # 101 → Agreements
                 protocol_id = 4,             # read-only legal and payment
             )
+            return "Successful", new_doc
 
         if process.returncode != 0:
             message = (
@@ -169,14 +187,14 @@ def agreement_generator(patient_id):
 
 
     # Save the version info to the report column
-    if report_date:
-        report[report_date] = version_number
-    else:
-        # If there's no previous date key, store the new date/time
-        report[datetime.now().strftime("%Y-%m-%d %H:%M:%S")] = version_number
+    # if report_date:
+    #     report[report_date] = version_number
+    # else:
+    #     # If there's no previous date key, store the new date/time
+    #     report[datetime.now().strftime("%Y-%m-%d %H:%M:%S")] = version_number
 
-    patient.report = report
-    patient.save()
+    # patient.report = report
+    # patient.save()
 
     message = (
         f"Report successfully generated for patient {patient.first_name} {patient.last_name}. "

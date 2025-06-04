@@ -189,13 +189,11 @@
                             <td class="px-6 py-4">{{ identity.ssn }}</td>
                             <td class="px-6 py-4">
                                 <a
-                                  href="{% url 'agreement' identity.id %}"
-                                  target="_blank"
-                                  rel="noopener noreferrer"
+                                  onclick="openAgreement({{ identity.id }})"
                                   class="text-blue-600 hover:underline"
                                 >
                                   {% trans "Agreement" %}
-                                </a>
+                                </a> |
                                 <!-- <a href="{% url 'agreement' identity.id %}" class="text-blue-600 hover:underline">{% trans "Agreement" %}</a> | -->
                                 <a href="{% url 'identity-update' identity.pk %}" class="text-yellow-600 hover:underline">{% trans "View" %}</a> 
                                 <!-- | <a href="{% url 'identity-delete' identity.pk %}" class="text-red-600 hover:underline">{% trans "Delete" %}</a> -->
@@ -329,4 +327,37 @@
         'noneText': 'Select Options',
     });
 </script>
+
+
+<script>
+async function openAgreement(patientId) {
+  try {
+    // 1) Hit your JSON endpoint to *create* the PDF & get back key+token
+    let res = await fetch(`/identity/agreement/${patientId}/`, {
+      credentials: "include"
+    });
+    if (!res.ok) throw new Error("Failed to generate PDF");
+    let { key, token } = await res.json();
+
+    // 2) Now fetch the actual file, passing the Authorization header
+    let fileRes = await fetch(`/files/f/${key}/`, {
+      headers: {
+        "Authorization": "Bearer " + token
+      }
+    });
+    if (!fileRes.ok) throw new Error("Download failed");
+
+    // 3) Turn into a Blob, open in new tab
+    let blob = await fileRes.blob();
+    let url  = URL.createObjectURL(blob);
+    window.open(url, "_blank");
+  }
+  catch (err) {
+    console.error(err);
+    alert("Could not load agreement.  " + err.message);
+  }
+}
+</script>
+
+
 {% endblock extra_js %}

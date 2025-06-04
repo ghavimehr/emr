@@ -20,8 +20,14 @@ class SignInView(LoginView):
         if user.groups.filter(name='Physicians').exists():
             return '/my_dashboard/'
 
+        if user.groups.filter(name='Researchers').exists():
+            return '/my_dashboard/'
+
+        if user.groups.filter(name='Secretaris').exists():
+            return '/my_dashboard/'
+
         # If user is in 'Patients' group
-        elif user.groups.filter(name='Patients').exists():
+        elif user.groups.filter(name='patients_costumer').exists():
             return '/patients_dashboard/'
 
         # Fallback for others

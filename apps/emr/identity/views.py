@@ -244,21 +244,28 @@ def agreement(request, patient_id):
     message, new_doc = agreement_generator(patient_id)
 
     # reference_number = Patient.objects.values_list("patient_id", flat=True).get(id=patient_id)
+    hex_key = new_doc.id.hex  # e.g. "55d4d68a72ff465e939b296b1f879f44"
 
     now = datetime.datetime.utcnow()
     payload = {
-        "key": str(new_doc.id),               # must match serve_patient_file’s `payload["key"]`
+        "key": hex_key,               # must match serve_patient_file’s `payload["key"]`
         "iat": now,
         "exp": now + datetime.timedelta(hours=1),
     }
     token = jwt.encode(payload, settings.ONLYOFFICE_JWT_SECRET, algorithm="HS256")
 
+
+    return JsonResponse({
+        "key":   str(new_doc.id),
+        "token": token,
+    })
     # 3) inject the Authorization header into this request
-    request.META["HTTP_AUTHORIZATION"] = f"Bearer {token}"
+    # request.META["HTTP_AUTHORIZATION"] = f"Bearer {token}"
+    # return serve_patient_file(request, key=str(new_doc.id))
+
 
     # 4) hand off directly to serve_patient_file
     #    it will run your IP‐allow logic, JWT decode, lookup by id=new_doc.id, and stream.
-    return serve_patient_file(request, key=str(new_doc.id))
 
     # if pdf_path:
     #     # If report was generated successfully, return the PDF file as response
