@@ -74,7 +74,26 @@
         {% include "includes/footer.html" %}
       {% endblock footer %}
       <p class="my-10 text-sm text-center text-gray-500">
-        &copy; <u><a href="/" rel="noreferrer">{% trans "Dr Arzaghi's Clinic" %}</a></u> - <u><a target="_blank" href="https://Ghavimehr.com">{% trans "Designed by Dr. Ghavimehr" %}</a></u>
+        &copy; 
+        <u>
+          <a href="/" rel="noreferrer">
+            {% if lang == 'fa' %} 
+              {{ request.branding.clinic_name_fa }}
+            {% else %}  
+              {{ request.branding.clinic_name_en }}
+            {% endif %}
+
+          </a>
+        </u> 
+        
+        {% if request.hide_designer == False %}
+        - 
+        <u>
+          <a target="_blank" href="https://Ghavimehr.com">
+            {% trans "Designed by Dr. Ghavimehr" %}
+          </a>
+        </u>
+        {% endif %}
       </p>
 
     </div>

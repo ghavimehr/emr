@@ -45,7 +45,7 @@ def blog_dashboard(request):
     return render(request, 'dashboard/blog/index.html', context)
 
 
-@staff_member_required(login_url='/admin/')
+@staff_member_required(login_url='/users/signin/')
 def all_blogs(request):
     filter_string = {}
     if search := request.GET.get('search'):
@@ -345,7 +345,7 @@ def profile(request):
     user = request.user  # reference request.user directly
     
     if user.is_superuser:
-        return redirect('/admin/')  
+        return redirect('/management/')  
 
     elif user.groups.exists():
         return redirect(reverse('welcome'))  

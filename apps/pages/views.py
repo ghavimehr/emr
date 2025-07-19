@@ -32,12 +32,12 @@ def index(request):
   
   context = {
     'segment'        : 'home',
-    'page_title'     : "مرکز فوق‌تخصصی آلزایمر",
-    'page_info'      : 'کلینیک حامی درمانگاه چند تخصصی مغز و اعصاب و روان',
-    'page_keywords'  : 'دکتر آلزایمر, متخصص حافظه, دمانس, آلزایمر, rTMS, زوال عقل, فراموشی, سالمندان',
+    'page_title'     : request.branding.slogan1,
+    'page_info'      : request.branding.slogan2,
+    'page_keywords'  : '',
     'page_canonical' : '',
     'products'       : products ,
-    'articles'       : blogs
+    'articles'       : blogs,
   }
 
   return render(request, 'pages/home2.html', context)

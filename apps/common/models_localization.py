@@ -3,7 +3,7 @@ from django.db.models import ForeignKey, ManyToManyField
 from django.db.models import JSONField
 from django.apps import apps
 from django.utils.translation import get_language
-from .utils_localization import get_localized_name
+from apps.common.utils_localization import get_localized_name
 
 class LocalizedNameMixin:
     def get_localized_field(self, field_name):

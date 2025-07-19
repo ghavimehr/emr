@@ -43,23 +43,24 @@ ONBOARDING_KIT_PRICE = os.environ.get('ONBOARDING_KIT_PRICE', '19.99')
 # Enable/Disable DEBUG Mode
 DEBUG = str2bool(os.environ.get('DEBUG'))
 
-CUSTOMER_NAME = {
-    "en": "Hami Clinic",
-    "fa": "کلینیک حامی",
-}
 
 ONLYOFFICE_JWT_SECRET = "ep3soh8iWa2pah0OoQuee8veiyax5yoo"
-ONLYOFFICE_DOCSERVER_URL = "https://ds.drarzaghi.com"
-ONLYOFFICE_ALLOWED_IPS = ["192.168.100.13/32"] 
-ONLYOFFICE_CALLBACK = "https://emr.drarzaghi.com/f/oocallback/"
+ONLYOFFICE_DOCSERVER_URL = "https://ds.ghavimehr.com"
+ONLYOFFICE_ALLOWED_IPS = ["192.168.101.5/32"] 
+ONLYOFFICE_CALLBACK = "https://emr.ghavimehr.com/f/oocallback/"
 PATIENT_DATA = os.path.join(BASE_DIR, "data")
 ONLYOFFICE_JWT_EXPIRE = 7200
 
 
 # Hosts Settings
-ALLOWED_HOSTS = [ 'formsdev.ghavimehr.com', '.formsdev.ghavimehr.com', 'www.formsdev.ghavimehr.com', 'emr.ghavimehr.com', '.emr.ghavimehr.com',
-                'www.emr.ghavimehr.com', 'emr.drarzaghi.com', '.emr.drarzaghi.com', 'www.emr.drarzaghi.com', 'emrtest.drarzaghi.com', '.emrtest.drarzaghi.com', 'www.emrtest.drarzaghi.com', 'emrlab.ghavimehr.com' ]
-CSRF_TRUSTED_ORIGINS = [ 'http://emrdemo.ghavimehr.com', 'https://emrdemo.ghavimehr.com', 'https://emr.drarzaghi.com', 'http://emr.drarzaghi.com', 'https://emrlab.ghavimehr.com', 'https://www.emrlab.ghavimehr.com']
+ALLOWED_HOSTS = [ 'emr.ghavimehr.com', '.emr.ghavimehr.com','www.emr.ghavimehr.com', 
+                'emr.drarzaghi.com', '.emr.drarzaghi.com', 'www.emr.drarzaghi.com', 
+                'emrdev.ghavimehr.com', '.emrdev.ghavimehr.com', 'www.emrdev.ghavimehr.com', 
+                'emrdemo.ghavimehr.com', '.emrdemo.ghavimehr.com', 'www.emrdemo.ghavimehr.com', 
+                'irlgbt.com', '.irlgbt.com', 'www.irlgbt.com' ]
+CSRF_TRUSTED_ORIGINS = [ 'http://emrdemo.ghavimehr.com', 'https://emrdemo.ghavimehr.com', 'https://emr.drarzaghi.com', 'http://emr.drarzaghi.com', 
+                        'https://emrdev.ghavimehr.com', 'https://www.emrdev.ghavimehr.com', 'http://emr.ghavimehr.com', 'https://emr.ghavimehr.com',
+                        'https://irlgbt.com', 'http://irlgbt.com',]
 USE_X_FORWARDED_HOST = True
 
 LOGIN_URL = '/users/signin/'
@@ -175,6 +176,8 @@ INSTALLED_APPS = [
     "corsheaders",
 
     # APPS
+    #"core", #needed for multi-tenancy
+    'core.apps.CoreConfig', #needed for multi-tenancy
     "apps.ai_processor",
     "apps.api",
     "apps.common",
@@ -282,7 +285,7 @@ TEMPLATES = [
 
                 ## My developments
                 "apps.my_dashboard.context_processors.selected_patient",
-                "apps.common.context_processors.customer_name_picker",
+                'django.template.context_processors.i18n',
             ],
         },
     },
@@ -321,18 +324,41 @@ DB_NAME     = os.environ.get('DB_NAME')
 
 
 
-## MySQL
+DATABASE_ROUTERS = ['core.db_routers.TenantRouter']
+
+
 
 DATABASES = {
+
+    'customer_config': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'emr_customer_config_db',
+        'USER': 'emr_customer_config_user',
+        'PASSWORD': 'pL5nTOjGLce/z0HYz5jT5Q==',
+        'HOST': '127.0.0.1',
+        'PORT': '3307',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"},
+        'TIME_ZONE':         "Asia/Tehran",
+        'CONN_HEALTH_CHECKS': True,
+        'CONN_MAX_AGE':   60,
+        'ATOMIC_REQUESTS': True,
+    },
+
+
     'default': {
         'ENGINE'  : 'django.db.backends.mysql',
-        'NAME'    : 'drarzaghiemr',
-        'USER'    : 'drarzaghiemruser',
-        'PASSWORD': 'Eif4OaVai0anai1o',
+        'NAME'    : 'emrdev',
+        'USER'    : 'psycho',
+        'PASSWORD': 'ooPh0Wu0yaighahZ',
         'HOST'    : '127.0.0.1',
         'PORT'    : '3307',
         'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",}
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"},
+        'TIME_ZONE':  "Asia/Tehran" ,
+        'CONN_MAX_AGE':   60,
+        'ATOMIC_REQUESTS': True,
+        'CONN_HEALTH_CHECKS': True,
     },
 }
 

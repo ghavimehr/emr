@@ -21,8 +21,8 @@
     <div class="grid grid-cols-2 gap-4 py-6">
 
         {% for field in form %}
-            {% if field.label|lower == "thumbnail" %}
-                <div class="col-span-2" dir="ltr">{% include "includes/image-input.html" with field=field %}</div>
+            {% if field.name == "thumbnail" %}
+                <div class="col-span-2">{% include "includes/image-input.html" with field=field %}</div>
             {% elif "video" in field.label|lower %}
                 <div class="col-span-2">
                     <label for="{{ field.name }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>

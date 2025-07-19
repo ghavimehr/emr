@@ -1,14 +1,6 @@
 from apps.common.models import Profile, RoleChoices, Props
 from django.conf import settings
 from datetime import datetime
-from django.utils.translation import get_language
-
-def customer_name_picker(request):
-    # Determine the current language, defaulting to 'en'
-    lang = get_language() or "en"
-    # Get the customer name based on the current language, falling back to English
-    name = settings.CUSTOMER_NAME.get(lang, settings.CUSTOMER_NAME["en"])
-    return {"customer_name": name}
 
 
 

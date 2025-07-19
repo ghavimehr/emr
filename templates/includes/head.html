@@ -1,5 +1,5 @@
 {% load static %}
-{% load i18n static %}
+{% load i18n static tenant_static %}
 
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +13,7 @@
   })(window,document,'script','dataLayer','GTM-K9FNR9WF');</script>
   <!-- End Google Tag Manager -->
 
-<title>{{ page_title }} | {{ customer_name }}</title>
+<title>{{ page_title }} | {{ request.branding.clinic_name }}</title>
 
 <meta name="author"      content="Made by RoSoft | https://rosoftware.ro/">
 <meta name="description" content="{{ page_info }}">
