@@ -143,7 +143,7 @@
 
               <div id="tooltip-toggle" role="tooltip"
                 class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
-                تغییر رنگ پوسته
+                {% trans "Change them mode" %}
                 <div class="tooltip-arrow" data-popper-arrow></div>
               </div>
             
@@ -170,30 +170,30 @@
       </div>
     </nav>
 
-    <div class="flex justify-center flex-col items-center mx-3 md:mx-0" dir="ltr">
+    <div class="flex justify-center flex-col items-center mx-3 md:mx-0" lang="{{ LANGUAGE_CODE }}" dir="{% get_direction %}">
       <div class="bg-gray-900 rounded-2xl text-white flex items-center gap-3 p-1 mb-12 md:mb-16">
-        <p class="text-xs md:text-sm bg-primary-600 px-3 rounded-2xl py-0.5">جدید</p>
+        <p class="text-xs md:text-sm bg-primary-600 px-3 rounded-2xl py-0.5">{% trans "NEW" %}</p>
         <a href="{% url 'onboarding' %}">
           <p class="flex items-center gap-2 text-xs md:text-sm text-white">
-            غربالگری آلزایمر و دمانس: جقدر در معرض مشکلات حافظه هستید؟
+            {{ request.branding.new_service }}
             <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/>
             </svg>                  
           </p>
         </a>  
       </div>
-      <div class="text-center mb-8 md:mb-12">
+      <div class="text-center mb-8 md:mb-12" lang="{{ LANGUAGE_CODE }}" dir="{% get_direction %}">
         <h3 class="text-2xl md:text-3xl text-white font-extrabold	mb-5" style="font-family: 'Samim'; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">
-          {{ site }}{% trans "Wellcome to Electronic Medical Record sever of" %} {{ request.branding.clinic_name }}{% trans "!" %}
+          {{ request.branding.slogan3 }}
         </h3>
-<!--        <p class="text-white text-base md:text-lg">
+       <p class="text-white text-base md:text-lg">
           <a class="text-white underline hover:text-white" href="{% url "tool_django_generator" %}">Django Generator</a>, DataBase Tools,
           CSV Processors, <a class="text-white underline hover:text-white" href="{% url "products" %}">محصولات</a>,
            and <a class="text-white underline hover:text-white" href="{% url "dashboards" %}">Dashboards</a>. 
         </p>
         <p class="text-white text-base md:text-lg">
           <a class="text-white underline hover:text-white" href="/ticket/create/">Free Support</a> (registered users) 
-          and Custom Development Services.</p>-->
+          and Custom Development Services.</p>
       </div>
 
       {% if request.user.is_authenticated %}
@@ -249,25 +249,27 @@
   </div>
 
   <div class="max-w-screen-xl mx-3 md:mx-auto mb-16">
-    <div class="">
+
+
+    <div class="mb-10">
       <h3 class="text-gray-900 dark:text-white font-bold text-xl md:text-2xl mb-3 text-center">
-        <a class="" href="{% url "blog" %}">معرفی خدمات سایت</a>
+        <a class="" href="{% url "products" %}">{{ request.branding.products }}</a>
       </h3>
-      <p class="text-gray-900 dark:text-white text-base md:text-lg text-center mb-10">با تست های شناختی موجود در سایت آشنا شوید</p>
+      <p class="text-gray-900 dark:text-white text-base md:text-lg text-center mb-10">
+        {{ request.branding.slogan_products1 }}
+      </p>
+      {% include "includes/product-list.html" %}
+    </div>
+
+
+    <div class="mb-10">
+      <h3 class="text-gray-900 dark:text-white font-bold text-xl md:text-2xl mb-3 text-center">
+        <a class="" href="{% url "blog" %}">{{ request.branding.blog }}</a>
+      </h3>
+      <p class="text-gray-900 dark:text-white text-base md:text-lg text-center mb-10">{{ request.branding.slogan_blog1 }}</p>
       {% include "includes/blog-list.html" %}
     </div>
 
-    <!-- <div class="mb-10">
-      <h3 class="text-gray-900 dark:text-white font-bold text-xl md:text-2xl mb-3 text-center">
-        <a class="" href="{% url "products" %}">محصولات</a>
-      </h3>
-      <p class="text-gray-900 dark:text-white text-base md:text-lg text-center mb-10">
-        Check out our latest releases and 
-        <a href="{% url 'dashboards' %}">dashboards</a> 
-        for Flask, NodeJS, <a href="{% url 'dashboards' %}django/">Django</a> , and React. 
-      </p>
-      {% include "includes/product-list.html" %}
-    </div> -->
 
   </div>
 

@@ -15,23 +15,14 @@ class SignInView(LoginView):
 
     def get_success_url(self):
         user = self.request.user
-
-        # If user is in 'Physicians' group
-        if user.groups.filter(name='Physicians').exists():
-            return '/my_dashboard/'
-
-        if user.groups.filter(name='Researchers').exists():
-            return '/my_dashboard/'
-
-        if user.groups.filter(name='Secretaris').exists():
-            return '/my_dashboard/'
-
-        # If user is in 'Patients' group
+        if user.is_superuser:
+            return '/management/'  # superuser goes to admin management dashboard
+        elif user.groups.filter(name__in=['Physicians', 'Researchers', 'Secretaris']).exists() or user.is_staff:
+            return '/my_dashboard/'  # any staff role goes to staff dashboard
         elif user.groups.filter(name='patients_costumer').exists():
-            return '/patients_dashboard/'
-
-        # Fallback for others
-        return '/patients_dashboard/'
+            return '/patients_dashboard/'  # patient group goes to patient dashboard
+        else:
+            return '/patients_dashboard/'  # fallback (non-grouped users)
 
 def signout_view(request):
     logout(request)

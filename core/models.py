@@ -27,11 +27,29 @@ class Branding(models.Model):
     slogan2_en           = models.CharField(max_length=255, blank=True, help_text="info of the first page")
     slogan2_fa           = models.CharField(max_length=255, blank=True, help_text="توضیح صفحه اول")
 
-    slogan3_en           = models.CharField(max_length=255, blank=True)
-    slogan3_fa           = models.CharField(max_length=255, blank=True)
+    slogan3_en           = models.CharField(max_length=255, blank=True, default="Welcome to our clinic", help_text="Home page text")
+    slogan3_fa           = models.CharField(max_length=255, blank=True, default="خوش آمدید", help_text="متن صفحه اول")
 
     slogan4_en           = models.CharField(max_length=255, blank=True)
     slogan4_fa           = models.CharField(max_length=255, blank=True)
+
+    products_en           = models.CharField(max_length=255, blank=True, default="Services", help_text="Alternative name for Services")
+    products_fa           = models.CharField(max_length=255, blank=True, default="خدمات ما", help_text="نام قسمت خدمات")
+
+    slogan_products1_en           = models.CharField(max_length=255, blank=True, default="We offer:", help_text="Services subtitle")
+    slogan_products1_fa           = models.CharField(max_length=255, blank=True, default="شما می‌توانید خدمات زیر را در مطب ما دریافت کنید." , help_text="معرفی بخش خدمات")
+
+    new_service_en           = models.CharField(max_length=255, blank=True, default="Fill the screening test, NOW!", help_text="New Services")
+    new_service_fa           = models.CharField(max_length=255, blank=True, default="خطر ابتلای خود به آلزایمر را اندازه گیری کنید." , help_text="معرفی خدمت جدید در صفحه اول")
+
+
+    blog_en           = models.CharField(max_length=255, blank=True, default="Blog", help_text="Alternative name for Blog")
+    blog_fa           = models.CharField(max_length=255, blank=True, default="مقالات", help_text="نام قسمت مقالات")
+
+    slogan_blog1_en           = models.CharField(max_length=255, blank=True, default="Check out our latest blog posts", help_text="Blog's subtitle")
+    slogan_blog1_fa           = models.CharField(max_length=255, blank=True, default="مطالب علمی", help_text="متن توضیحی زیر عنوان مقالات")
+
+    
 
     class Meta:
         db_table  = 'branding'
@@ -77,6 +95,26 @@ class Branding(models.Model):
     @property
     def slogan4(self):
         return self._get_field("slogan14")
+
+    @property
+    def products(self):
+        return self._get_field("products")
+
+    @property
+    def slogan_products1(self):
+        return self._get_field("slogan_products1")
+
+    @property
+    def new_service(self):
+        return self._get_field("new_service")
+
+    @property
+    def blog(self):
+        return self._get_field("blog")
+
+    @property
+    def slogan_blog1(self):
+        return self._get_field("slogan_blog1")
 
     @classmethod
     def using_customer_config(cls):

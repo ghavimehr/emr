@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-04 09:07+0000\n"
+"POT-Creation-Date: 2025-07-22 16:25+0330\n"
 "PO-Revision-Date: 2025-01-13 20:04+0330\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -43,8 +43,8 @@ msgstr "عنوان فرعی"
 msgid "Video (Optional)"
 msgstr "ویدیو (اختیاری)"
 
-#: apps/blog/forms.py:91 apps/emr/lab/models.py:189 apps/emr/rtms/models.py:229
-#: apps/emr/rtms/models.py:255
+#: apps/blog/forms.py:91 apps/emr/lab/models.py:189 apps/emr/rtms/models.py:236
+#: apps/emr/rtms/models.py:262
 msgid "Tags"
 msgstr "برچسب ها"
 
@@ -70,10 +70,6 @@ msgid "%d article was published successfully."
 msgid_plural "%d articles were published successfully."
 msgstr[0] "%d مطلب در سایت منتشر شد."
 msgstr[1] "%d مطالب در سایت منتشر شدند."
-
-#: apps/common/views_sliding_panel.py:53
-msgid "You do not have permission to view these files."
-msgstr ""
 
 #: apps/emr/lab/forms.py:37
 msgid "Select or create tags"
@@ -157,7 +153,7 @@ msgstr "آزمایشگاه ها"
 
 #: apps/emr/lab/models.py:144 apps/emr/lab/models.py:164
 #: apps/emr/rtms/forms.py:47 apps/emr/rtms/models.py:9
-#: apps/emr/rtms/models.py:221
+#: apps/emr/rtms/models.py:228
 msgid "Name"
 msgstr "نام:"
 
@@ -179,7 +175,7 @@ msgid "User"
 msgstr "کاربر:"
 
 #: apps/emr/lab/models.py:152 apps/emr/lab/models.py:175
-#: templates/emr/identity/identity_form.html:408
+#: templates/emr/identity/identity_form.html:374
 msgid "Address"
 msgstr "آدرس"
 
@@ -191,7 +187,7 @@ msgstr "آزمایشگاه"
 msgid "CSF Test Performers"
 msgstr "آزمایشگاه ها"
 
-#: apps/emr/lab/models.py:169 templates/emr/identity/identity_form.html:272
+#: apps/emr/lab/models.py:169 templates/emr/identity/identity_form.html:238
 msgid "Education Level"
 msgstr "سطح تحصیلات"
 
@@ -574,6 +570,16 @@ msgstr "تمام نتایج ذخیره شد."
 msgid "There were errors in your submission."
 msgstr "مشکلی در ذخیره سازی به وجود آمد."
 
+#: apps/emr/oneglance/views.py:110
+#, fuzzy
+#| msgid "In One Glance"
+msgid "One-Glance"
+msgstr "در یک نگاه"
+
+#: apps/emr/oneglance/views.py:111
+msgid "Patient's Summerized Data"
+msgstr ""
+
 #: apps/emr/questionnaires/forms.py:63
 msgid "options"
 msgstr "گزینه ها"
@@ -720,7 +726,7 @@ msgid "Meta"
 msgstr ""
 
 #: apps/emr/questionnaires/models.py:76
-#: templates/emr/identity/identity_form.html:178
+#: templates/emr/identity/identity_form.html:144
 #: templates/emr/identity/identity_list.html:42
 #: templates/emr/rtms/rtms_overview.html:35
 msgid "Patient ID"
@@ -1059,8 +1065,7 @@ msgid "Review of Systems"
 msgstr "مرور سیستم ها"
 
 #: apps/emr/rtms/forms.py:11 apps/emr/rtms/models.py:22
-#: apps/emr/rtms/models.py:234
-#, fuzzy
+#: apps/emr/rtms/models.py:241
 #| msgid "Patient ID"
 msgid "Patient Identity"
 msgstr "شمارۀ پرونده"
@@ -1070,114 +1075,112 @@ msgid "MT"
 msgstr ""
 
 #: apps/emr/rtms/forms.py:13 apps/emr/rtms/models.py:16
-#: apps/emr/rtms/models.py:37 templates/emr/rtms/rtms_overview.html:40
+#: apps/emr/rtms/models.py:44 templates/emr/rtms/rtms_overview.html:40
 #: templates/emr/rtms/rtms_overview.html:79
-#, fuzzy
 #| msgid "Event Type"
 msgid "Pulse Type"
 msgstr "نوع اقدام"
 
-#: apps/emr/rtms/forms.py:14 apps/emr/rtms/models.py:61
+#: apps/emr/rtms/forms.py:14 apps/emr/rtms/models.py:68
 #: templates/emr/rtms/rtms_overview.html:60
 #: templates/emr/rtms/rtms_overview.html:81
-#, fuzzy
 #| msgid "Total Score"
 msgid "Total Pulse"
 msgstr "نمره کل"
 
-#: apps/emr/rtms/forms.py:15 apps/emr/rtms/models.py:68
+#: apps/emr/rtms/forms.py:15 apps/emr/rtms/models.py:75
 msgid "DLPFC Left"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:16 apps/emr/rtms/models.py:74
+#: apps/emr/rtms/forms.py:16 apps/emr/rtms/models.py:81
 msgid "DLPFC Right"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:17 apps/emr/rtms/models.py:80
+#: apps/emr/rtms/forms.py:17 apps/emr/rtms/models.py:87
 msgid "OFC Left"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:18 apps/emr/rtms/models.py:86
+#: apps/emr/rtms/forms.py:18 apps/emr/rtms/models.py:93
 msgid "OFC Right"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:19 apps/emr/rtms/models.py:92
+#: apps/emr/rtms/forms.py:19 apps/emr/rtms/models.py:99
 msgid "Somatosensory Left"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:20 apps/emr/rtms/models.py:98
+#: apps/emr/rtms/forms.py:20 apps/emr/rtms/models.py:105
 msgid "Somatosensory Right"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:21 apps/emr/rtms/models.py:104
+#: apps/emr/rtms/forms.py:21 apps/emr/rtms/models.py:111
 msgid "Parietal Left"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:22 apps/emr/rtms/models.py:110
+#: apps/emr/rtms/forms.py:22 apps/emr/rtms/models.py:117
 msgid "Parietal Right"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:23 apps/emr/rtms/models.py:116
+#: apps/emr/rtms/forms.py:23 apps/emr/rtms/models.py:123
 msgid "Occipital Left"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:24 apps/emr/rtms/models.py:122
+#: apps/emr/rtms/forms.py:24 apps/emr/rtms/models.py:129
 msgid "Occipital Middle"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:25 apps/emr/rtms/models.py:128
+#: apps/emr/rtms/forms.py:25 apps/emr/rtms/models.py:135
 msgid "Occipital Inferior"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:26 apps/emr/rtms/models.py:134
+#: apps/emr/rtms/forms.py:26 apps/emr/rtms/models.py:141
 msgid "Occipital Right"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:27 apps/emr/rtms/models.py:140
+#: apps/emr/rtms/forms.py:27 apps/emr/rtms/models.py:147
 msgid "M1 Left"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:28 apps/emr/rtms/models.py:146
+#: apps/emr/rtms/forms.py:28 apps/emr/rtms/models.py:153
 msgid "M1 Right"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:29 apps/emr/rtms/models.py:152
+#: apps/emr/rtms/forms.py:29 apps/emr/rtms/models.py:159
 msgid "SMA Left"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:30 apps/emr/rtms/models.py:158
+#: apps/emr/rtms/forms.py:30 apps/emr/rtms/models.py:165
 msgid "SMA Right"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:31 apps/emr/rtms/models.py:164
+#: apps/emr/rtms/forms.py:31 apps/emr/rtms/models.py:171
 msgid "Right Post Central"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:32 apps/emr/rtms/models.py:170
+#: apps/emr/rtms/forms.py:32 apps/emr/rtms/models.py:177
 msgid "Left Poat Central"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:33 apps/emr/rtms/models.py:176
+#: apps/emr/rtms/forms.py:33 apps/emr/rtms/models.py:183
 msgid "Broca Left"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:34 apps/emr/rtms/models.py:182
+#: apps/emr/rtms/forms.py:34 apps/emr/rtms/models.py:189
 msgid "Broca Right"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:35 apps/emr/rtms/models.py:188
+#: apps/emr/rtms/forms.py:35 apps/emr/rtms/models.py:195
 msgid "Sub Temporal Right"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:36 apps/emr/rtms/models.py:194
+#: apps/emr/rtms/forms.py:36 apps/emr/rtms/models.py:201
 msgid "Sub Temporal Left"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:37 apps/emr/rtms/models.py:200
+#: apps/emr/rtms/forms.py:37 apps/emr/rtms/models.py:207
 msgid "Middle Temporal Left"
 msgstr ""
 
-#: apps/emr/rtms/forms.py:38 apps/emr/rtms/models.py:206
+#: apps/emr/rtms/forms.py:38 apps/emr/rtms/models.py:213
 msgid "Middle Temporal Right"
 msgstr ""
 
@@ -1193,60 +1196,64 @@ msgstr ""
 msgid "Precent of the MT for the first session."
 msgstr ""
 
-#: apps/emr/rtms/models.py:41
-msgid "unknown_variable_1"
+#: apps/emr/rtms/models.py:33
+msgid "Precent of the MT for other sessions."
 msgstr ""
 
 #: apps/emr/rtms/models.py:48
-msgid "unknown_variable_2"
+msgid "unknown_variable_1"
 msgstr ""
 
 #: apps/emr/rtms/models.py:55
+msgid "unknown_variable_2"
+msgstr ""
+
+#: apps/emr/rtms/models.py:62
 msgid "Total Session Number"
 msgstr "تعداد کل جلسات"
 
-#: apps/emr/rtms/models.py:216 apps/emr/rtms/models.py:217
-#: apps/emr/rtms/models.py:236
+#: apps/emr/rtms/models.py:223 apps/emr/rtms/models.py:224
+#: apps/emr/rtms/models.py:243
 msgid "rTMS"
 msgstr ""
 
-#: apps/emr/rtms/models.py:222
+#: apps/emr/rtms/models.py:229
 msgid "نام"
 msgstr ""
 
-#: apps/emr/rtms/models.py:228
+#: apps/emr/rtms/models.py:235
 msgid "Tag"
 msgstr "برچسب"
 
-#: apps/emr/rtms/models.py:238
+#: apps/emr/rtms/models.py:245
 msgid "Session Number"
 msgstr "شماره‌ی جلسه"
 
-#: apps/emr/rtms/models.py:241
+#: apps/emr/rtms/models.py:248
 msgid "Session Date and Time"
 msgstr ""
 
-#: apps/emr/rtms/models.py:244
+#: apps/emr/rtms/models.py:251
 msgid "Motor Threshold"
 msgstr ""
 
-#: apps/emr/rtms/models.py:250
+#: apps/emr/rtms/models.py:257
 msgid "Done"
 msgstr ""
 
-#: apps/emr/rtms/models.py:252
+#: apps/emr/rtms/models.py:259
 msgid "Pulse Power"
 msgstr ""
 
-#: apps/emr/rtms/models.py:254
+#: apps/emr/rtms/models.py:261
 msgid "Session Notes"
 msgstr "یادداشت‌های جلسه"
 
-#: apps/emr/rtms/models.py:261
+#: apps/emr/rtms/models.py:268
 msgid "RTMS Session"
 msgstr "جلسه‌ی rTMS"
 
-#: apps/emr/rtms/models.py:262
+#: apps/emr/rtms/models.py:269
 msgid "RTMS Sessions"
 msgstr "جلسات rTMS"
 
@@ -1295,12 +1302,13 @@ msgid "Present Illness Scan (PDF)"
 msgstr "شرح بیماری (PDF)"
 
 #: templates/emr/ccpi/ccpi_form.html:87
-#: templates/emr/identity/identity_form.html:458
+#: templates/emr/identity/identity_form.html:117
+#: templates/emr/identity/identity_form.html:424
 msgid "Cancel"
 msgstr "لغو"
 
 #: templates/emr/ccpi/ccpi_form.html:93
-#: templates/emr/identity/identity_form.html:474
+#: templates/emr/identity/identity_form.html:440
 msgid "Save"
 msgstr "ذخیره"
 
@@ -1373,7 +1381,7 @@ msgid "Actions"
 msgstr "امکانات"
 
 #: templates/emr/events/event_list.html:30
-#: templates/emr/identity/identity_list.html:192
+#: templates/emr/identity/identity_list.html:198
 msgid "View"
 msgstr "مشاهده"
 
@@ -1386,196 +1394,202 @@ msgstr "هیچ رویدادی یافت نشد."
 msgid "Patient ID:"
 msgstr "شماره پرونده:"
 
-#: templates/emr/identity/identity_form.html:27
+#: templates/emr/identity/identity_form.html:25
 #: templates/emr/oneglance/oneglance.html:62
 #: templates/includes/my-navigation-patients.html:44
 msgid "SSN:"
 msgstr "شماره ملی:"
 
-#: templates/emr/identity/identity_form.html:32
+#: templates/emr/identity/identity_form.html:28
 msgid "First Name:"
 msgstr "نام:"
 
-#: templates/emr/identity/identity_form.html:37
+#: templates/emr/identity/identity_form.html:31
 msgid "Last Name:"
 msgstr "نام خانوادگی:"
 
-#: templates/emr/identity/identity_form.html:42
+#: templates/emr/identity/identity_form.html:36
 #: templates/emr/oneglance/oneglance.html:29
 msgid "Gender:"
 msgstr "جنسیت:"
 
-#: templates/emr/identity/identity_form.html:47
+#: templates/emr/identity/identity_form.html:39
 msgid "Birthday (Jalali):"
 msgstr "تاریخ تولد:"
 
-#: templates/emr/identity/identity_form.html:52
+#: templates/emr/identity/identity_form.html:42
 #: templates/emr/oneglance/oneglance.html:35
 msgid "Marital Status:"
 msgstr "وضعیت تاهل:"
 
-#: templates/emr/identity/identity_form.html:57
+#: templates/emr/identity/identity_form.html:45
 #: templates/emr/oneglance/oneglance.html:76
 msgid "Language:"
 msgstr "زبان مادری:"
 
-#: templates/emr/identity/identity_form.html:62
+#: templates/emr/identity/identity_form.html:50
 #: templates/emr/oneglance/oneglance.html:39
 msgid "Education Level:"
 msgstr "سطح تحصیلات:"
 
-#: templates/emr/identity/identity_form.html:67
+#: templates/emr/identity/identity_form.html:53
 #: templates/emr/oneglance/oneglance.html:65
 msgid "Occupation:"
 msgstr "شغل:"
 
-#: templates/emr/identity/identity_form.html:72
+#: templates/emr/identity/identity_form.html:56
 msgid "Blood Group:"
 msgstr "گروه خونی:"
 
-#: templates/emr/identity/identity_form.html:77
+#: templates/emr/identity/identity_form.html:59
 #: templates/emr/oneglance/oneglance.html:51
 msgid "Dominant Hand:"
 msgstr "دست غالب:"
 
-#: templates/emr/identity/identity_form.html:82
+#: templates/emr/identity/identity_form.html:64
 msgid "Height (cm):"
 msgstr "قد:"
 
-#: templates/emr/identity/identity_form.html:87
+#: templates/emr/identity/identity_form.html:67
 msgid "Weight (kg):"
 msgstr "وزن:"
 
-#: templates/emr/identity/identity_form.html:92
+#: templates/emr/identity/identity_form.html:70
 msgid "Insurances:"
 msgstr "بیمه:"
 
-#: templates/emr/identity/identity_form.html:100
+#: templates/emr/identity/identity_form.html:76
 msgid "Ethnicities:"
 msgstr "قومیت:"
 
-#: templates/emr/identity/identity_form.html:107
+#: templates/emr/identity/identity_form.html:83
 msgid "Payment Label:"
 msgstr "روش پرداخت:"
 
-#: templates/emr/identity/identity_form.html:112
+#: templates/emr/identity/identity_form.html:86
 msgid "Phone:"
 msgstr "شماره تماس:"
 
-#: templates/emr/identity/identity_form.html:117
+#: templates/emr/identity/identity_form.html:89
 msgid "Messenger #1:"
 msgstr "شماره واتساپ:"
 
-#: templates/emr/identity/identity_form.html:122
+#: templates/emr/identity/identity_form.html:92
 msgid "Messenger #2:"
 msgstr "شماره ایتا:"
 
-#: templates/emr/identity/identity_form.html:127
+#: templates/emr/identity/identity_form.html:97
 #: templates/emr/oneglance/oneglance.html:55
 msgid "Address:"
 msgstr "آدرس:"
 
-#: templates/emr/identity/identity_form.html:132
+#: templates/emr/identity/identity_form.html:100
 msgid "Secretary Notes:"
 msgstr "یادداشت های منشی:"
 
-#: templates/emr/identity/identity_form.html:137
-msgid "Secretary Tags (JSON):"
-msgstr "تگ های منشی:"
+#: templates/emr/identity/identity_form.html:103
+#| msgid "Secretary Tags"
+msgid "Secretary Tags:"
+msgstr "تگ های منشی"
 
-#: templates/emr/identity/identity_form.html:189
+#: templates/emr/identity/identity_form.html:113
+#| msgid "Start Editing"
+msgid "Start Edit"
+msgstr "ویرایش"
+
+#: templates/emr/identity/identity_form.html:155
 #: templates/emr/identity/identity_list.html:179
 msgid "Social Security Number"
 msgstr "شماره ملی"
 
-#: templates/emr/identity/identity_form.html:200
+#: templates/emr/identity/identity_form.html:166
 #: templates/emr/identity/identity_list.html:55
 #: templates/emr/identity/identity_list.html:177
 msgid "First Name"
 msgstr "نام"
 
-#: templates/emr/identity/identity_form.html:212
+#: templates/emr/identity/identity_form.html:178
 #: templates/emr/identity/identity_list.html:68
 #: templates/emr/identity/identity_list.html:178
 msgid "Last Name"
 msgstr "نام خانوادگی"
 
-#: templates/emr/identity/identity_form.html:223
+#: templates/emr/identity/identity_form.html:189
 #: templates/emr/identity/identity_list.html:98
 msgid "Gender"
 msgstr "جنسیت"
 
-#: templates/emr/identity/identity_form.html:235
+#: templates/emr/identity/identity_form.html:201
 msgid "Birthday (Jalali)"
 msgstr "تاریخ تولد"
 
-#: templates/emr/identity/identity_form.html:240
+#: templates/emr/identity/identity_form.html:206
 msgid "Select your birth date"
 msgstr "تاریخ تولد را انتخاب کنید"
 
-#: templates/emr/identity/identity_form.html:250
+#: templates/emr/identity/identity_form.html:216
 msgid "Marital Status"
 msgstr "وضعیت تاهل"
 
-#: templates/emr/identity/identity_form.html:261
+#: templates/emr/identity/identity_form.html:227
 msgid "Mother Language"
 msgstr "زبان مادری"
 
-#: templates/emr/identity/identity_form.html:283
+#: templates/emr/identity/identity_form.html:249
 msgid "Occupation"
 msgstr "شغل"
 
-#: templates/emr/identity/identity_form.html:303
+#: templates/emr/identity/identity_form.html:269
 msgid "Blood Group"
 msgstr "گروه خونی"
 
-#: templates/emr/identity/identity_form.html:314
+#: templates/emr/identity/identity_form.html:280
 #: templates/emr/identity/identity_list.html:119
 msgid "Dominant Hand"
 msgstr "دست غالب"
 
-#: templates/emr/identity/identity_form.html:325
+#: templates/emr/identity/identity_form.html:291
 msgid "Height (cm)"
 msgstr "قد"
 
-#: templates/emr/identity/identity_form.html:336
+#: templates/emr/identity/identity_form.html:302
 msgid "Weight (kg)"
 msgstr "وزن"
 
-#: templates/emr/identity/identity_form.html:347
+#: templates/emr/identity/identity_form.html:313
 msgid "Insurances"
 msgstr "بیمه"
 
-#: templates/emr/identity/identity_form.html:356
+#: templates/emr/identity/identity_form.html:322
 msgid "Ethnicities"
 msgstr "قومیت"
 
-#: templates/emr/identity/identity_form.html:364
+#: templates/emr/identity/identity_form.html:330
 msgid "Payment Label"
 msgstr "روش پرداخت"
 
-#: templates/emr/identity/identity_form.html:375
+#: templates/emr/identity/identity_form.html:341
 msgid "Phone No for Call"
 msgstr "شماره تماس"
 
-#: templates/emr/identity/identity_form.html:386
+#: templates/emr/identity/identity_form.html:352
 msgid "Phone No for Messenger 1"
 msgstr "شماره واتساپ"
 
-#: templates/emr/identity/identity_form.html:397
+#: templates/emr/identity/identity_form.html:363
 msgid "Phone No for Messenger 2"
 msgstr "شماره ایتا"
 
-#: templates/emr/identity/identity_form.html:419
+#: templates/emr/identity/identity_form.html:385
 msgid "Secretary Notes"
 msgstr "یادداشت های منشی"
 
-#: templates/emr/identity/identity_form.html:430
-#: templates/emr/identity/identity_form.html:446
+#: templates/emr/identity/identity_form.html:396
+#: templates/emr/identity/identity_form.html:412
 msgid "Secretary Tags"
 msgstr "تگ های منشی"
 
-#: templates/emr/identity/identity_form.html:464
+#: templates/emr/identity/identity_form.html:430
 msgid "Save and Add Another"
 msgstr "ذخیره و ایجاد یک بیمار جدید"
 
@@ -1614,53 +1628,58 @@ msgstr "جستجو"
 msgid "Reference NO"
 msgstr "شمارۀ پرونده"
 
-#: templates/emr/identity/identity_list.html:193
+#: templates/emr/identity/identity_list.html:195
+#: templates/emr/identity/identity_list.html:197
+msgid "Agreement"
+msgstr ""
+
+#: templates/emr/identity/identity_list.html:199
 msgid "Delete"
 msgstr "حذف"
 
-#: templates/emr/identity/identity_list.html:212
+#: templates/emr/identity/identity_list.html:218
 #: templates/emr/rtms/rtms_overview.html:122
 msgid "Rows per page:"
 msgstr "تعداد در صفحه:"
 
-#: templates/emr/identity/identity_list.html:232
+#: templates/emr/identity/identity_list.html:238
 #: templates/emr/rtms/rtms_overview.html:141
 msgid "Page navigation"
 msgstr "جابجایی در صفحات"
 
-#: templates/emr/identity/identity_list.html:240
-#: templates/emr/identity/identity_list.html:254
+#: templates/emr/identity/identity_list.html:246
+#: templates/emr/identity/identity_list.html:260
 #: templates/emr/rtms/rtms_overview.html:149
 #: templates/emr/rtms/rtms_overview.html:163
 msgid "First"
 msgstr "اولین صفحه"
 
-#: templates/emr/identity/identity_list.html:248
-#: templates/emr/identity/identity_list.html:259
+#: templates/emr/identity/identity_list.html:254
+#: templates/emr/identity/identity_list.html:265
 #: templates/emr/rtms/rtms_overview.html:157
 #: templates/emr/rtms/rtms_overview.html:168
 msgid "Previous"
 msgstr "قبلی"
 
-#: templates/emr/identity/identity_list.html:267
+#: templates/emr/identity/identity_list.html:273
 #: templates/emr/rtms/rtms_overview.html:176
 msgid "Page"
 msgstr "صفحه"
 
-#: templates/emr/identity/identity_list.html:267
+#: templates/emr/identity/identity_list.html:273
 #: templates/emr/rtms/rtms_overview.html:176
 msgid "of"
 msgstr "از"
 
-#: templates/emr/identity/identity_list.html:277
-#: templates/emr/identity/identity_list.html:291
+#: templates/emr/identity/identity_list.html:283
+#: templates/emr/identity/identity_list.html:297
 #: templates/emr/rtms/rtms_overview.html:186
 #: templates/emr/rtms/rtms_overview.html:200
 msgid "Next"
 msgstr "بعدی"
 
-#: templates/emr/identity/identity_list.html:285
-#: templates/emr/identity/identity_list.html:296
+#: templates/emr/identity/identity_list.html:291
+#: templates/emr/identity/identity_list.html:302
 #: templates/emr/rtms/rtms_overview.html:194
 #: templates/emr/rtms/rtms_overview.html:205
 msgid "Last"
@@ -1710,20 +1729,7 @@ msgstr "پکیج خدمات:"
 msgid "Visit History"
 msgstr "ویزیت‌ها"
 
-#: templates/emr/oneglance/oneglance.html:97
-msgid "Differential Diagnoses"
-msgstr ""
-
-#: templates/emr/oneglance/oneglance.html:102
-#: templates/emr/oneglance/oneglance.html:112
-msgid "None listed."
-msgstr "موردی موجود نیست"
-
-#: templates/emr/oneglance/oneglance.html:107
-msgid "Comorbidities"
-msgstr ""
-
-#: templates/emr/oneglance/oneglance.html:120
+#: templates/emr/oneglance/oneglance.html:119
 msgid "No patient selected. Please search and select a patient first."
 msgstr "شما بیمار را انتخاب نکرده اید، لطفا ابتدا بیمار مد نظر را انتخاب کنید."
 
@@ -1792,11 +1798,37 @@ msgstr "هیچ رویدادی یافت نشد."
 msgid "No rTMS records found."
 msgstr "هیچ گزارشی از rTMS یافت نشد."
 
+#: templates/includes/component-promo.html:15
+msgid "OFF First visit"
+msgstr "تخفیف ویزیت اول"
+
+#: templates/includes/component-promo.html:23
+msgid "Use the coupon code"
+msgstr ""
+
+#: templates/includes/component-promo.html:23
+msgid " during checkout."
+msgstr ""
+
+#: templates/includes/component-promo.html:26
+msgid "Speed Up your digital journey with our affordable subscription"
+msgstr ""
+
+#: templates/includes/component-promo.html:31
+msgid "Browse Products"
+msgstr ""
+
+#: templates/includes/component-promo.html:32
+#, fuzzy
+#| msgid "Description"
+msgid "Subscription Plans"
+msgstr "راهنما"
+
 #: templates/includes/document_box.html:11
 msgid "Generate File"
 msgstr "افزودن"
 
-#: templates/includes/document_box.html:33
+#: templates/includes/document_box.html:41
 #, fuzzy
 #| msgid "No events found."
 msgid "No documents found."
@@ -1811,12 +1843,19 @@ msgid "About Us"
 msgstr "درباره ما"
 
 #: templates/includes/footer.html:12 templates/includes/my-sidebar.html:125
+#: templates/pages/home2.html:267
 msgid "Blog"
 msgstr "مطالب سایت"
 
 #: templates/includes/footer.html:15
 msgid "Docs"
 msgstr "مقالات علمی"
+
+#: templates/includes/footer2.html:96
+#: templates/layouts/base-dashboard-patients.html:77
+#: templates/layouts/my-base-dashboard.html:93
+msgid "Designed by Dr. Ghavimehr"
+msgstr "طراحی شده توسط دکتر قوی‌مهر"
 
 #: templates/includes/image-input.html:18
 #: templates/includes/product-image-input.html:17
@@ -1950,46 +1989,58 @@ msgid "Document Panel"
 msgstr "پنل مدارک"
 
 #: templates/layouts/base-dashboard-patients.html:77
-#: templates/layouts/my-base-dashboard.html:77
 msgid "Dr Arzaghi's Clinic"
 msgstr "کلینیک دکتر ارزاقی"
-
-#: templates/layouts/base-dashboard-patients.html:77
-#: templates/layouts/my-base-dashboard.html:77
-msgid "Designed by Dr. Ghavimehr"
-msgstr "طراحی شده توسط دکتر قوی‌مهر"
 
 #: templates/layouts/my-base-dashboard.html:14
 msgid "Electronic Medical Record"
 msgstr "پرونده الکترونیک"
 
-#: templates/pages/home2.html:154
+#: templates/pages/home2.html:163
 msgid "Log Out"
 msgstr "خروج"
 
-#: templates/pages/home2.html:156
+#: templates/pages/home2.html:165
 msgid "Log In"
 msgstr "ورود"
 
-#: templates/pages/home2.html:178
+#: templates/pages/home2.html:187
 msgid "Wellcome to Electronic Medical Record sever of"
 msgstr "به سامانه پرونده الکترونیک"
 
-#: templates/pages/home2.html:178
+#: templates/pages/home2.html:187
 msgid "!"
 msgstr " خوش آمدید"
 
-#: templates/pages/home2.html:192
+#: templates/pages/home2.html:201
 msgid "My Medical Records"
 msgstr "پرونده الکترونیک"
 
-#: templates/pages/home2.html:199
+#: templates/pages/home2.html:208
 msgid "Schedule an Appointment"
 msgstr "رزرو وقت ویزیت"
 
-#: templates/pages/home2.html:271
+#: templates/pages/home2.html:256
+msgid "Services"
+msgstr "خدمات ما"
+
+#: templates/pages/home2.html:259
+msgid "Check out our latest services"
+msgstr ""
+
+#: templates/pages/home2.html:269
+msgid "Check out our latest blog posts"
+msgstr ""
+
+#: templates/pages/home2.html:282
 msgid "Free Online Screening Service"
 msgstr "خدمات غربالگری آنلاین رایگان"
+
+#~ msgid "Secretary Tags (JSON):"
+#~ msgstr "تگ های منشی:"
+
+#~ msgid "None listed."
+#~ msgstr "موردی موجود نیست"
 
 #~ msgid "Documents"
 #~ msgstr "مدارک"
