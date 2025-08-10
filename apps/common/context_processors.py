@@ -4,11 +4,15 @@ from datetime import datetime
 
 
 
+# def profile_context(request):
+#     is_company = False
+#     if request.user.is_authenticated:
+#         is_company = Profile.objects.filter(user=request.user, role=RoleChoices.COMPANY).exists()
+#     return {'is_company': is_company}
+
 def profile_context(request):
-    is_company = False
-    if request.user.is_authenticated:
-        is_company = Profile.objects.filter(user=request.user, role=RoleChoices.COMPANY).exists()
-    return {'is_company': is_company}
+    return {'is_company': True}
+
 
 
 def version_context(request):

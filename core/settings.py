@@ -225,32 +225,32 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    #my important middleware
+    # 1) Your custom RealIP/Domain middleware
     "apps.common.middlewares.RealIPMiddleware",
     "core.dynamic_domain.DynamicDomainMiddleware",
 
-
+    # 2) Security & static-file helpers
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+
+    # 3) Sessions → Locale → CORS → Common
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
+
+    # 4) CSRF → Auth → Messages → clickjacking
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'django.middleware.locale.LocaleMiddleware',
 
-    # Util
+    # 5) Utilities & third-party
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-
-    # allauth 
     "allauth.account.middleware.AccountMiddleware",
 
-    # my middlewares
+    # 6) Your final custom middleware
     "apps.dashboard.log_middleware.APILoggingMiddleware",
-
-
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True

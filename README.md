@@ -1,413 +1,114 @@
-# [Open-Source App Generator](https://app-generator.dev/)
-
-[Open-Source Tools](https://app-generator.dev/tools/django-generator) for solo-devs, students and companies - Generate [Digital Products](https://app-generator.dev/product/),
-Update legacy code by chat, Inject new modules, Software Auto-healing, AI, Deployment automation (any provider), Docker, K8s.
+EMR – Electronic Medical Records System
+Based on [AppGenerator](https://app-generator.dev/)
 
-- 👉 `LIVE Demo`: https://app-generator.dev
-- 👉 Get [Support](https://app-generator.dev/ticket/create/) via email and `Discord`       
 
-<br />
+This project transforms a generic web dashboard template into a functional Electronic Medical Records (EMR) system. It is designed to replace inefficient paper-based patient charts (notably common in Iran’s healthcare) with digital records. By digitizing medical data, it addresses issues like illegible handwriting, missing files, and high paper costs . The EMR stores structured patient data (demographics, vitals, medical history, lab results, etc.) and standardizes it using modern healthcare data standards, enabling better analytics. The motivation is to streamline record-keeping, improve data quality, and support advanced research and AI-driven analyses of patient data in a healthcare context.
 
-## Features 
+Features
+ • Structured Patient Records: Store detailed, structured data for each patient (e.g. personal info, vitals, diagnoses, treatment notes) instead of paper charts.
+ • Standardized Metrics: Convert qualitative health information into quantitative metrics. For example, it can compute clinical scores (BMI, risk scores, etc.) and encode conditions using accepted medical standards (ICD codes, questionnaire scores), enabling consistent reporting.
+ • Data Analytics & AI/ML Support: The backend includes Python data science libraries (pandas, etc.), so records can be easily exported or analyzed with AI/ML tools. This makes it suitable for healthcare analytics and research.
+ • Web-Based Dashboard: A responsive HTML/JavaScript frontend (using React/webpack and Tailwind CSS) provides a user-friendly interface for clinicians to enter and view records.
+ • Multi-language Support: The system includes localization (e.g. Persian/Farsi support) to accommodate local language needs.
+ • Authentication & Security: Uses Django’s authentication (via django-allauth) and best practices (HTTPS-ready, user sessions, etc.) to protect patient data.
+ • Modular Design: Built with Django and REST APIs, making it extensible (e.g. adding new medical modules or analyses).
 
-- [One-Click Sign IN](https://app-generator.dev/users/signin/): `GitHub`
-- [Marketplace](https://app-generator.dev/product/): mirrored from [AppSeed](https://appseed.us)
-- Generator (CLI & Web Versions)
-  - MVC: Django, NodeJS, Flask, FastAPI
-  - Full-Stack: React, Vue with any API Backend
-  - API [ manage visually the data ]
-  - eCommerce
-  - Website
-- Deployment options: Render, AppSeed Cloud Digital Ocean, User Provider (AWS, DO, Azure)
-- [Developer Tools](https://app-generator.dev/docs/developer-tools.html)
-  - [Django App Generator](https://app-generator.dev/tools/django-generator)
-  - [CSV Processor](https://app-generator.dev/tools/csv-processor)
-  - [DataBase Migrator](https://app-generator.dev/tools/db-migrator)
-  - [DataBase Processor](https://app-generator.dev/tools/db-processor)
-  - [Dynamic Django](https://app-generator.dev/docs/developer-tools/dynamic-django/index.html) Tool (commercial)
-  - [CSV to DB Table](https://app-generator.dev/docs/developer-tools/csv-to-table.html)
-  - [CSV to API](https://app-generator.dev/docs/developer-tools/csv-to-api.html)
-  - [CSV to DataTable](https://app-generator.dev/docs/developer-tools/csv-to-datatable.html)
-- Sections:
-  - [Products](https://app-generator.dev/product/)
-  - [Blog](https://app-generator.dev/blog/)
-  - [Docs](https://app-generator.dev/docs/)
-  - [AI Agent](https://app-generator.dev/ai-processor/)
-  - `Tools/`
-  - `Deploy/`
-  - [Support](https://app-generator.dev/support/)
-  - [Custom Development](https://app-generator.dev/custom-development/)
+These capabilities replace paper workflows, reducing waste (e.g. printing costs) and errors , and lay groundwork for future AI-enhanced tools.
 
-<br />
+Technologies Used
+ • Backend: Python 3.12 with Django 4.2 (https://www.djangoproject.com/) and Django REST Framework for API services. Key libraries include Django-AllAuth (authentication), Celery with Redis for background tasks, Gunicorn as WSGI server, and Waitress/uvicorn support  .
+ • Database: PostgreSQL (primary) and MySQL support (via mysqlclient, mysql-connector-python) for data storage (configured through environment). Database migrations use Django’s ORM.
+ • Frontend: JavaScript, HTML, and CSS. The UI is built with React (managed via webpack) and styled with Tailwind CSS. Frontend assets are compiled/bundled by webpack/yarn (see package.json, webpack.config.js, tailwind.config.js).
+ • Dev Tools: Docker for containerization (app image based on nikolaik/python-nodejs:python3.12-nodejs22-slim ), docker-compose for orchestration (services for Django, Celery, Redis, Postgres). Babel and Webpack for transpiling, and ESLint/Prettier for code style (black, etc.).
+ • Languages: The codebase is primarily in Python (≈48%) with HTML and JavaScript for front-end .
+ • Infrastructure: Nginx configuration (in nginx/), Gunicorn configuration (gunicorn-cfg.py), and other production scripts (Dockerfiles, render.yaml).
+ • Documentation: Sphinx is used for project docs (see docs/), supporting Markdown and reStructuredText.
 
-## Stack
+This mix of tools (Python/Django backend with a Node.js-based frontend build) leverages modern web and data technologies to deliver a full-stack EMR solution.
 
-- Python/Django
-- React
-- Docker
-- CI/CD - LIVE Deploy on Digital Ocean
+Installation and Setup Instructions
+ 1. Clone the repository:
 
-<br />
+git clone https://github.com/ghavimehr/emr.git
+cd emr
+2. Prepare environment:
+ • Copy the sample environment file and fill in secrets (database credentials, Django secret key, etc.):
 
-## Manual Build
+cp env.sample .env
 
-> Step #1 - Download the code
 
-```bash
-$ git clone https://github.com/app-generator/app-generator.git
-$ cd app-generator
-```
+ • Set values for DB_NAME, DB_USERNAME, DB_PASS, DJANGO_SECRET_KEY, etc., in .env.
 
-> Step #2 - Install modules
+ 3. Install backend dependencies:
+Ensure you have Python 3.12+ and pip installed. In the project root:
 
-```bash
-$ virtualenv env
-$ source env/bin/activate
-$ pip install -r requirements.txt
-```
 
-> Step #3 - Set Up Database
 
-```bash
-$ python manage.py makemigrations
-$ python manage.py migrate
-```
+python3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
 
-> Step #4 - Create the ENV file
+This installs Django, DRF, Celery, Redis client, Pandas, and all Python packages listed in requirements.txt .
 
-The `.env` can be created from the `env.sample` file, provided in the root of the project
+ 4. Install frontend dependencies:
+Ensure you have Node.js (>= v16) and Yarn or npm. Then in the project root:
 
-```bash
-$ cp env.sample .env
-```
+yarn install    # or: npm install
+yarn build      # builds the frontend assets
 
-> Step #5 - Compile UI (that uses Tailwind)
+(Yarn commands rely on the package.json, webpack.config.js, and tailwind.config.js provided.)
 
-```bash
-$ pnpm i
-$ pnpm run build
-```
+ 5. Initialize the database:
+Create and migrate the database:
 
-> Step #5 - Execute `collectstatic` for Django statics
+python manage.py makemigrations
+python manage.py migrate
 
-```bash
-$ python manage.py collectstatic
-$ python manage.py migrate
-```
+Optionally, create a superuser:
 
-> Start the APP
+python manage.py createsuperuser
 
-```bash
-$ python manage.py createsuperuser # create the admin
-$ python manage.py runserver       # start the project
-```
 
-At this point, the app runs at `http://127.0.0.1:8000/`.
+ 6. Collect static files:
 
-<br />
+python manage.py collectstatic --noinput
 
-## Compile [Documentation](https://app-generator.dev/docs/index.html)
 
-The Documentation being generated by [](https://www.sphinx-doc.org/en/master/), the compilation requires a linux box
+ 7. Run the development server:
 
-```bash
-$ cd docs && rm -rf build && make html
-# Or via a while loop
-$ cd docs ; while true ; do rm -rf build/ ; make html ; sleep 10 ; done
-```
+python manage.py runserver
 
-The output is saved on `docs/build` and rendered on `/docs/` URI
+This starts Django’s local server (by default on http://127.0.0.1:8000). You can now log in to the admin or access the app UI.
 
-<br />
+Required packages/software: Python 3.12, Node.js (with Yarn), PostgreSQL (or another DB), Redis (for Celery), and Docker (optional for containerized setup). All Python dependencies are listed in requirements.txt , and Node dependencies in package.json.
 
-## CLI Interface
+For a one-step setup, use Docker Compose (see Deployment section below).
 
-All CLI tools are listed by `dev_tools` subcommand:
+Deployment
+ • Docker: The project includes Dockerfiles (Dockerfile.app, Dockerfile.celery, etc.) and docker-compose.yml for production. In Docker mode, it builds a container for the Django app, a Celery worker, Redis, and Postgres. To deploy via Docker:
 
-`$ python manage.py dev_tools`
+docker-compose up -d --build
 
-Below sections explains each dev_tool added to the codebase - If somethings is not working in your environment, please contact [support](https://appseed.us/support/).
+This builds images and runs all services (app on port 5005, celery on 5007, docs on 5006). Postgres is set up as appseed-db (with credentials from .env), and Redis as appseed-redis  .
 
-### Generate Code
+ • Cloud/Server: For production, a Linux server with Docker or Python support is needed. Ensure ports (e.g., 5005) are open or proxied via Nginx. Configure environment variables securely (in a real deployment, use protected secrets). The render.yaml file suggests deployment on Render or similar platforms.
+ • Additional Services: A production deployment requires a managed PostgreSQL database (or equivalent) and Redis. SSL certificates for HTTPS should be added (using Nginx or a cloud load balancer).
 
-> For now, only Django code is supported.
+Project Status
 
-```bash
-$ python manage.py tool_generator -i # Print HELP 
-$ python manage.py tool_generator -f sources/input-template-volt.json
-```
+Warning: This project is under active development. The current version (v0.0.63) is a proof of concept. Key functionality (data entry forms, analytics tools) may be incomplete. Additional setup is required before it can be production-ready:
+ • Migrations & Data: Database schemas may still evolve.
+ • Dependencies: You may need to install extra packages as features expand.
+ • Testing: Rigorous testing (unit tests, user testing) is ongoing.
+ • Configuration: The developer must adjust environment settings (.env), update Docker configs, and secure the app for deployment.
 
-The generated code is saved in `generated_code` DIR. Open the sources using your favorite editor and start the project. The easier way is to use Docker:
+Developers should treat this as a work-in-progress. Contributions and improvements are encouraged to reach a stable release.
 
-<br />
+Contributing
 
-### Generate Project Template
+Contributions are welcome! If you have ideas (new features, bug fixes), feel free to fork the repo and submit a pull request. Please ensure code follows the existing style and include tests where applicable. You can also open issues on GitHub to report bugs or request enhancements.
 
-> Using this tool, we can generate a JSON template used later by the generator
-
-```bash
-$ python manage.py tool_generator_interactive -i # Print HELP 
-$ python manage.py tool_generator_interactive    # Generate JSON File  
-...
-# (Truncated Output)
-$ python manage.py tool_generator_interactive
-
-[?] Project Friendly Name: Some Django project
-[?] The Backend Framework:                                                                                                               
- > django
-   flask (soon)
-   nodejs (soon)
-
-[?] The UI Kit:                                                                                                                          
- > datta
-   volt
-   soft-dashboard
-
-[?] The Database:                                                                                                                        
- > sqlite
-   mysql
-   pgsql
-...
-# (Truncated Output)
-...
-> File saved = sources\Nt5QWHGI_django_template.json
-> HOW to generate code:
-    |-- python manage.py tool_generator -f sources/Nt5QWHGI_django_template.json   
-```
-
-By running the sugegsted command, we should be able to generate a valid Django Project.
-
-<br />
-
-### Upload to GitHub
-
-> Note: For having SUCCESS on this operation, a `GITHUB_KEY` is required in `.env` - read [more](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
-
-```bash
-$ python manage.py tool_github_uploader -i # Print HELP 
-$ python manage.py tool_github_uploader -d generated_code/GENERATED_PROJECT -k GITHUB_KEY 
-```
-
-Once the operation is finished, the generated project should be saved under the account associated with the `GITHUB_KEY`.
-
-<br />
-
-### Inspect DB (sqlite, MySql, PgSql)
-
-```bash
-# SQLite scan 
-$ python manage.py tool_db_processor -f media/tools/db_inspect/db_sqlite.json
-# OR
-# MySql scan
-$ python manage.py tool_db_processor -f media/tools/db_inspect/db_mysql.json
-...
-# (Truncated Output)
-> Processing media/tools/db_inspect/db_sqlite.json
-    |-- type      : db
-    |-- DB driver : SQLITE
-    |-- DB name   : media/tools/common/sample.sqlite3
-    |-- DB host   : None
-    |-- DB port   : None
-    |-- DB user   : None
-    |-- DB pass   : None
-
- > Dump data for [api_user_user]
- > Dump data for [api_authentication_activesession]
- > Dump data for [auth_group]
- > Dump data for [api_user_user_groups]
- > Dump data for [django_content_type]
- > Dump data for [auth_permission]
- > Dump data for [api_user_user_user_permissions]
- > Dump data for [auth_group_permissions]
- > Dump data for [django_admin_log]
- > Dump data for [django_migrations]
- > Dump data for [django_session]
-```
-
-The SQL dump is done in the `tmp` DIRECTORY
-
-```bash
-ROOT
-  |-- tmp
-      |-- 05_27_58_SQLITE.sql
-      |-- 05_28_04_SQLITE_api_user_user 
-```
-
-<br />
-
-### Migrate DB
-
-> Note: the feature works with SQLite, MySql and PostgreSQL.
-
-The source and target DB credentials should be provided in JSON format. Here are the provided samples
-
-- [SQLite Sample](https://github.com/app-generator/app-generator/blob/main/media/tools/db_migrator/db_source_sqlite.json)
-- [MySql Sample](https://github.com/app-generator/app-generator/blob/main/media/tools/db_migrator/db_dest.json)
-
-> How to use it:
-
-```bash
-$ python manage.py tool_db_migrator -s DB_SOURCE.json -t DB_TARGET.json           # Perform Checks
-$ python manage.py tool_db_migrator -s DB_SOURCE.json -t DB_TARGET.json --migrate # Migrate the data 
-```
-
-<br />
-
-### CSV processor
-
-Authenticated users can process CSV files and apply transformers.
-
-> DEMO: https://app-generator.dev/tools/csv-processor/
-
-<br />
-
-### Inspect CSV Files
-
-```bash
-$ python manage.py tool_inspect_source -f media/tools/csv/csv_inspect.json    # Truncated output
-$ python manage.py tool_inspect_source -f media/tools/csv/csv_inspect.json -k # Print all rows 
-# OR for distant CSV files
-$ python manage.py tool_inspect_source -f media/tools/csv/csv_inspect_distant.json
-...
-# (Truncated Output)
- > Processing media/tools/csv/csv_inspect.json
-       |-- file: media/tools/csv/titanic.csv
-       |-- type: csv
-{'PassengerId': {'type': 'int64'}, 'Survived': {'type': 'int64'}, 'Pclass': {'type': 'int64'}, 'Name': {'type': 'object'}, 'Sex': {'type': 'object'}, 'Age': {'type': 'float64'}, 'SibSp': {'type': 'int64'}, 'Parch': {'type': 'int64'}, 'Ticket': {'type': 'object'}, 'Fare': {'type': 'float64'}, 'Cabin': {'type': 'object'}, 'Embarked': {'type': 'object'}}
-[1] - PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Cabin,Embarked
-[2] - 1,0,3,"Braund, Mr. Owen Harris",male,22,1,0,A/5 21171,7.25,,S
-[3] - 2,1,1,"Cumings, Mrs. John Bradley (Florence Briggs Thayer)",female,38,1,0,PC 17599,71.2833,C85,C
-[4] - 3,1,3,"Heikkinen, Miss. Laina",female,26,0,0,STON/O2. 3101282,7.925,,S
-[5] - 4,1,1,"Futrelle, Mrs. Jacques Heath (Lily May Peel)",female,35,1,0,113803,53.1,C123,S
-[6] - 5,0,3,"Allen, Mr. William Henry",male,35,0,0,373450,8.05,,S
-[7] - 6,0,3,"Moran, Mr. James",male,,0,0,330877,8.4583,,Q
-[8] - 7,0,1,"McCarthy, Mr. Timothy J",male,54,0,0,17463,51.8625,E46,S
-[9] - 8,0,3,"Palsson, Master. Gosta Leonard",male,2,3,1,349909,21.075,,S
-[10] - 9,1,3,"Johnson, Mrs. Oscar W (Elisabeth Vilhelmina Berg)",female,27,0,2,347742,11.1333,,S
-...
-```
-
-<br />
-
-### List available commands
-
-```bash
-$ python manage.py help 
-# (Truncated Output)
-Type 'manage.py help <subcommand>' for help on a specific subcommand.
-Available subcommands:
-...
-[cli]
-    help_print_apps
-    help_print_cfg
-    help_print_models
-...
-```
-
-<br />
-
-### List Registered Apps
-
-```bash
-$ python manage.py help_print_apps
-# (Truncated Output)
- APP -> Webpack Loader
- APP -> Administration
- APP -> Authentication and Authorization
- ...
-```
-
-<br />
-
-### List Registered Models
-
-```bash
-$ python manage.py help_print_models
-# (Truncated Output)
-APP -> Github
-APP -> Google
-APP -> Django_Quill
-APP -> Celery Results
-        |--> django_celery_results.models.TaskResult
-          |--> id: AutoField
-          |--> task_id: CharField
-          |--> periodic_task_name: CharField
-          |--> task_name: CharField
-          |--> task_args: TextField
-          |--> task_kwargs: TextField
-          |--> status: CharField
-          |--> worker: CharField
-          |--> content_type: CharField
-          |--> content_encoding: CharField
-          |--> result: TextField
-          |--> date_created: DateTimeField
-          |--> date_done: DateTimeField
-          |--> traceback: TextField
-          |--> meta: TextField
-        |--> django_celery_results.models.ChordCounter
-          |--> id: AutoField
-          |--> group_id: CharField
-          |--> sub_tasks: TextField
-          |--> count: PositiveIntegerField
-        |--> django_celery_results.models.GroupResult
-          |--> id: AutoField
-          |--> group_id: CharField
-          |--> date_created: DateTimeField
-          |--> date_done: DateTimeField
-          |--> content_type: CharField
-          |--> content_encoding: CharField
-          |--> result: TextField
-```
-
-<br />
-
-## Celery (async tasks)
-
-- Make sure you have a Redis Server running: `redis://localhost:6379`
-  - `$ redis-cli` and type `ping`
-- In the base directory inside `tasks_scripts` folder you need to write your scripts file.
-- Run the celery command from the CLI.
-
-```bash
-$ export DJANGO_SETTINGS_MODULE="core.settings"  
-$ celery -A core worker -l info -B
-```
-
-> Executed Tasks, [tasks_scripts](https://github.com/app-generator/appseed-v2/tree/main/tasks_scripts) DIR as defined in the [EXEC Schedule](https://github.com/app-generator/appseed-v2/blob/main/core/celery.py)
-
-- [Critical Tasks](https://github.com/app-generator/appseed-v2/blob/main/tasks_scripts/critical/critical_task.py) - executed every 5min
-- [Hourly Tasks](https://github.com/app-generator/appseed-v2/blob/main/tasks_scripts/hourly/hourly_task.py)
-- [Daily Tasks](https://github.com/app-generator/appseed-v2/blob/main/tasks_scripts/daily/daily_task.py)
-- [Weekly Tasks](https://github.com/app-generator/appseed-v2/blob/main/tasks_scripts/weekly/weekly_task.py)
-- [Monthly Tasks](https://github.com/app-generator/appseed-v2/blob/main/tasks_scripts/monthly/monthly_task.py)
-
-The output for each task can be found in the [LOGS](https://github.com/app-generator/appseed-v2/tree/main/tasks_scripts/logs) Directory.
-
-Here is a LOG sample generated by a critical task that runs at every 5min:
-
-- [tasks_scripts/logs/2024-05-20-16-30-critical_task.log](https://github.com/app-generator/appseed-v2/blob/main/tasks_scripts/logs/2024-05-20-16-30-critical_task.log)
-
-<br />
-
-## Team
-
-> **Core**
-
-- [Adrian](https://github.com/Sm0keDev) - Founder, Tech Lead, Automation, Design Patterns
-- [Alex Paduraru](https://github.com/alexandru-paduraru) - Business Advisor & Investor
-- [Valentin Raduti](https://github.com/deroude) - Full-Stack Senior (Design Patterns, Auth, Automation, React)
-- [Teo Deleanu](https://github.com/tdeleanu) - Full-Stack Senior
-
-> **Developers/Contractors**
-
-- [Mominur](https://github.com/mominur-helios) - Django/React Developer
-- [Hasib](https://github.com/hasib-helios) - Django/React Developer
-- [Sugeng](https://github.com/sgnd) - CI/CD, Deployment, Docker
-- [Nur Askiah](https://github.com/nuraskiah) - Django/React Developer
-- [Dhafit](https://github.com/dhafitf) - UI/UX, Frontend
-- [Anamul](https://github.com/MySecondLanguage) - Python, Django TL
-
-<br />
 
 ## LICENSE
 

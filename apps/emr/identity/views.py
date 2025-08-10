@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.utils import timezone
 from django.urls import reverse
 from django.http import JsonResponse, FileResponse
@@ -24,7 +25,7 @@ from apps.emr.files.views import serve_patient_file
 logger = logging.getLogger("django")
 
 
-@login_required(login_url="/users/signin/")
+@staff_member_required(login_url='/users/signin/')
 def identity_list(request):
     # 1) Base queryset
     qs = Patient.objects.all()
@@ -101,7 +102,7 @@ def identity_list(request):
     return render(request, "emr/identity/identity_list.html", context)
 
 
-@login_required(login_url="/users/signin/")
+@staff_member_required(login_url='/users/signin/')
 def identity_create(request):
     if request.method == "POST":
         if "save_and_add" in request.POST:
@@ -148,7 +149,7 @@ def identity_create(request):
     return render(request, "emr/identity/identity_form.html", context)
 
 
-@login_required(login_url="/users/signin/")
+@staff_member_required(login_url='/users/signin/')
 def identity_update(request, pk):
     identity_obj = get_object_or_404(Patient, pk=pk)
 
@@ -193,7 +194,7 @@ def identity_update(request, pk):
     return render(request, "emr/identity/identity_form.html", context)
 
 
-@login_required(login_url="/users/signin/")
+@staff_member_required(login_url='/users/signin/')
 def identity_delete(request, pk):
     identity_obj = get_object_or_404(Patient, pk=pk)
     if request.method == "POST":
@@ -205,7 +206,7 @@ def identity_delete(request, pk):
     )
 
 
-@login_required(login_url="/users/signin/")
+@staff_member_required(login_url='/users/signin/')
 def occupation_search(request):
     query = request.GET.get("q", "").strip()
     if len(query) < 3:
@@ -217,7 +218,7 @@ def occupation_search(request):
     return JsonResponse(data, safe=False)
 
 
-@login_required
+@staff_member_required(login_url='/users/signin/')
 def Secretarytags_search(request):
     q = request.GET.get("q", "").strip()
     if len(q) < 3:
@@ -227,7 +228,7 @@ def Secretarytags_search(request):
     return JsonResponse(data, safe=False)
 
 
-@login_required
+@staff_member_required(login_url='/users/signin/')
 def Secretarytags_add(request):
     if request.method == "POST":
         data = json.loads(request.body)
@@ -238,7 +239,7 @@ def Secretarytags_add(request):
     return JsonResponse({"error": "Invalid request"}, status=400)
 
 
-@login_required(login_url="/users/signin/")
+@staff_member_required(login_url='/users/signin/')
 def agreement(request, patient_id):
     # Call the demographic_report function
     message, new_doc = agreement_generator(patient_id)

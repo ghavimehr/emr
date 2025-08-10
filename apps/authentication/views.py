@@ -14,6 +14,12 @@ class SignInView(LoginView):
 
 
     def get_success_url(self):
+        # 1) if we have a `next` parameter, honor it:
+        redirect_to = self.get_redirect_url()   # checks GET/POST for `next`
+        if redirect_to:
+            return redirect_to
+
+        # 2) otherwise, fall back to your role-based logic:
         user = self.request.user
         if user.is_superuser:
             return '/management/'  # superuser goes to admin management dashboard

@@ -1,5 +1,8 @@
 {% extends "layouts/base-dashboard.html" %}
-{% load static %}
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+
 
 {% block extrastyle %}
     <link rel="stylesheet" href="{% static "dist/jquery.multi-select.css" %}">

@@ -94,7 +94,7 @@ class Branding(models.Model):
 
     @property
     def slogan4(self):
-        return self._get_field("slogan14")
+        return self._get_field("slogan4")
 
     @property
     def products(self):
