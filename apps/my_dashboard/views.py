@@ -19,6 +19,7 @@ def welcome_view(request):
     context = {
         'display_name': display_name,
         'role': role,
+        'user_ip': request.META["HTTP_X_REAL_IP"],
     }
     return render(request, 'my_dashboard/welcome.html', context)
 

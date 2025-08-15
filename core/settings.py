@@ -37,7 +37,11 @@ CUST_DEV_WEEK_PRICE = os.environ.get('CUST_DEV_WEEK_PRICE', '999')
 ONBOARDING_KIT_PRICE = os.environ.get('ONBOARDING_KIT_PRICE', '19.99')
 
 
+# Trust the proxy for HTTPS detection
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
+# If you rely on X-Forwarded-Host (Caddy default) for multi-tenant host logic
+USE_X_FORWARDED_HOST = True
 
 
 # Enable/Disable DEBUG Mode
@@ -110,7 +114,7 @@ LOGGING = {
             'formatter': 'simple',
         },
         'main_file': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.path.join(BASE_DIR, 'logs', 'main.log'),
             'formatter': 'simple',
@@ -141,6 +145,11 @@ LOGGING = {
             'level': 'INFO',
             'propagate': True,
         },
+        'apps.emr.oneglance': {
+            'handlers': ['main_file', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
     },
 }
 
@@ -156,7 +165,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
 
     
-#    'accounts.apps.AccountsConfig',
+    'accounts.apps.AccountsConfig',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -225,32 +234,32 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # 1) Your custom RealIP/Domain middleware
+    #my important middleware
     "apps.common.middlewares.RealIPMiddleware",
     "core.dynamic_domain.DynamicDomainMiddleware",
 
-    # 2) Security & static-file helpers
+
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-
-    # 3) Sessions → Locale → CORS → Common
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.locale.LocaleMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
-
-    # 4) CSRF → Auth → Messages → clickjacking
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'django.middleware.locale.LocaleMiddleware',
 
-    # 5) Utilities & third-party
+    # Util
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+
+    # allauth 
     "allauth.account.middleware.AccountMiddleware",
 
-    # 6) Your final custom middleware
+    # my middlewares
     "apps.dashboard.log_middleware.APILoggingMiddleware",
+
+
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True

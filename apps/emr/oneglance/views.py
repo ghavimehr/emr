@@ -18,8 +18,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from shutil import copyfile
 
-
-from django.views.decorators.csrf import csrf_exempt
+from django.contrib.admin.views.decorators import staff_member_required
 from django.http import JsonResponse, HttpResponseBadRequest
 from django.utils.decorators import method_decorator
 
@@ -42,8 +41,7 @@ logger = logging.getLogger(__name__)
 
 
 
-@csrf_exempt
-@xframe_options_sameorigin
+#@staff_member_required(login_url='/users/signin/')
 def oneglance_page(request):
     # Get patient from the session or raise 404 if not found
     patient_db_id = request.session.get("selected_patient_id")
@@ -129,8 +127,7 @@ def oneglance_page(request):
     return render(request, 'emr/oneglance/oneglance.html', context)
 
 
-@csrf_exempt
-@xframe_options_sameorigin
+#@staff_member_required(login_url='/users/signin/')
 def generate_pdf(request):
     try:
         # Get patient from the session or raise 404 if not found
@@ -209,7 +206,7 @@ def generate_pdf(request):
         try:
             process = subprocess.Popen(
                 [
-                    "/usr/local/texlive/2024/bin/x86_64-linux/xelatex",  # Adjust path if needed
+                    "/usr/local/texlive/2025/bin/x86_64-linux/xelatex",  # Adjust path if needed
                     "-output-directory",
                     os.path.dirname(tex_file_path),
                     tex_file_path,

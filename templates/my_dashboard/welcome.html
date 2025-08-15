@@ -10,7 +10,7 @@
 <div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
     <div class="mb-4 col-span-full xl:mb-2">
 
-        <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white text-right" dir="rtl" style="font-family: BTitr">خوش آمدید</h1>
+        <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white" dir="rtl" style="font-family: BTitr">Welcome</h1>
         
     </div>
 
@@ -18,11 +18,13 @@
     <div class="col-span-3">
         <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
             <div class="flex items-center justify-between mb-8" >
-                <h3 class="mb-4 text-xl font-semibold dark:text-white text-right" style="font-family: BTitr">اطلاعات کاربر</h3>
+                <h3 class="mb-4 text-xl font-semibold dark:text-white" style="font-family: BTitr">User's Information:</h3>
             </div> 
            
            
-            <p class="mb-4 text-xl font-bold dark:text-white text-right" dir="rtl">گروه: {{ role }}</p>
+            <p class="mb-4 text-xl font-bold dark:text-white" dir="rtl">Groups: {{ role }}</p>
+
+            <p class="mb-4 text-xl font-bold dark:text-white" dir="rtl">Your IP: {{ user_ip }}</p>
            
 
         </div>
